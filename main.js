@@ -207,6 +207,15 @@ const updateCta = () => ctaFloat.classList.toggle("is-on",
 addEventListener("scroll", updateCta, { passive: true });
 updateCta();
 
+// Trilhas: abre o painel sob o mouse só quando o mouse se move (rolar a página por cima não troca o painel)
+const paths = document.querySelectorAll(".path");
+const abrirTrilha = (e) => {
+  const p = e.target.closest(".path");
+  if (p && !p.classList.contains("is-open")) paths.forEach((x) => x.classList.toggle("is-open", x === p));
+};
+document.querySelector(".paths").addEventListener("pointermove", abrirTrilha);
+document.querySelector(".paths").addEventListener("focusin", abrirTrilha);
+
 // Formulário: envio entra na Fase 4; por ora não recarrega a página
 document.querySelector("[data-form]").addEventListener("submit", (e) => e.preventDefault());
 
@@ -219,7 +228,8 @@ const STAGGER = .06;
 const root = document.documentElement;
 const $ = (s, el = document) => el.querySelector(s);
 
-if (window.gsap && window.ScrollTrigger && window.SplitText) initMotion();
+// Motion só começa com a fonte carregada: assim o texto não se reajusta no meio da animação
+if (window.gsap && window.ScrollTrigger && window.SplitText) document.fonts.ready.then(initMotion);
 else root.classList.remove("intro");
 
 function initMotion() {
