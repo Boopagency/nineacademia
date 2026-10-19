@@ -25,3 +25,8 @@ baixa para o lightbox (1600px). Trocar pelos originais quando chegarem.
 | 18 | 18-oficina-perfumaria-detalhe-frasco.png | oficinas | Oficina de perfumaria | só mãos + frasco |
 | 19 | 19-oficina-perfumaria-detalhe-mesa.png | oficinas | Oficina de perfumaria | só produto; marca de terceiro visível |
 | 20 | 20-oficina-joalheria-detalhe-ouro.png | oficinas | Oficina de joalheria | só mão + ouro |
+| 21 | 21-jantar-pergolado-noite.webp | jantares | Jantar da turma | plano aberto, luzes; candidata a fundo da faixa de CTA |
+| 22 | 22-jantar-alunos-gargalhada.webp | jantares | Jantar da turma | gargalhada real; excelente |
+| 23 | 23-jantar-alunas-olhando-camera.webp | jantares | Jantar da turma | olhar pra câmera; excelente |
+| 24 | 24-aula-laboratorio-foto-turma.webp | aulas | Aula de ciências no laboratório | foto oficial da turma (jaleco); muito forte |
+| 25 | 25-aula-laboratorio-experimento.webp | aulas | Aula de ciências no laboratório | mão na massa, luz natural; ótima |
