@@ -20,3 +20,8 @@ baixa para o lightbox (1600px). Trocar pelos originais quando chegarem.
 | 13 | 13-oficina-pao-aluna-sorrindo.webp | oficinas | Oficina de panificação | aluna olhando pra câmera; excelente para "gente em toda dobra" |
 | 14 | 14-oficina-pao-detalhe-marca.png | oficinas | Oficina de panificação | só detalhe; marca de terceiro (Pão da Casa) |
 | 15 | 15-oficina-pao-detalhe-pao.webp | oficinas | Oficina de panificação | só o pão; sem pessoas |
+| 16 | 16-oficina-perfumaria-instrutora.png | oficinas | Oficina de perfumaria | instrutora sorrindo; confirmar nome (pode ir para "Quem conduz") |
+| 17 | 17-oficina-perfumaria-aluno-fita.webp | oficinas | Oficina de perfumaria | aluno de olhos fechados sentindo a fita; ótima |
+| 18 | 18-oficina-perfumaria-detalhe-frasco.png | oficinas | Oficina de perfumaria | só mãos + frasco |
+| 19 | 19-oficina-perfumaria-detalhe-mesa.png | oficinas | Oficina de perfumaria | só produto; marca de terceiro visível |
+| 20 | 20-oficina-joalheria-detalhe-ouro.png | oficinas | Oficina de joalheria | só mão + ouro |
