@@ -30,3 +30,14 @@ baixa para o lightbox (1600px). Trocar pelos originais quando chegarem.
 | 23 | 23-jantar-alunas-olhando-camera.webp | jantares | Jantar da turma | olhar pra câmera; excelente |
 | 24 | 24-aula-laboratorio-foto-turma.webp | aulas | Aula de ciências no laboratório | foto oficial da turma (jaleco); muito forte |
 | 25 | 25-aula-laboratorio-experimento.webp | aulas | Aula de ciências no laboratório | mão na massa, luz natural; ótima |
+| 26 | 26-oficina-realidade-virtual-aluno.png | oficinas | Oficina de realidade virtual | rima com o hero do site atual (VR) |
+| 27 | 27-oficina-realidade-virtual-turma.webp | oficinas | Oficina de realidade virtual | turma inteira de óculos VR; boa |
+| 28 | 28-oficina-realidade-virtual-detalhe.webp | oficinas | Oficina de realidade virtual | só mãos + controles |
+| 29 | 29-oficina-realidade-virtual-aluno-2.png | oficinas | Oficina de realidade virtual | aluno explorando; boa |
+| 30 | 30-jantar-degustacao-alunas.webp | jantares | Degustação | alunas se servindo; boa |
+
+## Resumo (30 fotos)
+- oficinas 17 · jantares 10 · aulas 3 · grupos/intercâmbio/serviço/formatura 0
+- Com gente e emoção (prioridade no mural): 06, 11, 13, 17, 22, 23, 24, 25, 27, 04, 08, 12, 16, 21, 26, 29, 30, 01, 03, 10
+- Só detalhe/produto (usar pouco, como respiro): 02, 07, 09, 14, 15, 18, 19, 20, 28
+- Pendências: vinho (07–10) e menores; autorização de imagem; originais em alta para o lightbox
