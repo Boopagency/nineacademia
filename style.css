@@ -90,15 +90,12 @@ main { position: relative; z-index: 1; }
 .section-head { margin-bottom: clamp(40px, 6vw, 80px); }
 .section-head h2 { max-width: 16ch; }
 
-/* Linhas verticais do grid: 5 no desktop, 3 no mobile */
-.grid-lines {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  display: flex; justify-content: space-between;
-  max-width: var(--max); margin-inline: auto; padding-inline: var(--margin);
-}
-.grid-lines span { width: 1px; background: var(--line); }
-@media (max-width: 767px) {
-  .grid-lines span:nth-child(2), .grid-lines span:nth-child(4) { display: none; }
+/* Marcas d'água: coroas e NINE em opacidade bem baixa ao longo da página */
+.hero, .section { position: relative; overflow-x: clip; }
+.wm-mark { position: absolute; z-index: -1; pointer-events: none; user-select: none; }
+.wm-mark--crown { height: auto; opacity: .08; }
+.wm-mark--nine { font-size: clamp(8rem, 26vw, 26rem); font-weight: 700; letter-spacing: -0.05em; line-height: .8; color: var(--navy); opacity: .04; white-space: nowrap; }
+@media (max-width: 767px) { .wm-mark--crown { max-width: 120px; } }
 }
 
 /* ---------- Tipos utilitários ---------- */
@@ -123,7 +120,7 @@ main { position: relative; z-index: 1; }
 .ph > span { padding: 12px; max-width: 26ch; }
 .ph--dark { background: var(--ph-dark); color: rgba(255, 255, 255, .7); }
 .photo { position: relative; overflow: hidden; aspect-ratio: var(--ar, auto); background: var(--paper-2); border-radius: var(--r-card); }
-.photo img, .photo video { width: 100%; height: 100%; object-fit: cover; }
+.photo img, .photo video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 html:has(dialog[open]) { overflow: hidden; }
 
 /* ---------- Botões ---------- */
@@ -501,7 +498,7 @@ html:has(dialog[open]) { overflow: hidden; }
   writing-mode: vertical-rl; transform: rotate(180deg);
 }
 .path p, .path__img { display: none; }
-.path__img { aspect-ratio: 16 / 10; margin-top: 16px; border-radius: 16px; }
+.path__img { aspect-ratio: 16 / 10; flex: none; margin-top: 16px; border-radius: 16px; }
 
 @media (min-width: 1024px) {
   .paths:not(:hover):not(:focus-within) .path:first-child,
@@ -511,7 +508,7 @@ html:has(dialog[open]) { overflow: hidden; }
   .paths:not(:hover):not(:focus-within) .path:first-child :is(p, .path__img),
   .path:hover :is(p, .path__img), .path:focus :is(p, .path__img) { display: block; }
   .paths:not(:hover):not(:focus-within) .path:first-child .path__img,
-  .path:hover .path__img, .path:focus .path__img { display: grid; margin-top: auto; }
+  .path:hover .path__img, .path:focus .path__img { display: grid; margin-top: 24px; flex: 1 1 0; min-height: 180px; aspect-ratio: auto; }
   .path p { margin-top: 12px; color: var(--ink-muted); max-width: 32ch; }
 }
 
@@ -524,7 +521,7 @@ html:has(dialog[open]) { overflow: hidden; }
   .path { flex: 0 0 min(78%, 340px); scroll-snap-align: start; min-height: 380px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
   .path h3 { writing-mode: horizontal-tb; transform: none; margin-top: 20px; font-size: var(--fs-h3); white-space: normal; }
   .path p { display: block; margin-top: 10px; color: var(--ink-muted); }
-  .path__img { display: grid; margin-top: auto; }
+  .path__img { display: grid; margin-top: auto; aspect-ratio: 1; }
 }
 
 /* ==========================================================================
@@ -746,6 +743,7 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 .zoom.is-pinned .zoom__center video { filter: brightness(.72); }
 .zoom.is-pinned .zoom__center { overflow: visible; }
 .zoom.is-pinned .zoom__phrase {
-  position: absolute; left: 50%; top: 50%; width: min(100vw, 1200px); margin: -.5em 0 0 calc(min(100vw, 1200px) / -2);
-  font-size: var(--fs-mega); letter-spacing: -0.05em; text-shadow: 0 4px 40px rgba(17, 23, 73, .5);
+  position: absolute; top: 0; bottom: 0; left: 50%; width: min(100vw, 1200px); margin: 0 0 0 calc(min(100vw, 1200px) / -2);
+  display: grid; align-content: center;
+  font-size: clamp(3rem, min(10vw, 14svh), 12rem); letter-spacing: -0.05em; text-shadow: 0 4px 40px rgba(17, 23, 73, .5);
 }

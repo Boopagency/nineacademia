@@ -23,7 +23,7 @@ for f in sorted(os.listdir(G)):
         sizes[f[:2]] = webp(Image.open(f"{G}/{f}"), f[:2])
 
 # Quadros tirados dos vídeos: (reel, segundo)
-for n, t in [("01", 21), ("02", 9), ("04", 3), ("04", 12), ("04", 40), ("05", 39), ("05", 55), ("07", 12), ("07", 43), ("06", 15)]:
+for n, t in [("01", 21), ("02", 9), ("04", 3), ("04", 12), ("04", 40), ("05", 39), ("05", 55), ("07", 12), ("07", 43), ("06", 17)]:
     tmp = f"/tmp/_v{n}-{t}.png"; ff("-ss", str(t), "-i", vid(n), "-frames:v", "1", tmp)
     sizes[f"v{n}-{t}"] = webp(Image.open(tmp), f"v{n}-{t}")
 
