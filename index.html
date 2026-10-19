@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="assets/video/hero-1.webp" fetchpriority="high">
   <script>try{if(!sessionStorage.getItem("nine-intro")&&matchMedia("(prefers-reduced-motion: no-preference)").matches)document.documentElement.classList.add("intro")}catch(e){}</script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
@@ -79,9 +80,10 @@
     <section class="hero" id="topo" aria-labelledby="hero-title">
       <div class="container">
         <div class="hero__card">
-          <!-- [A CONFIRMAR] vídeo-montagem de 10–15s dos Reels + poster -->
-          <div class="ph ph--dark hero__media" role="img" aria-label="Vídeo-montagem da turma da Nine: risadas, aula, palco e abraços">
-            <span>[A CONFIRMAR] Vídeo-montagem dos Reels (10–15s) + poster</span>
+          <div class="hero__media" role="img" aria-label="Vídeos da turma da Nine: oficina de pizza, aula de pintura e jantar da turma">
+            <video src="assets/video/hero-1.mp4" poster="assets/video/hero-1.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
+            <video src="assets/video/hero-2.mp4" poster="assets/video/hero-2.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
+            <video src="assets/video/hero-3.mp4" poster="assets/video/hero-3.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
           </div>
           <p class="hero__wordmark" aria-hidden="true"><span>NINE</span></p>
           <div class="hero__bar">
@@ -111,8 +113,8 @@
       <div class="container grid-12">
         <div class="manifesto__aside">
           <h2 class="label" id="sobre-title">Sobre a Nine</h2>
-          <div class="ph manifesto__face" data-reveal="image" style="--ar: 4/5" role="img" aria-label="Aluna da Nine em aula">
-            <span>[A CONFIRMAR] Foto de aluno</span>
+          <div class="photo manifesto__face" data-reveal="image" style="--ar: 4/5">
+            <img src="assets/img/galeria/v01-21-600.webp" width="600" height="1067" alt="Aluna sorrindo enquanto abre a massa na oficina de pizza" loading="lazy" decoding="async">
           </div>
         </div>
         <p class="manifesto__text" data-scrub="words">
@@ -131,19 +133,19 @@
 
         <!-- 4a. Zoom 3×3 -->
         <div class="zoom" data-zoom-grid>
-          <div class="ph ph--dark zoom__center" role="img" aria-label="Vídeo da turma da Nine">
-            <span>[A CONFIRMAR] Vídeo central</span>
+          <div class="zoom__center">
+            <video src="assets/video/zoom.mp4" poster="assets/video/zoom.webp" muted playsinline loop preload="none" data-autoplay aria-label="Alunos da Nine desfilando com roupa de gala, sorrindo para a câmera"></video>
             <p class="zoom__phrase">Imagine você aqui.</p>
           </div>
           <div class="zoom__ring">
-            <div class="ph zoom__item" role="img" aria-label="Turma reunida no auditório"><span>[A CONFIRMAR]</span></div>
-            <div class="ph zoom__item" role="img" aria-label="Alunos rindo durante o intervalo"><span>[A CONFIRMAR]</span></div>
-            <div class="ph zoom__item" role="img" aria-label="Oficina prática em pequeno grupo"><span>[A CONFIRMAR]</span></div>
-            <div class="ph zoom__item" role="img" aria-label="Aluno falando no palco"><span>[A CONFIRMAR]</span></div>
-            <div class="ph zoom__item" role="img" aria-label="Jantar da turma"><span>[A CONFIRMAR]</span></div>
-            <div class="ph zoom__item" role="img" aria-label="Grupo de acompanhamento em conversa"><span>[A CONFIRMAR]</span></div>
-            <div class="ph zoom__item" role="img" aria-label="Serviço voluntário na comunidade"><span>[A CONFIRMAR]</span></div>
-            <div class="ph zoom__item" role="img" aria-label="Formatura da turma"><span>[A CONFIRMAR]</span></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/06-600.webp" width="600" height="817" alt="Turma em volta da mesa na oficina de joalheria" loading="lazy" decoding="async"></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/22-600.webp" width="600" height="398" alt="Dois alunos às gargalhadas no jantar da turma" loading="lazy" decoding="async"></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/24-600.webp" width="600" height="438" alt="Turma de jaleco reunida no laboratório" loading="lazy" decoding="async"></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/13-600.webp" width="600" height="394" alt="Aluna sorrindo com a massa na mão na oficina de panificação" loading="lazy" decoding="async"></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/17-600.webp" width="600" height="420" alt="Aluno de olhos fechados sentindo uma fragrância na oficina de perfumaria" loading="lazy" decoding="async"></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/23-600.webp" width="600" height="420" alt="Duas alunas sorrindo para a câmera no jantar" loading="lazy" decoding="async"></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/27-600.webp" width="600" height="417" alt="Turma experimentando óculos de realidade virtual" loading="lazy" decoding="async"></div>
+            <div class="photo zoom__item"><img src="assets/img/galeria/v05-39-600.webp" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" loading="lazy" decoding="async"></div>
           </div>
         </div>
 
@@ -154,51 +156,61 @@
             <p class="lead mural__sub" data-reveal="fade-up">Nove meses de aula, conversa até tarde, palco, serviço e amizades que ficam pra vida.</p>
           </div>
 
-          <div class="chips" role="group" aria-label="Filtrar fotos" data-filter>
-            <button type="button" class="chip" aria-pressed="true" data-cat="tudo">Tudo</button>
-            <button type="button" class="chip" aria-pressed="false" data-cat="aulas">Aulas</button>
-            <button type="button" class="chip" aria-pressed="false" data-cat="oficinas">Oficinas</button>
-            <button type="button" class="chip" aria-pressed="false" data-cat="grupos">Grupos</button>
-            <button type="button" class="chip" aria-pressed="false" data-cat="intercambio">Intercâmbio</button>
-            <button type="button" class="chip" aria-pressed="false" data-cat="jantares">Jantares</button>
-            <button type="button" class="chip" aria-pressed="false" data-cat="servico">Serviço</button>
-            <button type="button" class="chip" aria-pressed="false" data-cat="formatura">Formatura</button>
-          </div>
-
-          <!-- [A CONFIRMAR] fotos reais; legendas definitivas vêm com o acervo -->
-          <ul class="masonry" data-masonry>
-            <li data-cat="aulas"><figure><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR]</span></div><figcaption>Aula geral · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="oficinas"><figure><div class="ph" style="--ar: 1/1"><span>[A CONFIRMAR]</span></div><figcaption>Oficina de oratória · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="grupos"><figure><div class="ph" style="--ar: 3/4"><span>[A CONFIRMAR]</span></div><figcaption>Grupo de acompanhamento · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="jantares"><figure><div class="ph" style="--ar: 4/3"><span>[A CONFIRMAR]</span></div><figcaption>Jantar da turma · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="intercambio"><figure><div class="ph" style="--ar: 2/3"><span>[A CONFIRMAR]</span></div><figcaption>Intercâmbio cultural · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="servico"><figure><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR]</span></div><figcaption>Serviço voluntário · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="aulas"><figure><div class="ph" style="--ar: 1/1"><span>[A CONFIRMAR]</span></div><figcaption>Aula geral · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="formatura"><figure><div class="ph" style="--ar: 3/4"><span>[A CONFIRMAR]</span></div><figcaption>Formatura · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="oficinas"><figure><div class="ph" style="--ar: 4/3"><span>[A CONFIRMAR]</span></div><figcaption>Oficina de fotografia · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="grupos"><figure><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR]</span></div><figcaption>Grupo de alinhamento · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="jantares"><figure><div class="ph" style="--ar: 2/3"><span>[A CONFIRMAR]</span></div><figcaption>Jantar da turma · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="servico"><figure><div class="ph" style="--ar: 1/1"><span>[A CONFIRMAR]</span></div><figcaption>Serviço voluntário · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="intercambio"><figure><div class="ph" style="--ar: 4/3"><span>[A CONFIRMAR]</span></div><figcaption>Intercâmbio cultural · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="formatura"><figure><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR]</span></div><figcaption>Formatura · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="aulas"><figure><div class="ph" style="--ar: 3/4"><span>[A CONFIRMAR]</span></div><figcaption>Aula geral · [A CONFIRMAR]</figcaption></figure></li>
-            <li data-cat="oficinas"><figure><div class="ph" style="--ar: 1/1"><span>[A CONFIRMAR]</span></div><figcaption>Oficina de design · [A CONFIRMAR]</figcaption></figure></li>
-          </ul>
+          <div class="chips" role="group" aria-label="Filtrar fotos" data-filter></div>
+          <ul class="masonry" data-masonry></ul>
           <div class="mural__more">
-            <button type="button" class="btn btn--ghost" disabled title="Ativado quando o acervo completo chegar">Ver mais momentos</button>
+            <button type="button" class="btn btn--ghost" data-more>Ver mais momentos</button>
           </div>
         </div>
 
+        <dialog class="lightbox" aria-label="Foto ampliada" data-lightbox data-lenis-prevent>
+          <figure class="lightbox__fig">
+            <img alt="" data-lb-img>
+            <figcaption data-lb-cap></figcaption>
+          </figure>
+          <button type="button" class="lightbox__btn lightbox__close" data-lb-close aria-label="Fechar">×</button>
+          <button type="button" class="lightbox__btn lightbox__prev" data-lb-prev aria-label="Foto anterior">←</button>
+          <button type="button" class="lightbox__btn lightbox__next" data-lb-next aria-label="Próxima foto">→</button>
+        </dialog>
+
         <!-- 4c. Parede de Reels -->
         <div class="reels">
-          <ul class="reels__track">
-            <li><div class="ph reel" role="img" aria-label="Reel da Nine"><span>[A CONFIRMAR] Reel 9:16</span></div></li>
-            <li><div class="ph reel" role="img" aria-label="Reel da Nine"><span>[A CONFIRMAR] Reel 9:16</span></div></li>
-            <li><div class="ph reel" role="img" aria-label="Reel da Nine"><span>[A CONFIRMAR] Reel 9:16</span></div></li>
-            <li class="is-active"><div class="ph ph--dark reel" role="img" aria-label="Reel da Nine em destaque"><span>[A CONFIRMAR] Reel 9:16</span></div></li>
-            <li><div class="ph reel" role="img" aria-label="Reel da Nine"><span>[A CONFIRMAR] Reel 9:16</span></div></li>
-            <li><div class="ph reel" role="img" aria-label="Reel da Nine"><span>[A CONFIRMAR] Reel 9:16</span></div></li>
-            <li><div class="ph reel" role="img" aria-label="Reel da Nine"><span>[A CONFIRMAR] Reel 9:16</span></div></li>
+          <ul class="reels__track" data-reels>
+            <li data-reel>
+              <video class="reel" src="assets/video/reel-02.mp4" poster="assets/video/reel-02.webp" muted playsinline loop preload="none" aria-label="Reel: Oficina de pintura em tela e perfumaria"></video>
+              <button type="button" class="reel__pick" aria-label="Assistir: Oficina de pintura em tela e perfumaria"></button>
+              <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
+            </li>
+            <li data-reel>
+              <video class="reel" src="assets/video/reel-04.mp4" poster="assets/video/reel-04.webp" muted playsinline loop preload="none" aria-label="Reel: Aula, convivência e jantar da turma"></video>
+              <button type="button" class="reel__pick" aria-label="Assistir: Aula, convivência e jantar da turma"></button>
+              <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
+            </li>
+            <li data-reel>
+              <video class="reel" src="assets/video/reel-05.mp4" poster="assets/video/reel-05.webp" muted playsinline loop preload="none" aria-label="Reel: Visita ao Pequeno Cotolengo"></video>
+              <button type="button" class="reel__pick" aria-label="Assistir: Visita ao Pequeno Cotolengo"></button>
+              <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
+            </li>
+            <li class="is-active" data-reel>
+              <video class="reel" src="assets/video/reel-01.mp4" poster="assets/video/reel-01.webp" muted playsinline loop preload="none" aria-label="Reel: Oficina de pizza"></video>
+              <button type="button" class="reel__pick" aria-label="Assistir: Oficina de pizza"></button>
+              <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
+            </li>
+            <li data-reel>
+              <video class="reel" src="assets/video/reel-03.mp4" poster="assets/video/reel-03.webp" muted playsinline loop preload="none" aria-label="Reel: Alunos desfilando com roupa de gala"></video>
+              <button type="button" class="reel__pick" aria-label="Assistir: Alunos desfilando com roupa de gala"></button>
+              <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
+            </li>
+            <li data-reel>
+              <video class="reel" src="assets/video/reel-06.mp4" poster="assets/video/reel-06.webp" muted playsinline loop preload="none" aria-label="Reel: Bastidores e palco do evento Game Over"></video>
+              <button type="button" class="reel__pick" aria-label="Assistir: Bastidores e palco do evento Game Over"></button>
+              <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
+            </li>
+            <li data-reel>
+              <video class="reel" src="assets/video/reel-07.mp4" poster="assets/video/reel-07.webp" muted playsinline loop preload="none" aria-label="Reel: Turma reformando a residência dos niners"></video>
+              <button type="button" class="reel__pick" aria-label="Assistir: Turma reformando a residência dos niners"></button>
+              <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
+            </li>
           </ul>
           <p class="reels__more">Tem muito mais no <a href="https://www.instagram.com/nine.academia/" target="_blank" rel="noopener">@nine.academia</a></p>
         </div>
@@ -207,7 +219,7 @@
 
     <!-- 4d. Faixa de CTA -->
     <section class="cta-band" aria-labelledby="cta-band-title">
-      <div class="ph ph--dark cta-band__bg" aria-hidden="true"><span>[A CONFIRMAR] Foto da turma</span></div>
+      <img class="cta-band__bg" src="assets/img/galeria/21.webp" width="862" height="562" alt="" loading="lazy" decoding="async">
       <div class="container cta-band__inner">
         <h2 id="cta-band-title" data-reveal="lines">Na próxima turma, a foto pode ser sua.</h2>
         <a class="btn btn--light" href="#aplicar" data-magnetic>Quero aplicar <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 11L11 5M6 5h5v5"/></svg></span></a>
@@ -219,8 +231,8 @@
       <div class="container grid-12">
         <div class="numeros__aside">
           <p class="label">A Nine em números</p>
-          <div class="ph numeros__face" data-reveal="image" style="--ar: 4/3" role="img" aria-label="Turma da Nine reunida">
-            <span>[A CONFIRMAR] Foto da turma</span>
+          <div class="photo numeros__face" data-reveal="image" style="--ar: 4/3">
+            <img src="assets/img/galeria/24-600.webp" width="600" height="438" alt="Turma da Nine de jaleco reunida no laboratório de ciências" loading="lazy" decoding="async">
           </div>
           <div class="numeros__foot">
             <h2 id="numeros-title" data-reveal="lines">Uma formação inteira em nove meses.</h2>
@@ -258,12 +270,10 @@
             </ul>
           </div>
           <div class="pilar__media">
-            <div class="ph arc" data-reveal="image" role="img" aria-label="Colagem: atleta vintage em retícula comemorando, com pinceladas verdes e violeta">
-              <span>[A CONFIRMAR] Colagem original em alta</span>
-            </div>
-            <svg class="brush" viewBox="0 0 400 500" aria-hidden="true">
-              <path data-draw d="M250 -14C362 -4 424 92 414 204L410 336"/>
-              <path data-draw d="M-26 424C30 384 72 474 142 432S232 402 252 474"/>
+            <div class="arc" data-reveal="image"><img src="assets/img/pilares/pilar-01.webp" width="450" height="745" alt="Colagem: tenista vintage em retícula saltando e sorrindo, com pinceladas coral, verde e lilás" loading="lazy" decoding="async"></div>
+            <svg class="brush" viewBox="0 0 400 667" aria-hidden="true">
+              <path data-draw d="M250 -18C362 -5 424 123 414 272L410 448"/>
+              <path data-draw d="M-26 566C30 512 72 632 142 576S232 536 252 632"/>
             </svg>
           </div>
         </article>
@@ -281,12 +291,10 @@
             </ul>
           </div>
           <div class="pilar__media">
-            <div class="ph arc" data-reveal="image" role="img" aria-label="Colagem: jogador de futebol americano vintage em retícula correndo, com contorno coral">
-              <span>[A CONFIRMAR] Colagem original em alta</span>
-            </div>
-            <svg class="brush" viewBox="0 0 400 500" aria-hidden="true">
-              <path data-draw d="M250 -14C362 -4 424 92 414 204L410 336"/>
-              <path data-draw d="M-26 424C30 384 72 474 142 432S232 402 252 474"/>
+            <div class="arc" data-reveal="image"><img src="assets/img/pilares/pilar-02.webp" width="450" height="745" alt="Colagem: jogador de futebol americano vintage em retícula correndo com a bola, com contorno coral" loading="lazy" decoding="async"></div>
+            <svg class="brush" viewBox="0 0 400 667" aria-hidden="true">
+              <path data-draw d="M250 -18C362 -5 424 123 414 272L410 448"/>
+              <path data-draw d="M-26 566C30 512 72 632 142 576S232 536 252 632"/>
             </svg>
           </div>
         </article>
@@ -304,12 +312,10 @@
             </ul>
           </div>
           <div class="pilar__media">
-            <div class="ph arc" data-reveal="image" role="img" aria-label="Colagem: tenista vintage em retícula saltando, com pinceladas verdes, vermelhas e azuis">
-              <span>[A CONFIRMAR] Colagem original em alta</span>
-            </div>
-            <svg class="brush" viewBox="0 0 400 500" aria-hidden="true">
-              <path data-draw d="M250 -14C362 -4 424 92 414 204L410 336"/>
-              <path data-draw d="M-26 424C30 384 72 474 142 432S232 402 252 474"/>
+            <div class="arc" data-reveal="image"><img src="assets/img/pilares/pilar-03.webp" width="450" height="745" alt="Colagem: tenista vintage em retícula saltando com a raquete, com pinceladas verdes, vermelhas e azuis" loading="lazy" decoding="async"></div>
+            <svg class="brush" viewBox="0 0 400 667" aria-hidden="true">
+              <path data-draw d="M250 -18C362 -5 424 123 414 272L410 448"/>
+              <path data-draw d="M-26 566C30 512 72 632 142 576S232 536 252 632"/>
             </svg>
           </div>
         </article>
@@ -357,13 +363,13 @@
         </header>
 
         <ul class="paths" data-reveal="fade-up">
-          <li class="path" tabindex="0" style="--accent: var(--blue)"><span class="path__n">01</span><h3>Negócios</h3><p>Empreender e liderar com propósito e ética.</p><div class="ph path__img" aria-hidden="true"><span>[A CONFIRMAR]</span></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--coral)"><span class="path__n">02</span><h3>Política</h3><p>Servir o bem comum com responsabilidade pública.</p><div class="ph path__img" aria-hidden="true"><span>[A CONFIRMAR]</span></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--green)"><span class="path__n">03</span><h3>Educação</h3><p>Formar as próximas gerações.</p><div class="ph path__img" aria-hidden="true"><span>[A CONFIRMAR]</span></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--violet)"><span class="path__n">04</span><h3>Arte e Cultura</h3><p>Criar beleza que aponta para algo maior.</p><div class="ph path__img" aria-hidden="true"><span>[A CONFIRMAR]</span></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--lime)"><span class="path__n">05</span><h3>Ciência e Tecnologia</h3><p>Investigar, construir e inovar.</p><div class="ph path__img" aria-hidden="true"><span>[A CONFIRMAR]</span></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--orange)"><span class="path__n">06</span><h3>Serviço Social</h3><p>Estar onde a necessidade é maior.</p><div class="ph path__img" aria-hidden="true"><span>[A CONFIRMAR]</span></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--gold)"><span class="path__n">07</span><h3>Comunicação e Entretenimento</h3><p>Contar histórias que movem pessoas.</p><div class="ph path__img" aria-hidden="true"><span>[A CONFIRMAR]</span></div></li>
+          <li class="path" tabindex="0" style="--accent: var(--blue)"><span class="path__n">01</span><h3>Negócios</h3><p>Empreender e liderar com propósito e ética.</p><div class="photo path__img"><img src="assets/img/galeria/12-600.webp" width="600" height="397" alt="Instrutor conversando com a turma em oficina" loading="lazy" decoding="async"></div></li>
+          <li class="path" tabindex="0" style="--accent: var(--coral)"><span class="path__n">02</span><h3>Política</h3><p>Servir o bem comum com responsabilidade pública.</p><div class="photo path__img"><img src="assets/img/galeria/v04-3-600.webp" width="600" height="1067" alt="Aula expositiva para a turma no auditório" loading="lazy" decoding="async"></div></li>
+          <li class="path" tabindex="0" style="--accent: var(--green)"><span class="path__n">03</span><h3>Educação</h3><p>Formar as próximas gerações.</p><div class="photo path__img"><img src="assets/img/galeria/25-600.webp" width="600" height="566" alt="Alunos fazendo experimento no laboratório" loading="lazy" decoding="async"></div></li>
+          <li class="path" tabindex="0" style="--accent: var(--violet)"><span class="path__n">04</span><h3>Arte e Cultura</h3><p>Criar beleza que aponta para algo maior.</p><div class="photo path__img"><img src="assets/img/galeria/v02-9-600.webp" width="600" height="1067" alt="Aluna pintando uma tela na oficina de arte" loading="lazy" decoding="async"></div></li>
+          <li class="path" tabindex="0" style="--accent: var(--lime)"><span class="path__n">05</span><h3>Ciência e Tecnologia</h3><p>Investigar, construir e inovar.</p><div class="photo path__img"><img src="assets/img/galeria/27-600.webp" width="600" height="417" alt="Turma usando óculos de realidade virtual" loading="lazy" decoding="async"></div></li>
+          <li class="path" tabindex="0" style="--accent: var(--orange)"><span class="path__n">06</span><h3>Serviço Social</h3><p>Estar onde a necessidade é maior.</p><div class="photo path__img"><img src="assets/img/galeria/v05-39-600.webp" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" loading="lazy" decoding="async"></div></li>
+          <li class="path" tabindex="0" style="--accent: var(--gold)"><span class="path__n">07</span><h3>Comunicação e Entretenimento</h3><p>Contar histórias que movem pessoas.</p><div class="photo path__img"><img src="assets/img/galeria/v06-15-600.webp" width="600" height="1067" alt="Aluno atuando no palco do evento Game Over" loading="lazy" decoding="async"></div></li>
         </ul>
       </div>
     </section>
@@ -406,8 +412,8 @@
         <header class="faq__head">
           <p class="label">FAQ</p>
           <h2 id="faq-title" data-reveal="lines">Perguntas frequentes</h2>
-          <div class="ph faq__face" data-reveal="image" style="--ar: 1/1" role="img" aria-label="Equipe da Nine conversando com alunos">
-            <span>[A CONFIRMAR] Foto da equipe</span>
+          <div class="photo faq__face" data-reveal="image" style="--ar: 1/1">
+            <img src="assets/img/galeria/22-600.webp" width="600" height="398" alt="Dois alunos rindo juntos no jantar da turma" loading="lazy" decoding="async">
           </div>
         </header>
         <div class="faq__list" data-reveal="fade-up">
@@ -501,6 +507,8 @@
       </div>
     </section>
   </main>
+
+  <a class="cta-float" href="#aplicar" data-cta-float>Inscrições abertas · <strong>Aplicar →</strong></a>
 
   <!-- 13. Rodapé -->
   <footer class="footer">

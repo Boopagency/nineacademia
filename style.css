@@ -122,6 +122,9 @@ main { position: relative; z-index: 1; }
 }
 .ph > span { padding: 12px; max-width: 26ch; }
 .ph--dark { background: var(--ph-dark); color: rgba(255, 255, 255, .7); }
+.photo { position: relative; overflow: hidden; aspect-ratio: var(--ar, auto); background: var(--paper-2); border-radius: var(--r-card); }
+.photo img, .photo video { width: 100%; height: 100%; object-fit: cover; }
+html:has(dialog[open]) { overflow: hidden; }
 
 /* ---------- Botões ---------- */
 .btn {
@@ -211,7 +214,9 @@ main { position: relative; z-index: 1; }
   position: relative; height: 88vh; min-height: 520px; max-height: 960px;
   border-radius: var(--r-card); overflow: hidden; isolation: isolate; color: #fff;
 }
-.hero__media { position: absolute; inset: -12% 0 0; border-radius: 0; align-items: start; padding-top: calc(12% + 48px); } /* sobra em cima para o parallax */
+.hero__media { position: absolute; inset: -12% 0 0; display: flex; background: var(--navy); } /* sobra em cima para o parallax */
+.hero__media video { flex: 1 1 0; min-width: 0; height: 100%; object-fit: cover; }
+@media (max-width: 767px) { .hero__media video + video { display: none; } }
 .hero__card::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(to top, rgba(17, 23, 73, .65), rgba(17, 23, 73, 0) 40%);
@@ -267,19 +272,25 @@ main { position: relative; z-index: 1; }
    ========================================================================== */
 /* 4a. Zoom 3×3: centro fixo na célula do meio, os 8 ao redor */
 .zoom {
-  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 12px;
+  position: relative; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 12px;
   height: calc(100svh - var(--nav-h) - 32px); min-height: 560px; max-height: 960px;
 }
 .zoom__ring { display: contents; }
-.zoom__center { grid-area: 2 / 2; color: #fff; }
-.zoom .ph { border-radius: 16px; }
-.zoom__center > span { position: absolute; top: 12px; left: 12px; padding: 0; font-size: .6875rem; }
-.zoom__phrase { font-size: clamp(1.25rem, 2.6vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; text-transform: none; line-height: 1; padding: 16px; }
+.zoom__item, .zoom__center { border-radius: 16px; }
+.zoom__item:nth-child(-n+3) { grid-row: 1; }
+.zoom__item:nth-child(4) { grid-area: 2 / 1; }
+.zoom__item:nth-child(5) { grid-area: 2 / 3; }
+.zoom__item:nth-child(n+6) { grid-row: 3; }
+.zoom__center { grid-area: 2 / 2; position: relative; overflow: hidden; background: var(--navy); color: #fff; display: grid; place-items: center; }
+.zoom__center video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.zoom__center::after { content: ""; position: absolute; inset: 0; background: rgba(17, 23, 73, .35); }
+.zoom__phrase { position: relative; z-index: 1; font-size: clamp(1.25rem, 2.6vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1; padding: 16px; text-align: center; }
 
 /* Mobile: vídeo em largura total com a frase, as 8 fotos viram faixa com snap */
 @media (max-width: 1023px) {
   .zoom { display: block; height: auto; min-height: 0; max-height: none; }
   .zoom .zoom__center { aspect-ratio: 4 / 5; max-height: 80vh; width: 100%; }
+  .zoom__item { aspect-ratio: 4 / 3; }
   .zoom__phrase { font-size: var(--fs-h1); }
   .zoom__ring {
     display: flex; gap: 12px; margin-top: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
@@ -304,7 +315,18 @@ main { position: relative; z-index: 1; }
 
 .masonry { columns: 4; column-gap: 16px; }
 .masonry li { break-inside: avoid; margin-bottom: 16px; }
+.masonry figure { position: relative; }
+.mural__open { display: block; width: 100%; padding: 0; border: 0; background: var(--paper-2); border-radius: 16px; overflow: hidden; cursor: zoom-in; }
+.mural__open img { width: 100%; height: auto; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
 .masonry figcaption { margin-top: 8px; font-size: .875rem; color: var(--ink-muted); }
+@media (hover: hover) and (pointer: fine) {
+  .masonry figcaption {
+    position: absolute; left: 8px; right: 8px; bottom: 8px; margin: 0; padding: 8px 12px; border-radius: 10px;
+    background: rgba(17, 23, 73, .82); color: #fff; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; pointer-events: none;
+  }
+  .masonry figure:hover figcaption, .masonry figure:focus-within figcaption { opacity: 1; transform: none; }
+  .masonry figure:hover img { transform: scale(1.05); }
+}
 .mural__more { display: flex; justify-content: center; margin-top: 32px; }
 
 @media (max-width: 1023px) {
@@ -327,7 +349,16 @@ main { position: relative; z-index: 1; }
 }
 .reels__track li { flex: 0 0 clamp(180px, 17vw, 240px); scroll-snap-align: center; }
 .reels__track li.is-active { flex-basis: clamp(220px, 21vw, 300px); }
-.reel { aspect-ratio: 9 / 16; border-radius: 20px; }
+.reels__track li { position: relative; }
+.reel { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 20px; background: var(--paper-2); transition: opacity .4s; }
+.reels__track li:not(.is-active) .reel { opacity: .55; }
+.reel__pick { position: absolute; inset: 0; border: 0; background: none; border-radius: 20px; cursor: pointer; }
+.reels__track li.is-active .reel__pick { display: none; }
+.reel__sound {
+  position: absolute; right: 12px; bottom: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0;
+  background: rgba(17, 23, 73, .7); color: #fff; font-size: 1.125rem; cursor: pointer;
+}
+.reels__track li:not(.is-active) .reel__sound { display: none; }
 .reels__more { margin-top: 32px; text-align: center; font-size: var(--fs-h3); font-weight: 500; letter-spacing: -0.02em; }
 .reels__more a { font-weight: 700; text-decoration-color: var(--gold); text-decoration-thickness: 3px; text-underline-offset: 6px; }
 @media (min-width: 1024px) {
@@ -342,8 +373,7 @@ main { position: relative; z-index: 1; }
 
 /* 4d. Faixa de CTA */
 .cta-band { position: relative; background: var(--navy); color: #fff; overflow: hidden; isolation: isolate; }
-.cta-band__bg { position: absolute; inset: 0; z-index: -1; border-radius: 0; opacity: .18; place-items: start end; }
-.cta-band__bg > span { color: #fff; }
+.cta-band__bg { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; opacity: .22; }
 .cta-band__inner {
   display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 32px;
   padding-block: clamp(96px, 12vw, 180px);
@@ -400,7 +430,8 @@ main { position: relative; z-index: 1; }
 .pilar__items p { margin-top: 8px; font-size: .9375rem; line-height: 1.45; color: var(--ink-muted); }
 
 .pilar__media { position: relative; max-width: 480px; width: 100%; margin-inline: auto; }
-.arc { aspect-ratio: 4 / 5; border-radius: var(--r-arc); }
+.arc { aspect-ratio: 3 / 5; border-radius: var(--r-arc); overflow: hidden; background: var(--paper-2); }
+.arc img { width: 100%; height: 100%; object-fit: cover; }
 .brush { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
 .brush path { fill: none; stroke: var(--accent); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -642,7 +673,7 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 .pilares.is-pinned .pilar__bar::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform: scaleY(var(--p, 0)); transform-origin: top; }
 .pilares.is-pinned .pilar__items { grid-template-columns: repeat(3, 1fr); }
 .pilares.is-pinned .pilar__items li { padding: 16px; }
-.pilares.is-pinned .pilar__media { max-width: min(440px, calc((100svh - 64px) * .8)); }
+.pilares.is-pinned .pilar__media { max-width: min(440px, calc((100svh - 64px) * .6)); }
 
 /* Jornada pinada (desktop) e linha desenhada (mobile) */
 .jornada.is-pinned .jornada__track { overflow: visible; scroll-snap-type: none; }
@@ -659,3 +690,62 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
   background: #fff; mix-blend-mode: difference; display: grid; place-items: center;
 }
 .cursor span { font-size: .875rem; font-weight: 600; color: #000; opacity: 0; }
+
+/* ==========================================================================
+   Fase 3.5 · Galeria
+   ========================================================================== */
+.lightbox {
+  width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+  background: rgba(10, 14, 46, .96); color: #fff; overscroll-behavior: contain;
+}
+.lightbox::backdrop { background: rgba(10, 14, 46, .6); }
+.lightbox[open] { display: grid; place-items: center; }
+.lightbox__fig { display: grid; gap: 12px; justify-items: center; padding: 72px 16px 32px; touch-action: pan-y; }
+.lightbox__fig img { max-width: min(92vw, 1200px); max-height: 78vh; width: auto; height: auto; border-radius: 12px; }
+.lightbox__fig figcaption { font-size: .9375rem; color: rgba(255, 255, 255, .8); text-align: center; }
+.lightbox__btn {
+  position: absolute; width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, .08); color: #fff; font-size: 1.375rem; cursor: pointer;
+}
+.lightbox__btn:hover { background: rgba(255, 255, 255, .16); }
+.lightbox__btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.lightbox__close { top: 16px; right: 16px; font-size: 1.75rem; }
+.lightbox__prev, .lightbox__next { top: 50%; transform: translateY(-50%); }
+.lightbox__prev { left: 16px; }
+.lightbox__next { right: 16px; }
+@media (max-width: 767px) {
+  .lightbox__prev, .lightbox__next { top: auto; bottom: 16px; transform: none; }
+}
+
+.cta-float {
+  position: fixed; right: 24px; bottom: 24px; z-index: 40;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 52px; padding: 12px 22px;
+  background: var(--navy); color: #fff; border-radius: var(--r-pill); text-decoration: none; font-size: .9375rem;
+  box-shadow: 0 12px 32px rgba(17, 23, 73, .25);
+  opacity: 0; visibility: hidden; transform: translateY(16px);
+  transition: opacity .3s, transform .3s, visibility .3s;
+}
+.cta-float strong { color: var(--gold); font-weight: 600; }
+.cta-float.is-on { opacity: 1; visibility: visible; transform: none; }
+.cta-float:focus-visible { outline-color: var(--gold); }
+@media (max-width: 767px) {
+  .cta-float { left: 0; right: 0; bottom: 0; justify-content: center; border-radius: 0; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+}
+
+/* Zoom pinado (desktop): centro vira quadro vertical em tela cheia */
+.zoom.is-pinned { height: 100svh; max-height: none; padding-block: 16px; }
+.zoom.is-pinned::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw);
+  background: var(--navy); opacity: var(--bg, 0); pointer-events: none;
+}
+.zoom.is-pinned .zoom__center {
+  grid-area: auto; position: absolute; top: 0; bottom: 0; left: 50%; width: auto; aspect-ratio: 9 / 16;
+  transform: translateX(-50%); border-radius: 0; background: none;
+}
+.zoom.is-pinned .zoom__center::after { display: none; }
+.zoom.is-pinned .zoom__center video { filter: brightness(.72); }
+.zoom.is-pinned .zoom__center { overflow: visible; }
+.zoom.is-pinned .zoom__phrase {
+  position: absolute; left: 50%; top: 50%; width: min(100vw, 1200px); margin: -.5em 0 0 calc(min(100vw, 1200px) / -2);
+  font-size: var(--fs-mega); letter-spacing: -0.05em; text-shadow: 0 4px 40px rgba(17, 23, 73, .5);
+}
