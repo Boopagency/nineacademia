@@ -211,7 +211,7 @@ main { position: relative; z-index: 1; }
   position: relative; height: 88vh; min-height: 520px; max-height: 960px;
   border-radius: var(--r-card); overflow: hidden; isolation: isolate; color: #fff;
 }
-.hero__media { position: absolute; inset: 0; border-radius: 0; align-items: start; padding-top: 48px; }
+.hero__media { position: absolute; inset: -12% 0 0; border-radius: 0; align-items: start; padding-top: calc(12% + 48px); } /* sobra em cima para o parallax */
 .hero__card::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(to top, rgba(17, 23, 73, .65), rgba(17, 23, 73, 0) 40%);
@@ -221,6 +221,7 @@ main { position: relative; z-index: 1; }
   font-size: clamp(6rem, 50vw, 48rem); font-weight: 700; letter-spacing: -0.05em; line-height: .8;
   color: rgba(255, 255, 255, .7); white-space: nowrap; pointer-events: none;
 }
+.hero__wordmark > span { display: block; }
 .hero__bar {
   position: absolute; inset: auto 0 0; z-index: 3;
   display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; gap: 24px;
@@ -421,6 +422,8 @@ main { position: relative; z-index: 1; }
   font-size: clamp(16rem, 34vw, 32rem); font-weight: 700; line-height: .72; letter-spacing: 0;
   color: transparent; -webkit-text-stroke: 2px rgba(17, 23, 73, .14);
 }
+.jornada__nine--fill { color: var(--gold); -webkit-text-stroke: 0; opacity: .22; clip-path: inset(100% 0 0 0); }
+.jornada__line { display: none; }
 .jornada__track { display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: var(--margin); padding-block: 24px 40px; scrollbar-width: thin; }
 .station {
   position: relative; flex: 0 0 clamp(220px, 20vw, 280px); padding: 40px 24px 0 0; scroll-snap-align: start;
@@ -599,3 +602,60 @@ main { position: relative; z-index: 1; }
 @media (max-width: 767px) {
   .footer__cols { grid-template-columns: 1fr 1fr; }
 }
+
+/* ==========================================================================
+   Fase 3 · Motion
+   ========================================================================== */
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+html.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+
+/* Preloader: só aparece com html.intro (script inline no <head>) */
+.preloader { display: none; }
+.intro .preloader {
+  position: fixed; inset: 0; z-index: 90; display: grid; place-items: center;
+  background: var(--navy); color: #fff;
+  animation: preloader-failsafe 0s 4s forwards; /* se o JS falhar, some sozinho */
+}
+@keyframes preloader-failsafe { to { visibility: hidden; } }
+.intro body { overflow: hidden; }
+.preloader > * { grid-area: 1 / 1; }
+.preloader__count { height: 1em; overflow: hidden; font-size: var(--fs-mega); font-weight: 700; line-height: 1; letter-spacing: -0.05em; }
+.preloader__digits { display: flex; flex-direction: column; }
+.preloader__wm { font-size: clamp(4rem, 14vw, 12rem); letter-spacing: -0.04em; }
+.preloader__wm .ch { display: inline-block; opacity: 0; }
+.preloader__wm .wm__i { position: relative; }
+.preloader__wm .wm__i img { opacity: 0; }
+
+/* Pilares pinados (classe aplicada pelo JS só no desktop com motion) */
+.pilares.is-pinned .pilares__stage { position: relative; height: 100svh; }
+.pilares.is-pinned .pilar { position: absolute; inset: 0; border-top: 0; padding-block: 32px; }
+.pilares.is-pinned .pilar__text { position: relative; padding-left: 40px; }
+.pilares.is-pinned .pilar__num { font-size: clamp(3.5rem, 6vw, 6rem); }
+.pilares.is-pinned .pilar h3 { margin-top: 16px; }
+.pilares.is-pinned .pilar__bar {
+  position: absolute; left: 0; top: 0; width: 4px; height: 100%; margin: 0;
+  background: var(--line); overflow: hidden;
+}
+.pilares.is-pinned .pilar__bar::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform: scaleY(var(--p, 0)); transform-origin: top; }
+.pilares.is-pinned .pilar__items { grid-template-columns: repeat(3, 1fr); }
+.pilares.is-pinned .pilar__items li { padding: 16px; }
+.pilares.is-pinned .pilar__media { max-width: min(440px, calc((100svh - 64px) * .8)); }
+
+/* Jornada pinada (desktop) e linha desenhada (mobile) */
+.jornada.is-pinned .jornada__track { overflow: visible; scroll-snap-type: none; }
+.jornada.is-drawing .station { border-left-color: transparent; }
+.jornada.is-drawing .jornada__line {
+  display: block; position: absolute; left: var(--margin); top: 0; bottom: 36px; width: 2px;
+  background: var(--navy); transform: scaleY(0); transform-origin: top;
+}
+
+/* Cursor (só desktop com mouse) */
+.cursor {
+  position: fixed; left: 0; top: 0; z-index: 95; pointer-events: none;
+  width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%;
+  background: #fff; mix-blend-mode: difference; display: grid; place-items: center;
+}
+.cursor span { font-size: .875rem; font-weight: 600; color: #000; opacity: 0; }
