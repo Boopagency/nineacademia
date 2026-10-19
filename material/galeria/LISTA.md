@@ -15,3 +15,8 @@ baixa para o lightbox (1600px). Trocar pelos originais quando chegarem.
 | 08 | 08-jantar-harmonizacao-palestra.webp | jantares | Jantar com palestra | turma + palestrante ao pôr do sol; candidata ao zoom/CTA |
 | 09 | 09-jantar-servico-vinho.png | jantares | Jantar de harmonização | sem rosto; vinho |
 | 10 | 10-jantar-brinde-alunos.png | jantares | Brinde da turma | dois alunos com taças: confirmar idade/autorização |
+| 11 | 11-oficina-pao-farinha.webp | oficinas | Oficina de panificação | instrutor + turma de avental; ótima |
+| 12 | 12-oficina-pao-conversa.webp | oficinas | Oficina de panificação | turma ouvindo o instrutor |
+| 13 | 13-oficina-pao-aluna-sorrindo.webp | oficinas | Oficina de panificação | aluna olhando pra câmera; excelente para "gente em toda dobra" |
+| 14 | 14-oficina-pao-detalhe-marca.png | oficinas | Oficina de panificação | só detalhe; marca de terceiro (Pão da Casa) |
+| 15 | 15-oficina-pao-detalhe-pao.webp | oficinas | Oficina de panificação | só o pão; sem pessoas |
