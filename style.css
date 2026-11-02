@@ -49,7 +49,7 @@
 /* ---------- Fonte (hospedada no site; antes vinha do Google Fonts) ---------- */
 @font-face {
   font-family: "Inter Tight"; font-style: normal; font-weight: 400 700; font-display: swap;
-  src: url("assets/fonts/inter-tight-latin.woff2") format("woff2");
+  src: url("/assets/fonts/inter-tight-latin.woff2") format("woff2");
 }
 
 /* ---------- Reset ---------- */
@@ -91,7 +91,7 @@ p { text-wrap: pretty; }
 .noscript { padding: 12px 16px; background: var(--navy); color: #fff; text-align: center; }
 
 /* Coroa decorativa como fundo (sem <img> vazia) */
-.crown { display: inline-block; aspect-ratio: 214 / 101; background: url("assets/logo/crown.png") center / contain no-repeat; }
+.crown { display: inline-block; aspect-ratio: 214 / 101; background: url("/assets/logo/crown.png") center / contain no-repeat; }
 
 /* ---------- Layout ---------- */
 .container { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--margin); }

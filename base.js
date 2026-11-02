@@ -1,4 +1,4 @@
-/* Faculdade Nine · comportamento comum a todas as páginas */
+/* Nine · comportamento comum aos dois sites (Faculdade e Academia) */
 
 // Ano do rodapé: nunca fixo
 document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
@@ -11,7 +11,7 @@ if (new URLSearchParams(location.search).has("rascunho")) {
 // Navbar: blur após 80px, esconde ao descer e reaparece ao subir
 const nav = document.querySelector("[data-nav]");
 let lastY = scrollY;
-addEventListener("scroll", () => {
+if (nav) addEventListener("scroll", () => {
   const y = scrollY;
   nav.classList.toggle("is-scrolled", y > 80);
   nav.classList.toggle("is-hidden", y > lastY && y > 200);
@@ -20,7 +20,7 @@ addEventListener("scroll", () => {
 
 // Menu mobile fullscreen
 const menu = document.querySelector("[data-menu]");
-const burger = document.querySelector(".nav__burger");
+const burger = document.querySelector(".nav__burger, .burger");
 const setMenu = (open) => {
   menu.hidden = !open;
   burger.setAttribute("aria-expanded", open);
@@ -30,6 +30,14 @@ const setMenu = (open) => {
 document.querySelectorAll("[data-menu-toggle]").forEach((b) => b.addEventListener("click", () => setMenu(menu.hidden)));
 menu.addEventListener("click", (e) => e.target.closest("a") && setMenu(false));
 addEventListener("keydown", (e) => e.key === "Escape" && !menu.hidden && setMenu(false));
+
+// Submenu "A Faculdade": fecha ao clicar fora ou com Esc
+const submenus = document.querySelectorAll("details.dd");
+document.addEventListener("click", (e) => submenus.forEach((d) => !d.contains(e.target) && (d.open = false)));
+addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  submenus.forEach((d) => { if (d.open) { d.open = false; d.querySelector("summary").focus(); } });
+});
 
 // Formulário da Ouvidoria: validação nativa; o envio (protocolo + e-mail) entra junto com o webhook da planilha
 const ouvidoria = document.querySelector("[data-ouvidoria]");
@@ -42,7 +50,7 @@ if (ouvidoria) ouvidoria.addEventListener("submit", (e) => {
 
 // Acordeões (FAQ e semestres da matriz): abre e fecha com altura animada; com movimento reduzido, abre direto
 const semMovimento = matchMedia("(prefers-reduced-motion: reduce)");
-document.querySelectorAll(".faq details, details.sem").forEach((d) => {
+document.querySelectorAll(".faq details, details.sem, .faq__list details").forEach((d) => {
   const summary = d.querySelector("summary");
   let anim = null;
   summary.addEventListener("click", (e) => {
