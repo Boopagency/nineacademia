@@ -83,7 +83,7 @@ A força da Nine está nas redes: gente real, turma, energia. O site precisa pro
   --paper:       #FAFAF7;  /* fundo principal */
   --paper-2:     #F2F2EE;  /* cards */
   --ink:         #111749;
-  --ink-muted:   #6B6F8A;  /* texto secundário */
+  --ink-muted:   #62667F;  /* texto secundário (escurecido para 5:1 sobre --paper-2) */
   --line:        rgba(17, 23, 73, .08); /* linhas do grid */
 
   /* Acentos das colagens: uso decorativo */

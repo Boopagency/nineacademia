@@ -17,15 +17,22 @@
   <script src="base.js" defer></script>
 </head>
 <body class="page">
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <nav class="a11y-bar" aria-label="Atalhos de acessibilidade">
+    <ul>
+      <li><a href="#conteudo" accesskey="1">Ir para o conteúdo [1]</a></li>
+      <li><a href="#menu-principal" accesskey="2">Ir para o menu [2]</a></li>
+      <li><a href="#rodape" accesskey="3">Ir para o rodapé [3]</a></li>
+    </ul>
+  </nav>
+  <noscript><p class="noscript">Algumas animações dependem de JavaScript. Todo o conteúdo do site continua disponível sem ele.</p></noscript>
 
   <header class="nav" data-nav>
     <div class="container nav__inner">
       <a class="logo" href="./" aria-label="Faculdade Nine, página inicial">
-        <span class="wm" aria-hidden="true">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span>
+        <span class="wm" aria-hidden="true">N<span class="wm__i">I<i class="crown" aria-hidden="true"></i></span>NE</span>
       </a>
 
-      <nav class="nav__pill" aria-label="Principal">
+      <nav class="nav__pill" id="menu-principal" aria-label="Principal">
         <ul>
           <li><a href="./">Início</a></li>
           <li><a href="a-faculdade.html" aria-current="page">A Faculdade</a></li>
@@ -59,7 +66,7 @@
 
   <main id="conteudo">
     <section class="page-hero" aria-labelledby="t-faculdade">
-      <img class="wm-mark wm-mark--crown" src="assets/logo/crown.png" alt="" aria-hidden="true" width="214" height="101" style="top:8%;right:3%;width:180px;rotate:-10deg">
+      <span class="wm-mark wm-mark--crown crown u-febe17" aria-hidden="true"></span>
       <div class="container">
         <nav class="crumbs" aria-label="Você está em"><a href="./">Início</a> <span aria-hidden="true">/</span> <span aria-current="page">A Faculdade</span></nav>
         <div class="page-hero__text">
@@ -67,7 +74,7 @@
           <h1 id="t-faculdade">Formar jovens que influenciam todas as áreas da sociedade.</h1>
           <p class="lead">A Nine Academia de Influência está se tornando a Faculdade Nine: uma instituição de ensino superior em Curitiba, mantida pelo Conselho Educacional Nine.</p>
         </div>
-        <div class="photo page-hero__img" style="--ar: 21/8"><img src="assets/img/galeria/24.webp" width="854" height="623" alt="Turma da Faculdade Nine de jaleco reunida no laboratório" fetchpriority="high" decoding="async"></div>
+        <div class="photo page-hero__img u-32bcf8"><img src="assets/img/galeria/24.webp" width="854" height="623" alt="Turma da Faculdade Nine de jaleco reunida no laboratório" fetchpriority="high" decoding="async"></div>
       </div>
     </section>
 
@@ -127,17 +134,17 @@
           <p class="prose__big strip-lead">Aula, oficina, serviço e convivência: a formação acontece dentro e fora da sala.</p>
         </header>
         <ul class="strip">
-          <li class="photo" style="--ar: 3/4"><img src="assets/img/galeria/06-600.webp" width="600" height="817" alt="Turma em volta da mesa na oficina de joalheria" loading="lazy" decoding="async"></li>
-          <li class="photo" style="--ar: 3/4"><img src="assets/img/galeria/v04-3-600.webp" width="600" height="1067" alt="Professora dando aula para a turma no auditório" loading="lazy" decoding="async"></li>
-          <li class="photo" style="--ar: 3/4"><img src="assets/img/galeria/23-600.webp" width="600" height="420" alt="Duas alunas sorrindo para a câmera à mesa do jantar" loading="lazy" decoding="async"></li>
-          <li class="photo" style="--ar: 3/4"><img src="assets/img/galeria/v05-39-600.webp" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" loading="lazy" decoding="async"></li>
+          <li class="photo u-81c42e"><img src="assets/img/galeria/06-600.webp" width="600" height="817" alt="Turma em volta da mesa na oficina de joalheria" loading="lazy" decoding="async"></li>
+          <li class="photo u-81c42e"><img src="assets/img/galeria/v04-3-600.webp" width="600" height="1067" alt="Professora dando aula para a turma no auditório" loading="lazy" decoding="async"></li>
+          <li class="photo u-81c42e"><img src="assets/img/galeria/23-600.webp" width="600" height="420" alt="Duas alunas sorrindo para a câmera à mesa do jantar" loading="lazy" decoding="async"></li>
+          <li class="photo u-81c42e"><img src="assets/img/galeria/v05-39-600.webp" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" loading="lazy" decoding="async"></li>
         </ul>
       </div>
     </section>
 
   </main>
 
-  <footer class="footer">
+  <footer class="footer" id="rodape">
     <div class="container">
       <div class="footer__inst">
         <p class="footer__name">Faculdade Nine</p>
@@ -166,7 +173,7 @@
           <ul>
             <li><a href="mailto:contato@nine.com.br">contato@nine.com.br</a></li>
             <li>Telefone <span class="tbc tbc--dark">[A CONFIRMAR]</span></li>
-            <li><a href="https://www.instagram.com/nine.academia/" target="_blank" rel="noopener">@nine.academia</a></li>
+            <li><a href="https://www.instagram.com/nine.academia/">@nine.academia</a></li>
           </ul>
         </div>
         <div>
@@ -175,12 +182,12 @@
             <span class="emec__qr" aria-hidden="true">QR</span>
             <p>Selo e QR Code do e-MEC <span class="tbc tbc--dark">[após o credenciamento]</span></p>
           </div>
-          <p class="footer__small"><a href="https://emec.mec.gov.br/" target="_blank" rel="noopener">Consulte instituições no e-MEC</a></p>
+          <p class="footer__small"><a href="https://emec.mec.gov.br/">Consulte instituições no e-MEC</a></p>
         </div>
       </div>
       <p class="footer__copy">© <span data-year></span> Faculdade Nine · Conselho Educacional Nine</p>
     </div>
-    <p class="footer__wm" aria-hidden="true"><span class="wm">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span></p>
+    <p class="footer__wm" aria-hidden="true"><span class="wm">N<span class="wm__i">I<i class="crown" aria-hidden="true"></i></span>NE</span></p>
   </footer>
 </body>
 </html>

@@ -220,7 +220,7 @@ function smoothScroll(introEnd) {
 
   // Âncoras passam pelo Lenis (ele já respeita o scroll-padding-top do CSS) e levam o foco junto
   const onClick = (e) => {
-    const a = e.target.closest('a[href*="#"]:not(.skip)');
+    const a = e.target.closest('a[href*="#"]:not(.a11y-bar a)');
     const target = a && a.pathname === location.pathname && a.hash.length > 1 && $(a.hash);
     if (!target) return;
     e.preventDefault();
@@ -291,7 +291,7 @@ function preloader() {
     .to($(".preloader__digits", el), { yPercent: -100 * 8 / 9, duration: .7, ease: "power2.inOut" })
     .to($(".preloader__count", el), { yPercent: -40, opacity: 0, duration: .15, ease: "power2.in" }, .62)
     .fromTo(el.querySelectorAll(".ch"), { yPercent: 50, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: .05, duration: .25, ease: EASE.out }, .76)
-    .fromTo($("img", el), { y: -innerHeight / 2, opacity: 1 }, { y: 0, duration: .42, ease: "bounce.out" }, .8)
+    .fromTo($(".crown", el), { y: -innerHeight / 2, opacity: 1 }, { y: 0, duration: .42, ease: "bounce.out" }, .8)
     .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: .45, ease: "power3.inOut" }, end);
   return end;
 }
