@@ -1,4 +1,4 @@
-/* Nine Academia de Influência */
+/* Faculdade Nine · home (o comum a todas as páginas está em base.js) */
 
 // Acervo do mural "Vida na Nine". Para trocar conteúdo: coloque os arquivos em
 // assets/img/galeria/ (<id>-600.webp miniatura e <id>.webp ampliada) e edite esta lista.
@@ -38,58 +38,6 @@ const GALERIA = [
 ];
 const CATEGORIAS = { aulas: "Aulas", oficinas: "Oficinas", grupos: "Grupos", intercambio: "Intercâmbio", jantares: "Jantares", servico: "Serviço", formatura: "Formatura" };
 const MURAL_INICIAL = 16;
-
-// Ano do rodapé: nunca fixo
-document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
-
-// Seções sem material real (Quem conduz, Depoimentos) só aparecem com ?rascunho
-if (new URLSearchParams(location.search).has("rascunho")) {
-  document.querySelectorAll("[data-draft]").forEach((el) => (el.hidden = false));
-}
-
-// Navbar: blur após 80px, esconde ao descer e reaparece ao subir
-const nav = document.querySelector("[data-nav]");
-let lastY = scrollY;
-addEventListener("scroll", () => {
-  const y = scrollY;
-  nav.classList.toggle("is-scrolled", y > 80);
-  nav.classList.toggle("is-hidden", y > lastY && y > 200);
-  lastY = y;
-}, { passive: true });
-
-// Ponto dourado no link da seção visível
-const pill = document.querySelector(".nav__pill");
-const dot = pill.querySelector(".nav__dot");
-const links = [...pill.querySelectorAll("a")];
-const sections = links.map((a) => document.querySelector(a.hash));
-const moveDot = (a) => {
-  links.forEach((l) => l.removeAttribute("aria-current"));
-  pill.classList.toggle("has-active", !!a);
-  if (!a) return;
-  a.setAttribute("aria-current", "true");
-  dot.style.transform = `translateX(${a.offsetLeft + a.offsetWidth / 2 - 2.5}px)`;
-};
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    const a = links[sections.indexOf(e.target)];
-    if (e.isIntersecting) moveDot(a);
-    else if (a.hasAttribute("aria-current")) moveDot(null);
-  });
-}, { rootMargin: "-45% 0px -50% 0px" });
-sections.forEach((s) => io.observe(s));
-
-// Menu mobile fullscreen
-const menu = document.querySelector("[data-menu]");
-const burger = document.querySelector(".nav__burger");
-const setMenu = (open) => {
-  menu.hidden = !open;
-  burger.setAttribute("aria-expanded", open);
-  document.body.style.overflow = open ? "hidden" : "";
-  (open ? menu.querySelector("a") : burger).focus();
-};
-document.querySelectorAll("[data-menu-toggle]").forEach((b) => b.addEventListener("click", () => setMenu(menu.hidden)));
-menu.addEventListener("click", (e) => e.target.closest("a") && setMenu(false));
-addEventListener("keydown", (e) => e.key === "Escape" && !menu.hidden && setMenu(false));
 
 // ---------- Vida na Nine (Fase 3.5) ----------
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
@@ -254,7 +202,7 @@ function initMotion() {
       .filter((el) => !el.closest(".hero") && !(desktop && el.closest("[data-pin]")));
 
     const cleanups = [smoothScroll(introEnd), reveals(free), heroScroll(), desktop ? pinZoom() : null];
-    cleanups.push(desktop ? pinPilares() : null, desktop ? pinJornada() : drawJornada());
+    cleanups.push(desktop ? pinPilares() : null, desktop ? fillNine() : drawJornada());
     if (desktop && finePointer) cleanups.push(cursor(), magnetic());
     return () => cleanups.forEach((fn) => fn && fn());
   });
@@ -272,8 +220,8 @@ function smoothScroll(introEnd) {
 
   // Âncoras passam pelo Lenis (ele já respeita o scroll-padding-top do CSS) e levam o foco junto
   const onClick = (e) => {
-    const a = e.target.closest('a[href^="#"]:not(.skip)');
-    const target = a && a.hash.length > 1 && $(a.hash);
+    const a = e.target.closest('a[href*="#"]:not(.skip)');
+    const target = a && a.pathname === location.pathname && a.hash.length > 1 && $(a.hash);
     if (!target) return;
     e.preventDefault();
     lenis.scrollTo(target);
@@ -426,18 +374,12 @@ function pinPilares() {
   return () => sec.classList.remove("is-pinned");
 }
 
-// Jornada: scroll horizontal pinado + "9" preenchendo (desktop)
-function pinJornada() {
-  const sec = $(".jornada"), wrap = $(".jornada__wrap", sec), track = $(".jornada__track", sec);
-  sec.classList.add("is-pinned");
-  const dist = () => track.scrollWidth - track.clientWidth;
-  gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: { trigger: wrap, start: "center center", end: () => "+=" + dist(), pin: true, scrub: .6, invalidateOnRefresh: true },
-  })
-    .to(track, { x: () => -dist() })
-    .fromTo(".jornada__nine--fill", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)" }, 0);
-  return () => sec.classList.remove("is-pinned");
+// Jornada (desktop): os 4 semestres cabem na tela; o "9" se preenche conforme a seção passa
+function fillNine() {
+  gsap.fromTo(".jornada__nine--fill", { clipPath: "inset(100% 0 0 0)" }, {
+    clipPath: "inset(0% 0 0 0)", ease: "none",
+    scrollTrigger: { trigger: ".jornada__wrap", start: "top 80%", end: "bottom 40%", scrub: true },
+  });
 }
 
 // Jornada no mobile: linha vertical desenhada no scroll

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ouvidoria | Faculdade Nine</title>
+  <meta name="description" content="Ouvidoria da Faculdade Nine: canal para reclamações, denúncias, sugestões, elogios e pedidos de informação, com sigilo e prazos definidos.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Ouvidoria | Faculdade Nine">
+  <meta property="og:description" content="Ouvidoria da Faculdade Nine: canal para reclamações, denúncias, sugestões, elogios e pedidos de informação, com sigilo e prazos definidos.">
+  <link rel="icon" type="image/png" href="assets/logo/crown.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="base.js" defer></script>
+</head>
+<body class="page">
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="nav" data-nav>
+    <div class="container nav__inner">
+      <a class="logo" href="./" aria-label="Faculdade Nine, página inicial">
+        <span class="wm" aria-hidden="true">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span>
+      </a>
+
+      <nav class="nav__pill" aria-label="Principal">
+        <ul>
+          <li><a href="./">Início</a></li>
+          <li><a href="a-faculdade.html">A Faculdade</a></li>
+          <li><a href="curso.html">Curso</a></li>
+          <li><a href="transparencia.html">Transparência</a></li>
+          <li><a href="ouvidoria.html" aria-current="page">Ouvidoria</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn nav__cta" data-magnetic href="./#aplicar">Inscrição <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 11L11 5M6 5h5v5"/></svg></span></a>
+
+      <button class="nav__burger" type="button" aria-expanded="false" aria-controls="menu-mobile" data-menu-toggle>
+        <span class="sr-only">Abrir menu</span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu-mobile" hidden data-menu>
+    <button class="menu__close" type="button" data-menu-toggle><span class="sr-only">Fechar menu</span>×</button>
+    <nav aria-label="Menu mobile">
+      <ul>
+        <li><a href="./">Início</a></li>
+        <li><a href="a-faculdade.html">A Faculdade</a></li>
+        <li><a href="curso.html">Curso</a></li>
+        <li><a href="transparencia.html">Transparência</a></li>
+        <li><a href="ouvidoria.html" aria-current="page">Ouvidoria</a></li>
+        <li><a href="./#aplicar" class="menu__apply">Inscrição →</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main id="conteudo">
+    <section class="page-hero" aria-labelledby="t-ouv">
+      <div class="container">
+        <nav class="crumbs" aria-label="Você está em"><a href="./">Início</a> <span aria-hidden="true">/</span> <span aria-current="page">Ouvidoria</span></nav>
+        <div class="page-hero__text">
+          <p class="label">Canal institucional</p>
+          <h1 id="t-ouv">Ouvidoria</h1>
+          <p class="lead">Canal de comunicação entre a Faculdade Nine e as comunidades acadêmica e externa para receber, registrar, encaminhar e responder manifestações.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" aria-labelledby="t-quem-pode">
+      <div class="container grid-12">
+        <h2 class="label section-aside" id="t-quem-pode">Quem pode se manifestar</h2>
+        <div class="prose">
+          <p class="prose__big">Estudantes, docentes, técnicos-administrativos, egressos, candidatos, pais ou responsáveis e demais membros da comunidade externa.</p>
+          <p>A Ouvidoria é vinculada diretamente à Direção-Geral, sem subordinação às demais direções e coordenações. Ela não substitui os requerimentos acadêmicos e administrativos da Secretaria Geral: procure-a quando não obtiver resposta ou atendimento adequado pelos canais ordinários.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tint" aria-labelledby="t-tipos">
+      <div class="container grid-12">
+        <h2 class="label section-aside" id="t-tipos">Tipos de manifestação</h2>
+        <div class="cards cards--3">
+          <article class="card"><h3>Reclamação</h3><p>Insatisfação com serviço, atendimento ou conduta.</p></article>
+          <article class="card"><h3>Denúncia</h3><p>Comunicação de irregularidade ou de ato ilícito, inclusive assédio e discriminação.</p></article>
+          <article class="card"><h3>Sugestão</h3><p>Proposta de melhoria.</p></article>
+          <article class="card"><h3>Elogio</h3><p>Reconhecimento de serviço, atendimento ou conduta.</p></article>
+          <article class="card"><h3>Solicitação de informação</h3><p>Pedido de esclarecimento não atendido pelos canais ordinários.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-prazos">
+      <div class="container grid-12">
+        <h2 class="label section-aside" id="t-prazos">Prazos de atendimento</h2>
+        <ol class="steps">
+          <li><p class="steps__n">Registro</p><p>O sistema gera um número de protocolo e envia a confirmação, com cópia da manifestação, para o seu e-mail.</p></li>
+          <li><p class="steps__n">Até 5 dias úteis</p><p>A Direção-Geral analisa a manifestação e a encaminha ao setor competente, ou a trata diretamente.</p></li>
+          <li><p class="steps__n">Até 10 dias úteis</p><p>O setor responde à Ouvidoria com as providências adotadas.</p></li>
+          <li><p class="steps__n">Até 20 dias úteis</p><p>Você recebe a resposta conclusiva por e-mail. O prazo pode ser prorrogado uma única vez, por igual período, com justificativa.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--tint" aria-labelledby="t-sigilo">
+      <div class="container grid-12">
+        <h2 class="label section-aside" id="t-sigilo">Sigilo e proteção de dados</h2>
+        <div class="prose">
+          <p>Sua identidade e o conteúdo da manifestação são mantidos em sigilo. No encaminhamento ao setor, a identidade é omitida, salvo quando indispensável e com a sua autorização, e você pode pedir que ela não seja revelada em nenhuma hipótese.</p>
+          <p>Os dados pessoais são tratados conforme a Lei nº 13.709/2018 (LGPD), apenas para registro, resposta e relatórios. É vedada qualquer retaliação a quem se manifesta de boa-fé.</p>
+          <p class="note">Relatórios semestrais, sem identificação dos manifestantes, são publicados em <a href="transparencia.html">Transparência Institucional</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="aplicar" id="manifestacao" aria-labelledby="t-form">
+      <div class="container grid-12">
+        <header class="aplicar__head">
+          <img class="aplicar__crown" src="assets/logo/crown.png" alt="" width="214" height="101">
+          <h2 id="t-form">Registre sua manifestação</h2>
+          <p class="lead">Acesso livre, sem cadastro. Os campos marcados como opcionais podem ficar em branco.</p>
+          <p class="lead">Se preferir, escreva para <a class="link-gold" href="mailto:contato@nine.com.br">contato@nine.com.br</a>.</p>
+        </header>
+
+        <form class="form" data-ouvidoria novalidate>
+          <div class="field">
+            <label for="o-nome">Nome</label>
+            <input id="o-nome" name="nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="o-email">E-mail</label>
+            <input id="o-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="o-vinculo">Vínculo com a Instituição</label>
+            <select id="o-vinculo" name="vinculo" required>
+              <option value="" selected disabled>Selecione</option>
+              <option>Estudante</option><option>Docente</option><option>Técnico-administrativo</option><option>Egresso</option>
+              <option>Candidato</option><option>Pai, mãe ou responsável</option><option>Comunidade externa</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="o-tipo">Tipo de manifestação</label>
+            <select id="o-tipo" name="tipo" required>
+              <option value="" selected disabled>Selecione</option>
+              <option>Reclamação</option><option>Denúncia</option><option>Sugestão</option><option>Elogio</option><option>Solicitação de informação</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="o-descricao">Descrição dos fatos</label>
+            <textarea id="o-descricao" name="descricao" rows="6" required></textarea>
+          </div>
+          <div class="field field--full">
+            <label for="o-anexos">Anexos <span class="opt">(opcional)</span></label>
+            <input id="o-anexos" name="anexos" type="file" multiple>
+          </div>
+          <div class="field field--hp" aria-hidden="true">
+            <label for="o-website">Website</label>
+            <input id="o-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="field field--full field--check">
+            <input id="o-sigilo" name="sigilo_total" type="checkbox">
+            <label for="o-sigilo">Não quero que minha identidade seja revelada em nenhuma hipótese.</label>
+          </div>
+          <div class="field field--full field--check">
+            <input id="o-lgpd" name="consentimento" type="checkbox" required>
+            <label for="o-lgpd">Concordo com o tratamento dos meus dados para o registro e a resposta desta manifestação, conforme a <a href="privacidade.html">Política de privacidade</a>.</label>
+          </div>
+          <div class="field--full">
+            <button class="btn btn--gold" type="submit">Enviar manifestação <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 11L11 5M6 5h5v5"/></svg></span></button>
+            <p class="form__status" data-status role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inst">
+        <p class="footer__name">Faculdade Nine</p>
+        <p>Mantida pelo Conselho Educacional Nine · CNPJ 61.991.971/0001-35</p>
+        <p>Rua Engenheiro Niepce da Silva, 139 · Portão · Curitiba/PR</p>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <p class="footer__title">Institucional</p>
+          <ul>
+            <li><a href="a-faculdade.html">A Faculdade</a></li>
+            <li><a href="curso.html">Curso</a></li>
+            <li><a href="./#aplicar">Processo seletivo</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__title">Transparência</p>
+          <ul>
+            <li><a href="transparencia.html">Transparência Institucional</a></li>
+            <li><a href="ouvidoria.html">Ouvidoria</a></li>
+            <li><a href="privacidade.html">Política de privacidade</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__title">Secretaria Geral</p>
+          <ul>
+            <li><a href="mailto:contato@nine.com.br">contato@nine.com.br</a></li>
+            <li>Telefone <span class="tbc tbc--dark">[A CONFIRMAR]</span></li>
+            <li><a href="https://www.instagram.com/nine.academia/" target="_blank" rel="noopener">@nine.academia</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__title">Cadastro e-MEC</p>
+          <div class="emec" role="note">
+            <span class="emec__qr" aria-hidden="true">QR</span>
+            <p>Selo e QR Code do e-MEC <span class="tbc tbc--dark">[após o credenciamento]</span></p>
+          </div>
+          <p class="footer__small"><a href="https://emec.mec.gov.br/" target="_blank" rel="noopener">Consulte instituições no e-MEC</a></p>
+        </div>
+      </div>
+      <p class="footer__copy">© <span data-year></span> Faculdade Nine · Conselho Educacional Nine</p>
+    </div>
+    <p class="footer__wm" aria-hidden="true"><span class="wm">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span></p>
+  </footer>
+</body>
+</html>
