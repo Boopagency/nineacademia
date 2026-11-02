@@ -1,16 +1,22 @@
-# ATUALIZAÇÃO (nov/2026): o site agora é da FACULDADE NINE
+# ATUALIZAÇÃO (nov/2026): DOIS SITES — Faculdade Nine (raiz) e Academia (/academia/)
 
-A Nine Academia de Influência está virando a **Faculdade Nine** (instituição de ensino superior). O site será usado na avaliação do MEC; onde este bloco conflitar com o resto do arquivo, **este bloco vale**.
+Este bloco vale sobre o resto do arquivo. O guia original abaixo continua valendo **só para a Academia de Influência** (`/academia/`).
 
-- **Dados institucionais:** Faculdade Nine, mantida pelo Conselho Educacional Nine (CNPJ 61.991.971/0001-35), Rua Engenheiro Niepce da Silva, 139, Portão, Curitiba/PR. Diretor-Geral: Raul Cesar Sindlinger. Órgãos: CONSUP e CPA. E-mail provisório: contato@nine.com.br.
-- **Fonte normativa:** Regulamento da Ouvidoria e da Comunicação Institucional (Caps. VII a X = área de Transparência, Ouvidoria, informações de curso). O anexo técnico do PDF **não** vai para o site.
-- **Curso:** matriz de 4 semestres e 30 disciplinas (planilha Disciplinas_Nine.xlsx). Nome, grau, modalidade, carga horária e ato autorizativo: **[A CONFIRMAR]**.
-- **Mapa do site (multipágina):** `index.html` (home com motion) · `a-faculdade.html` · `curso.html` (ficha + matriz) · `transparencia.html` (documentos com status e data de atualização) · `ouvidoria.html` (tipos, prazos 5/10/20 dias úteis, sigilo, formulário) · `privacidade.html`.
-- **Código:** `base.js` é comum a todas as páginas (nav, menu, ano, formulário da Ouvidoria); `main.js` é só da home. Páginas internas sem GSAP, sóbrias (≈90% Instituição).
-- **Formulários:** pré-inscrição e Ouvidoria vão para planilha via webhook (sem Supabase). A Ouvidoria precisa gerar protocolo e e-mail de confirmação.
-- **Desempenho (meta: 100 no PageSpeed):** sem preloader e sem animação de entrada no topo. Fonte Inter Tight hospedada em `assets/fonts/` com preload; GSAP/ScrollTrigger/SplitText/Flip/Lenis em `assets/vendor/` (versões fixas), carregados por `main.js` só depois do `load`. Vídeos só começam após o `load`. SplitText sempre com `aria: "none"`; nada de texto com opacidade baixa (falha contraste).
-- **Acessibilidade (e-MAG/ASES):** barra de atalhos com accesskey, `<noscript>`, decoração via CSS (nunca `<img alt="">`), `:focus` visível, sem `style=""` inline (o gerador converte em classes), sem `target="_blank"`, formulários com `fieldset`. Validar com W3C vnu e axe-core com animação ligada.
-- **e-MEC:** após o credenciamento, publicar QR Code e banner do e-MEC na home/rodapé (Portaria MEC 879/2022, prazo de 20 dias úteis).
+## Faculdade Nine (raiz do site) — institucional, foco em vender UM curso
+- **Curso:** Tecnólogo em Processos Gerenciais · presencial em Curitiba · 4 semestres · 30 disciplinas (planilha Disciplinas_Nine.xlsx; cada disciplina mostra "o que você fará a partir daqui"). **Sem vestibular/processo seletivo.** Preço e inscrição: **"Em breve"**.
+- **Identidade:** referência estrutural PUCPR (pucpr.br e ead.pucpr.br/cursos/...) sem copiar: barra superior escura, cabeçalho branco com submenu "A Faculdade", banner, blocos divididos foto + cor com **selo circular** e pílulas, pontos dourados, rodapé escuro multicoluna, faixa e-MEC. Cores Nine (navy + dourado + coroa). Imagens: corporativas (gestão), **geradas pelo cliente**; até lá, fotos reais em `FOTOS` no gerador.
+- **Páginas:** `index` · `curso` (caixa lateral, matriz retrátil por semestre, jornada, FAQ) · `areas-de-atuacao` (perfil do CNCST 2016 p. 48, CBO 1421-20 e 2521-05, registro no CRA, 8 áreas ligadas às disciplinas) · `a-faculdade` (dados, estrutura, CPA, onde estamos com mapa OSM) · `transparencia` (documentos do art. 26, sem painel de upload) · `ouvidoria` · `privacidade`.
+- **Dados:** Faculdade Nine, mantida pelo Conselho Educacional Nine (CNPJ 61.991.971/0001-35), Rua Engenheiro Niepce da Silva, 139, Portão, Curitiba/PR, CEP 80610-240. Diretor-Geral: Raul Cesar Sindlinger. CONSUP e CPA. E-mail provisório: contato@nine.com.br.
+- **Código:** gerado por `material/gerar-site.py <planilha.xlsx>` (sobrescreve as páginas da raiz; CSS-fonte `faculdade.css`, embutido minificado em cada página). Sem GSAP na Faculdade. `base.js` é comum aos dois sites.
+
+## Academia de Influência (`/academia/index.html`) — mantida à mão
+- Site com motion (galeria, Reels, pilares). Caminhos absolutos (`/assets/`, `/main.js`, `/base.js`). CSS-fonte `style.css` (o gerador embute na página).
+
+## Regras que valem para os dois
+- **Desempenho (meta 100 no PageSpeed):** sem preloader; fonte local com preload; GSAP/Lenis em `assets/vendor/` carregados após o `load`; imagens fora da tela com lazy; CSS embutido.
+- **Acessibilidade (e-MAG/ASES):** barra de atalhos com accesskey, `<noscript>`, decoração via CSS (nunca `<img alt="">`), `:focus` visível, sem `style=""`, sem `target="_blank"`, `fieldset` nos formulários. Validar com W3C vnu e axe-core (com animação ligada).
+- **Formulários:** Ouvidoria e (Academia) aplicação vão para planilha via webhook; Ouvidoria precisa de protocolo + e-mail de confirmação.
+- **e-MEC:** após o credenciamento, QR Code e banner do e-MEC na home/rodapé (Portaria MEC 879/2022).
 
 ---
 

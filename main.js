@@ -47,7 +47,7 @@ const refreshScroll = () => window.ScrollTrigger && ScrollTrigger.refresh();
 const masonry = document.querySelector("[data-masonry]");
 const moreBtn = document.querySelector("[data-more]");
 masonry.innerHTML = GALERIA.map((f, i) => `<li data-cat="${f.cat}"${i >= MURAL_INICIAL ? " data-extra hidden" : ""}><figure>
-  <button type="button" class="mural__open" data-i="${i}" aria-label="Ampliar: ${f.alt}"><img src="assets/img/galeria/${f.id}-600.webp" srcset="assets/img/galeria/${f.id}-320.webp 320w, assets/img/galeria/${f.id}-600.webp 600w" sizes="(min-width: 1024px) 25vw, 50vw" width="${f.w}" height="${f.h}" alt="${f.alt}" loading="lazy" decoding="async"></button>
+  <button type="button" class="mural__open" data-i="${i}" aria-label="Ampliar: ${f.alt}"><img src="/assets/img/galeria/${f.id}-600.webp" srcset="/assets/img/galeria/${f.id}-320.webp 320w, /assets/img/galeria/${f.id}-600.webp 600w" sizes="(min-width: 1024px) 25vw, 50vw" width="${f.w}" height="${f.h}" alt="${f.alt}" loading="lazy" decoding="async"></button>
   <figcaption>${f.legenda}</figcaption></figure></li>`).join("");
 const muralItems = [...masonry.children];
 const chipsEl = document.querySelector("[data-filter]");
@@ -90,7 +90,7 @@ const lbImg = lb.querySelector("[data-lb-img]"), lbCap = lb.querySelector("[data
 let lbAtual = 0, lbX = null, lbSwipe = false;
 const lbMostrar = (i) => {
   const f = GALERIA[(lbAtual = i)];
-  lbImg.src = `assets/img/galeria/${f.id}.webp`;
+  lbImg.src = `/assets/img/galeria/${f.id}.webp`;
   lbImg.alt = f.alt;
   lbCap.textContent = f.legenda;
 };
@@ -203,9 +203,9 @@ const loadScript = (src) => new Promise((ok, fail) => {
   document.head.append(s);
 });
 function afterLoad(fn) { document.readyState === "complete" ? fn() : addEventListener("load", fn, { once: true }); }
-afterLoad(() => loadScript("assets/vendor/gsap-3.15.0.min.js")
+afterLoad(() => loadScript("/assets/vendor/gsap-3.15.0.min.js")
   .then(() => Promise.all(["ScrollTrigger-3.15.0", "SplitText-3.15.0", "lenis-1.3.26"]
-    .map((f) => loadScript(`assets/vendor/${f}.min.js`))))
+    .map((f) => loadScript(`/assets/vendor/${f}.min.js`))))
   .then(() => document.fonts.ready)
   .then(initMotion)
   .catch(() => {})); // sem as bibliotecas o site continua completo, só sem animação
