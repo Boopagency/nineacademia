@@ -145,8 +145,8 @@ html:has(dialog[open]) { overflow: hidden; }
 .btn:hover { background: var(--navy-90); }
 .btn__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: #fff; color: var(--navy); }
 .btn__icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.btn--ghost { background: transparent; color: var(--navy); border-color: rgba(17, 23, 73, .2); padding-right: 20px; }
-.btn--ghost:hover { background: var(--paper-2); }
+.btn--ghost { background: var(--gold); color: var(--navy); border-color: var(--gold); padding-right: 20px; }
+.btn--ghost:hover { background: #FFC22E; border-color: #FFC22E; }
 .btn--light { background: #fff; color: var(--navy); border-color: #fff; }
 .btn--light:hover { background: var(--paper-2); }
 .btn--light .btn__icon { background: var(--navy); color: #fff; }
@@ -458,13 +458,6 @@ html:has(dialog[open]) { overflow: hidden; }
    7. Jornada
    ========================================================================== */
 .jornada__wrap { position: relative; overflow: hidden; isolation: isolate; padding-block: 24px 64px; }
-.jornada__nine {
-  position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: -1;
-  font-size: clamp(16rem, 34vw, 32rem); font-weight: 700; line-height: .72; letter-spacing: 0;
-  color: transparent; -webkit-text-stroke: 2px rgba(17, 23, 73, .07);
-}
-.jornada__nine::before { content: "9"; }
-.jornada__nine--fill { color: var(--gold); -webkit-text-stroke: 0; opacity: .22; clip-path: inset(100% 0 0 0); }
 .jornada__line { display: none; }
 .jornada__track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 24px 40px; }
 .station { position: relative; padding: 40px 24px 0 0; border-top: 2px solid var(--navy); }
@@ -479,7 +472,6 @@ html:has(dialog[open]) { overflow: hidden; }
 
 @media (max-width: 1023px) {
   .jornada__wrap { padding-block: 0; }
-  .jornada__nine { font-size: 28rem; top: 0; left: auto; right: -6vw; transform: none; }
   .jornada__track { grid-template-columns: 1fr; padding-block: 0; }
   .station { border-top: 0; border-left: 2px solid var(--navy); padding: 0 0 36px 32px; }
   .station::before { top: 2px; left: -7px; }
@@ -562,7 +554,7 @@ html:has(dialog[open]) { overflow: hidden; }
 .faq__head { grid-column: 1 / span 4; display: grid; gap: 20px; align-content: start; }
 .faq__face { max-width: 200px; margin-top: 12px; }
 .faq__list { grid-column: 6 / -1; border-top: 1px solid rgba(17, 23, 73, .14); }
-.faq details { border-bottom: 1px solid rgba(17, 23, 73, .14); }
+.faq details { border-bottom: 1px solid rgba(17, 23, 73, .14); overflow: hidden; }
 .faq summary {
   display: flex; justify-content: space-between; align-items: center; gap: 24px;
   padding: 24px 0; font-size: clamp(1.0625rem, 1.5vw, 1.375rem); font-weight: 600; letter-spacing: -0.015em;
@@ -803,8 +795,6 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 .eixos li { display: flex; align-items: baseline; gap: 12px; padding: 20px; border-radius: 16px; background: var(--paper-2); font-weight: 600; color: var(--navy); }
 .eixo__n { font-size: 2rem; font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
 
-.sem { margin-top: 40px; }
-.sem h3 { display: flex; align-items: baseline; gap: 12px; font-size: var(--fs-h3); }
 .sem__count { font-size: .875rem; font-weight: 500; letter-spacing: 0; color: var(--ink-muted); }
 .table-wrap { margin-top: 16px; overflow-x: auto; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
 .table { width: 100%; border-collapse: collapse; font-size: .9375rem; }
@@ -847,8 +837,43 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
   .page-hero__img { --ar: 4/3 !important; }
 }
 
+
+
+/* Faixa azul nas páginas internas */
+.section--navy { background: var(--navy); color: #fff; }
+.section--navy, .section--tint { isolation: isolate; } /* marca d'água fica sobre o fundo da faixa */
+.section--navy .label, .section--navy .fact dt { color: var(--gold); }
+.section--navy .prose__big, .section--navy .fact dd, .section--navy h2, .section--navy h3, .section--navy .checks li { color: #fff; }
+.section--navy .note, .section--navy .prose p:not(.prose__big) { color: rgba(255, 255, 255, .82); }
+.section--navy a { color: var(--gold); }
+.section--navy .tbc { color: rgba(255, 255, 255, .72); }
+.section--navy .fact { border-top-color: rgba(255, 255, 255, .16); }
+.section--navy .card, .section--navy .steps li, .section--navy .eixos li { background: var(--navy-90); box-shadow: none; }
+.section--navy .card h3, .section--navy .steps__n, .section--navy .eixos li { color: #fff; }
+.section--navy .card p, .section--navy .steps p:not(.steps__n) { color: rgba(255, 255, 255, .78); }
+.section--navy .steps li { border-top-color: var(--gold); }
+.section--navy .checks li::before { background-color: var(--gold); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23111749' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.section--navy :focus { outline-color: var(--gold); }
+.section--navy .wm-mark--nine { color: #fff; opacity: .05; }
+.section--navy .wm-mark--crown { opacity: .12; }
+
+/* Semestres retráteis (matriz) */
+.sem { margin-top: 16px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.sem summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px;
+  cursor: pointer; list-style: none; font-size: var(--fs-h3); font-weight: 600; letter-spacing: -0.02em; color: var(--navy);
+}
+.sem summary::-webkit-details-marker { display: none; }
+.sem summary::after {
+  content: "+"; flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--gold); color: var(--navy); font-size: 1.25rem; font-weight: 500;
+}
+.sem[open] summary::after { content: "−"; background: var(--navy); color: #fff; }
+.sem .table-wrap { margin: 0; border-radius: 0; box-shadow: none; border-top: 1px solid var(--line); }
+
 /* utilitários gerados (gerar-paginas.py) */
 .u-06f667 { --accent: var(--gold); }
+.u-0c1242 { bottom:6%;left:4%;width:150px;transform: rotate(10deg); }
 .u-0db893 { --ar: 4/5; }
 .u-318b33 { --ar: 1/1; }
 .u-32bcf8 { --ar: 21/8; }
@@ -860,11 +885,18 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 .u-5ef307 { top:6%;left:44%;width:160px;transform: rotate(12deg); }
 .u-62605d { bottom:-40px;right:2%;width:200px;transform: rotate(-12deg); }
 .u-66d4ec { --accent: var(--coral); }
+.u-6fab78 { top:10%;left:3%;width:140px;transform: rotate(-10deg); }
+.u-741e41 { bottom:10%;left:4%;width:150px;transform: rotate(-8deg); }
 .u-7aa610 { top:40%;left:34%;width:170px;transform: rotate(-8deg); }
 .u-81c42e { --ar: 3/4; }
 .u-821029 { bottom:-2%;left:-5vw;transform: rotate(-4deg); }
+.u-827683 { top:4%;right:-8vw;transform: rotate(3deg); }
 .u-82fe87 { --accent: var(--orange); }
+.u-87caf4 { bottom:-6%;right:-6vw;transform: rotate(-3deg); }
 .u-8ae841 { --accent: var(--blue); }
+.u-9b5141 { bottom:8%;left:3%;width:150px;transform: rotate(12deg); }
+.u-a11721 { top:-4%;left:-6vw;transform: rotate(3deg); }
+.u-a4a6cf { bottom:-14%;right:-6vw;transform: rotate(-3deg); }
 .u-c48100 { bottom:4%;left:6%;width:150px;transform: rotate(10deg); }
 .u-c589f7 { top:0;right:-6vw;transform: rotate(3deg); }
 .u-dd4285 { --ar: 4/3; }

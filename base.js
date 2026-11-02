@@ -39,3 +39,26 @@ if (ouvidoria) ouvidoria.addEventListener("submit", (e) => {
   ouvidoria.querySelector("[data-status]").textContent =
     "O registro online está em implantação. Enquanto isso, envie sua manifestação para contato@nine.com.br.";
 });
+
+// Acordeões (FAQ e semestres da matriz): abre e fecha com altura animada; com movimento reduzido, abre direto
+const semMovimento = matchMedia("(prefers-reduced-motion: reduce)");
+document.querySelectorAll(".faq details, details.sem").forEach((d) => {
+  const summary = d.querySelector("summary");
+  let anim = null;
+  summary.addEventListener("click", (e) => {
+    if (semMovimento.matches) return;
+    e.preventDefault();
+    const abrindo = !d.open || anim?.reverseClose;
+    const de = d.offsetHeight;
+    if (abrindo) d.open = true;
+    const para = abrindo ? d.scrollHeight : summary.offsetHeight;
+    anim?.cancel();
+    anim = d.animate({ height: [`${de}px`, `${para}px`] }, { duration: 380, easing: "cubic-bezier(.2, .7, .2, 1)" });
+    anim.reverseClose = !abrindo;
+    anim.onfinish = () => {
+      if (!abrindo) d.open = false;
+      anim = null;
+      window.ScrollTrigger && ScrollTrigger.refresh();
+    };
+  });
+});

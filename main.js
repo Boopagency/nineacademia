@@ -56,16 +56,19 @@ chipsEl.innerHTML = cats.map((k) =>
   `<button type="button" class="chip" aria-pressed="${k === "tudo"}" data-cat="${k}">${k === "tudo" ? "Tudo" : CATEGORIAS[k]}</button>`).join("");
 let filtro = "tudo", expandido = false;
 
+// Troca de filtro: o mural esmaece, é refeito e reaparece (as colunas de alvenaria não se dão bem com animar posição)
 function aplicarFiltro() {
-  const state = window.Flip && !reduceMotion.matches && Flip.getState(muralItems);
-  muralItems.forEach((li) => (li.hidden = filtro === "tudo" ? !expandido && li.hasAttribute("data-extra") : li.dataset.cat !== filtro));
-  moreBtn.hidden = expandido || filtro !== "tudo" || GALERIA.length <= MURAL_INICIAL;
-  if (!state) return refreshScroll();
-  Flip.from(state, {
-    duration: .6, ease: "power2.inOut", absolute: true, onComplete: refreshScroll,
-    onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: .92 }, { opacity: 1, scale: 1, duration: .4 }),
-    onLeave: (els) => gsap.to(els, { opacity: 0, scale: .92, duration: .3 }),
-  });
+  const trocar = () => {
+    muralItems.forEach((li) => (li.hidden = filtro === "tudo" ? !expandido && li.hasAttribute("data-extra") : li.dataset.cat !== filtro));
+    moreBtn.hidden = expandido || filtro !== "tudo" || GALERIA.length <= MURAL_INICIAL;
+    refreshScroll();
+  };
+  if (!window.gsap || reduceMotion.matches) return trocar();
+  gsap.killTweensOf(masonry);
+  gsap.to(masonry, { opacity: 0, y: 12, duration: .2, ease: "power1.in", onComplete: () => {
+    trocar();
+    gsap.to(masonry, { opacity: 1, y: 0, duration: .35, ease: "power2.out" });
+  } });
 }
 chipsEl.addEventListener("click", (e) => {
   const chip = e.target.closest(".chip");
@@ -201,14 +204,14 @@ const loadScript = (src) => new Promise((ok, fail) => {
 });
 function afterLoad(fn) { document.readyState === "complete" ? fn() : addEventListener("load", fn, { once: true }); }
 afterLoad(() => loadScript("assets/vendor/gsap-3.15.0.min.js")
-  .then(() => Promise.all(["ScrollTrigger-3.15.0", "SplitText-3.15.0", "Flip-3.15.0", "lenis-1.3.26"]
+  .then(() => Promise.all(["ScrollTrigger-3.15.0", "SplitText-3.15.0", "lenis-1.3.26"]
     .map((f) => loadScript(`assets/vendor/${f}.min.js`))))
   .then(() => document.fonts.ready)
   .then(initMotion)
   .catch(() => {})); // sem as bibliotecas o site continua completo, só sem animação
 
 function initMotion() {
-  gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
+  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   gsap.matchMedia().add({
     motion: "(prefers-reduced-motion: no-preference)",
@@ -226,7 +229,7 @@ function initMotion() {
       .filter((el) => !el.closest(".hero") && !(desktop && el.closest("[data-pin]")));
 
     const cleanups = [smoothScroll(), reveals(free), heroScroll(), desktop ? pinZoom() : null];
-    cleanups.push(desktop ? pinPilares() : null, desktop ? fillNine() : drawJornada());
+    cleanups.push(desktop ? pinPilares() : null, desktop ? null : drawJornada());
     if (desktop && finePointer) cleanups.push(cursor(), magnetic());
     return () => cleanups.forEach((fn) => fn && fn());
   });
@@ -369,21 +372,12 @@ function pinPilares() {
   return () => sec.classList.remove("is-pinned");
 }
 
-// Jornada (desktop): os 4 semestres cabem na tela; o "9" se preenche conforme a seção passa
-function fillNine() {
-  gsap.fromTo(".jornada__nine--fill", { clipPath: "inset(100% 0 0 0)" }, {
-    clipPath: "inset(0% 0 0 0)", ease: "none",
-    scrollTrigger: { trigger: ".jornada__wrap", start: "top 80%", end: "bottom 40%", scrub: true },
-  });
-}
-
 // Jornada no mobile: linha vertical desenhada no scroll
 function drawJornada() {
   const sec = $(".jornada"), track = $(".jornada__track", sec);
   sec.classList.add("is-drawing");
   const st = { trigger: track, start: "top 70%", end: "bottom 70%", scrub: true };
   gsap.to(".jornada__line", { scaleY: 1, ease: "none", scrollTrigger: st });
-  gsap.fromTo(".jornada__nine--fill", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", scrollTrigger: { ...st } });
   return () => sec.classList.remove("is-drawing");
 }
 
