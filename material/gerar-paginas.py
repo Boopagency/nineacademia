@@ -194,6 +194,7 @@ page("a-faculdade.html", "A Faculdade",
           "A Nine Academia de Influência está se tornando a Faculdade Nine: uma instituição de ensino superior em Curitiba, mantida pelo Conselho Educacional Nine.",
           img("24", "Turma da Faculdade Nine de jaleco reunida no laboratório", eager=True)) + f'''
     <section class="section" aria-labelledby="t-quem">
+      <span class="wm-mark wm-mark--crown crown" aria-hidden="true" style="bottom:6%;left:4%;width:150px;rotate:10deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-quem">Quem somos</h2>
         <div class="prose">
@@ -203,7 +204,8 @@ page("a-faculdade.html", "A Faculdade",
       </div>
     </section>
 
-    <section class="section section--tint" aria-labelledby="t-ident">
+    <section class="section section--navy" aria-labelledby="t-ident">
+      <span class="wm-mark wm-mark--nine" aria-hidden="true" style="bottom:-6%;right:-6vw;rotate:-3deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-ident">Dados institucionais</h2>
         <dl class="facts">
@@ -258,8 +260,9 @@ def tabela(sem, ds):
     linhas = "\n".join(
         f'              <tr><td class="mono">{d["cod"]}</td><th scope="row">{d["nome"]}</th><td>{d["eixo"]}</td><td>{d["area"]}</td><td>{TBC}</td></tr>'
         for d in ds)
-    return f'''        <div class="sem">
-          <h3 id="sem-{sem[0]}">{sem} semestre <span class="sem__count">{len(ds)} disciplinas</span></h3>
+    aberto = " open" if sem == "1º" else ""
+    return f'''        <details class="sem"{aberto}>
+          <summary><span>{sem} semestre <span class="sem__count">{len(ds)} disciplinas</span></span></summary>
           <div class="table-wrap" tabindex="0" role="region" aria-label="Disciplinas do {sem} semestre (role para os lados)">
             <table class="table">
               <thead><tr><th scope="col">Código</th><th scope="col">Disciplina</th><th scope="col">Eixo formativo</th><th scope="col">Área</th><th scope="col">Carga horária</th></tr></thead>
@@ -268,7 +271,7 @@ def tabela(sem, ds):
               </tbody>
             </table>
           </div>
-        </div>'''
+        </details>'''
 
 eixos_html = "\n".join(f'          <li><span class="eixo__n">{n}</span> {e}</li>' for e, n in EIXOS.most_common())
 comps_html = "\n".join(f"            <li>{c}.</li>" for c in COMPS)
@@ -288,7 +291,8 @@ page("curso.html", "Curso",
       </div>
     </section>
 
-    <section class="section section--tint" aria-labelledby="t-perfil">
+    <section class="section section--navy" aria-labelledby="t-perfil">
+      <span class="wm-mark wm-mark--nine" aria-hidden="true" style="top:4%;right:-8vw;rotate:3deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-perfil">O que você vai aprender a fazer</h2>
         <div class="prose">
@@ -300,6 +304,7 @@ page("curso.html", "Curso",
     </section>
 
     <section class="section" aria-labelledby="t-eixos">
+      <span class="wm-mark wm-mark--crown crown" aria-hidden="true" style="top:10%;left:3%;width:140px;rotate:-10deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-eixos">Eixos formativos</h2>
         <ul class="eixos">
@@ -364,7 +369,8 @@ def doc(t, d, st, data, href):
 page("transparencia.html", "Transparência Institucional",
      "Documentos institucionais, atos regulatórios, relatórios da Ouvidoria e resultados das avaliações da Faculdade Nine.",
      hero("t-transp", "Transparência Institucional", "Acesso livre, sem cadastro", "Transparência Institucional",
-          "Documentos e informações institucionais da Faculdade Nine, publicados em formato pesquisável e mantidos atualizados, conforme o Regulamento da Ouvidoria e da Comunicação Institucional.") + f'''
+          "Documentos e informações institucionais da Faculdade Nine, publicados em formato pesquisável e mantidos atualizados, conforme o Regulamento da Ouvidoria e da Comunicação Institucional.",
+          img("21", "Turma da Faculdade Nine reunida em um jantar sob o pergolado", eager=True)) + f'''
     <section class="section section--tight" aria-labelledby="t-docs">
       <div class="container">
         <h2 class="sr-only" id="t-docs">Documentos</h2>
@@ -375,7 +381,8 @@ page("transparencia.html", "Transparência Institucional",
       </div>
     </section>
 
-    <section class="section section--tint" aria-labelledby="t-emec">
+    <section class="section section--navy" aria-labelledby="t-emec">
+      <span class="wm-mark wm-mark--nine" aria-hidden="true" style="bottom:-14%;right:-6vw;rotate:-3deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-emec">Cadastro no e-MEC</h2>
         <div class="prose">
@@ -392,8 +399,9 @@ page("ouvidoria.html", "Ouvidoria",
      "Ouvidoria da Faculdade Nine: canal para reclamações, denúncias, sugestões, elogios e pedidos de informação, com sigilo e prazos definidos.",
      hero("t-ouv", "Ouvidoria", "Canal institucional", "Ouvidoria",
           "Canal de comunicação entre a Faculdade Nine e as comunidades acadêmica e externa para receber, registrar, encaminhar e responder manifestações.",
-          crown=False) + f'''
+          img("23", "Duas alunas sorrindo à mesa durante um encontro da turma", eager=True)) + f'''
     <section class="section section--tight" aria-labelledby="t-quem-pode">
+      <span class="wm-mark wm-mark--crown crown" aria-hidden="true" style="bottom:8%;left:3%;width:150px;rotate:12deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-quem-pode">Quem pode se manifestar</h2>
         <div class="prose">
@@ -416,7 +424,8 @@ page("ouvidoria.html", "Ouvidoria",
       </div>
     </section>
 
-    <section class="section" aria-labelledby="t-prazos">
+    <section class="section section--navy" aria-labelledby="t-prazos">
+      <span class="wm-mark wm-mark--nine" aria-hidden="true" style="top:-4%;left:-6vw;rotate:3deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-prazos">Prazos de atendimento</h2>
         <ol class="steps">
@@ -511,8 +520,10 @@ page("ouvidoria.html", "Ouvidoria",
 page("privacidade.html", "Política de privacidade",
      "Política de privacidade e proteção de dados pessoais da Faculdade Nine.",
      hero("t-priv", "Política de privacidade", "Lei nº 13.709/2018 (LGPD)", "Política de privacidade",
-          "Como a Faculdade Nine trata os dados pessoais de candidatos, estudantes, colaboradores e visitantes.", crown=False) + f'''
+          "Como a Faculdade Nine trata os dados pessoais de candidatos, estudantes, colaboradores e visitantes.",
+          img("11", "Instrutor conduzindo uma oficina prática com a turma", eager=True)) + f'''
     <section class="section section--tight" aria-labelledby="t-priv-status">
+      <span class="wm-mark wm-mark--crown crown" aria-hidden="true" style="bottom:10%;left:4%;width:150px;rotate:-8deg"></span>
       <div class="container grid-12">
         <h2 class="label section-aside" id="t-priv-status">Situação</h2>
         <div class="prose">
@@ -583,3 +594,20 @@ if INI in css:  # mantém as regras de execuções anteriores (o HTML já conver
 css += "\n" + INI + "\n" + "\n".join(f".{k} {{ {re.sub(r'rotate:\s*(-?[0-9.]+deg)', r'transform: rotate(\1)', v)}; }}" for k, v in sorted(regras.items())) + "\n" + FIM + "\n"
 open("style.css", "w").write(css)
 print(len(regras), "estilos inline viraram classes")
+
+
+# ---------------------------------------------------------------- CSS embutido (evita a requisição que bloqueia a renderização)
+# style.css continua sendo a fonte; cada página recebe a versão minificada dentro de <style id="css">.
+def _minifica(css):
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    css = re.sub(r"\s+", " ", css)
+    css = re.sub(r"\s*([{};,>])\s*", r"\1", css)
+    css = re.sub(r":\s+", ":", css)  # só depois do ":" (antes dele o espaço muda o seletor, ex.: ".aplicar :focus")
+    return css.replace(";}", "}").strip()
+mini = _minifica(open("style.css").read())
+for arq in glob.glob("*.html"):
+    t = open(arq).read()
+    bloco = f'<style id="css">{mini}</style>'
+    t = re.sub(r'<link rel="stylesheet" href="style.css">|<style id="css">.*?</style>', lambda m: bloco, t, count=1, flags=re.S)
+    open(arq, "w").write(t)
+print("CSS embutido:", len(mini) // 1024, "KB")
