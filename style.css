@@ -46,6 +46,12 @@
   --nav-h:   76px;
 }
 
+/* ---------- Fonte (hospedada no site; antes vinha do Google Fonts) ---------- */
+@font-face {
+  font-family: "Inter Tight"; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url("assets/fonts/inter-tight-latin.woff2") format("woff2");
+}
+
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
@@ -99,6 +105,7 @@ main { position: relative; z-index: 1; }
 .hero, .section { position: relative; overflow-x: clip; }
 .wm-mark { position: absolute; z-index: -1; pointer-events: none; user-select: none; }
 .wm-mark--crown { opacity: .08; }
+.wm-mark--nine::before { content: "NINE"; }
 .wm-mark--nine { font-size: clamp(8rem, 26vw, 26rem); font-weight: 700; letter-spacing: -0.05em; line-height: .8; color: var(--navy); opacity: .04; white-space: nowrap; }
 @media (max-width: 767px) { .wm-mark--crown { max-width: 120px; } }
 
@@ -228,6 +235,7 @@ html:has(dialog[open]) { overflow: hidden; }
   color: rgba(255, 255, 255, .7); white-space: nowrap; pointer-events: none;
 }
 .hero__wordmark > span { display: block; }
+.hero__wordmark > span::before { content: "NINE"; }
 .hero__bar {
   position: absolute; inset: auto 0 0; z-index: 3;
   display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; gap: 24px;
@@ -455,6 +463,7 @@ html:has(dialog[open]) { overflow: hidden; }
   font-size: clamp(16rem, 34vw, 32rem); font-weight: 700; line-height: .72; letter-spacing: 0;
   color: transparent; -webkit-text-stroke: 2px rgba(17, 23, 73, .07);
 }
+.jornada__nine::before { content: "9"; }
 .jornada__nine--fill { color: var(--gold); -webkit-text-stroke: 0; opacity: .22; clip-path: inset(100% 0 0 0); }
 .jornada__line { display: none; }
 .jornada__track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 24px 40px; }
@@ -648,23 +657,6 @@ html.lenis, html.lenis body { height: auto; }
 html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: clip; }
-
-/* Preloader: só aparece com html.intro (script inline no <head>) */
-.preloader { display: none; }
-.intro .preloader {
-  position: fixed; inset: 0; z-index: 90; display: grid; place-items: center;
-  background: var(--navy); color: #fff;
-  animation: preloader-failsafe 0s 4s forwards; /* se o JS falhar, some sozinho */
-}
-@keyframes preloader-failsafe { to { visibility: hidden; } }
-.intro body { overflow: hidden; }
-.preloader > * { grid-area: 1 / 1; }
-.preloader__count { height: 1em; overflow: hidden; font-size: var(--fs-mega); font-weight: 700; line-height: 1; letter-spacing: -0.05em; }
-.preloader__digits { display: flex; flex-direction: column; }
-.preloader__wm { font-size: clamp(4rem, 14vw, 12rem); letter-spacing: -0.04em; }
-.preloader__wm .ch { display: inline-block; opacity: 0; }
-.preloader__wm .wm__i { position: relative; }
-.preloader__wm .wm__i .crown { opacity: 0; }
 
 /* Pilares pinados (classe aplicada pelo JS só no desktop com motion) */
 .pilares.is-pinned .pilares__stage { position: relative; height: 100svh; }

@@ -47,7 +47,7 @@ const refreshScroll = () => window.ScrollTrigger && ScrollTrigger.refresh();
 const masonry = document.querySelector("[data-masonry]");
 const moreBtn = document.querySelector("[data-more]");
 masonry.innerHTML = GALERIA.map((f, i) => `<li data-cat="${f.cat}"${i >= MURAL_INICIAL ? " data-extra hidden" : ""}><figure>
-  <button type="button" class="mural__open" data-i="${i}" aria-label="Ampliar: ${f.alt}"><img src="assets/img/galeria/${f.id}-600.webp" width="${f.w}" height="${f.h}" alt="${f.alt}" loading="lazy" decoding="async"></button>
+  <button type="button" class="mural__open" data-i="${i}" aria-label="Ampliar: ${f.alt}"><img src="assets/img/galeria/${f.id}-600.webp" srcset="assets/img/galeria/${f.id}-320.webp 320w, assets/img/galeria/${f.id}-600.webp 600w" sizes="(min-width: 1024px) 25vw, 50vw" width="${f.w}" height="${f.h}" alt="${f.alt}" loading="lazy" decoding="async"></button>
   <figcaption>${f.legenda}</figcaption></figure></li>`).join("");
 const muralItems = [...masonry.children];
 const chipsEl = document.querySelector("[data-filter]");
@@ -114,7 +114,8 @@ lb.addEventListener("click", (e) => { if (e.target === lb && !lbSwipe) lb.close(
 // Vídeos com data-autoplay tocam só quando visíveis (e nunca com reduced motion)
 const autoplayIO = new IntersectionObserver((es) => es.forEach((e) =>
   e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause()), { threshold: .25 });
-if (!reduceMotion.matches) document.querySelectorAll("[data-autoplay]").forEach((v) => autoplayIO.observe(v));
+// Vídeos só começam depois da página pronta, para não disputar banda com o primeiro conteúdo
+if (!reduceMotion.matches) afterLoad(() => document.querySelectorAll("[data-autoplay]").forEach((v) => autoplayIO.observe(v)));
 
 // Parede de Reels: só o ativo toca (mudo); som opcional; no mobile, ativo = o centralizado
 const reelsTrack = document.querySelector("[data-reels]");
@@ -144,7 +145,7 @@ reelsTrack.addEventListener("click", (e) => {
 new IntersectionObserver(([e]) => { reelsNaTela = e.isIntersecting; ativarReel(reelAtivo); }, { threshold: .3 }).observe(reelsTrack);
 const centroIO = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target !== reelAtivo && ativarReel(e.target)),
   { root: reelsTrack, rootMargin: "0px -45% 0px -45%" });
-reelsTrack.scrollLeft = reelAtivo.offsetLeft - (reelsTrack.clientWidth - reelAtivo.offsetWidth) / 2;
+afterLoad(() => (reelsTrack.scrollLeft = reelAtivo.offsetLeft - (reelsTrack.clientWidth - reelAtivo.offsetWidth) / 2));
 reelItems.forEach((li) => centroIO.observe(li));
 
 // CTA fixo: aparece depois da faixa de CTA e some quando a Aplicação está na tela
@@ -153,7 +154,7 @@ const ctaBand = document.querySelector(".cta-band"), aplicarSec = document.query
 const updateCta = () => ctaFloat.classList.toggle("is-on",
   ctaBand.getBoundingClientRect().top < innerHeight / 2 && aplicarSec.getBoundingClientRect().top > innerHeight);
 addEventListener("scroll", updateCta, { passive: true });
-updateCta();
+afterLoad(updateCta);
 
 // Trilhas: abre o painel sob o mouse só quando o mouse se move (rolar a página por cima não troca o painel)
 const paths = document.querySelectorAll(".path");
@@ -176,15 +177,22 @@ const STAGGER = .06;
 const root = document.documentElement;
 const $ = (s, el = document) => el.querySelector(s);
 
-// Motion só começa com a fonte carregada: assim o texto não se reajusta no meio da animação
-if (window.gsap && window.ScrollTrigger && window.SplitText) document.fonts.ready.then(initMotion);
-else root.classList.remove("intro");
+// Bibliotecas de animação só carregam depois da página pronta: o primeiro conteúdo aparece sem esperar por elas
+const loadScript = (src) => new Promise((ok, fail) => {
+  const s = document.createElement("script");
+  s.src = src; s.onload = ok; s.onerror = fail;
+  document.head.append(s);
+});
+function afterLoad(fn) { document.readyState === "complete" ? fn() : addEventListener("load", fn, { once: true }); }
+afterLoad(() => loadScript("assets/vendor/gsap-3.15.0.min.js")
+  .then(() => Promise.all(["ScrollTrigger-3.15.0", "SplitText-3.15.0", "Flip-3.15.0", "lenis-1.3.26"]
+    .map((f) => loadScript(`assets/vendor/${f}.min.js`))))
+  .then(() => document.fonts.ready)
+  .then(initMotion)
+  .catch(() => {})); // sem as bibliotecas o site continua completo, só sem animação
 
 function initMotion() {
   gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
-  const motionOk = matchMedia("(prefers-reduced-motion: no-preference)").matches;
-  const introEnd = motionOk ? preloader() : 0;
-  if (motionOk) heroIntro(introEnd);
 
   gsap.matchMedia().add({
     motion: "(prefers-reduced-motion: no-preference)",
@@ -201,7 +209,7 @@ function initMotion() {
     const free = (sel) => gsap.utils.toArray(sel)
       .filter((el) => !el.closest(".hero") && !(desktop && el.closest("[data-pin]")));
 
-    const cleanups = [smoothScroll(introEnd), reveals(free), heroScroll(), desktop ? pinZoom() : null];
+    const cleanups = [smoothScroll(), reveals(free), heroScroll(), desktop ? pinZoom() : null];
     cleanups.push(desktop ? pinPilares() : null, desktop ? fillNine() : drawJornada());
     if (desktop && finePointer) cleanups.push(cursor(), magnetic());
     return () => cleanups.forEach((fn) => fn && fn());
@@ -210,13 +218,12 @@ function initMotion() {
 
 function once(trigger, start = "top 85%") { return { trigger, start, once: true }; }
 
-function smoothScroll(introEnd) {
+function smoothScroll() {
   const lenis = new Lenis();
   const raf = (t) => lenis.raf(t * 1000);
   lenis.on("scroll", ScrollTrigger.update);
   gsap.ticker.add(raf);
   gsap.ticker.lagSmoothing(0);
-  if (introEnd) { lenis.stop(); gsap.delayedCall(introEnd + .45, () => lenis.start()); }
 
   // Âncoras passam pelo Lenis (ele já respeita o scroll-padding-top do CSS) e levam o foco junto
   const onClick = (e) => {
@@ -244,7 +251,7 @@ function reveals(free) {
     gsap.from(el, { y: 40, opacity: 0, duration: DUR.base, ease: EASE.out, scrollTrigger: once(el) }));
 
   free('[data-reveal="lines"]').forEach((el) => SplitText.create(el, {
-    type: "lines", mask: "lines", autoSplit: true,
+    type: "lines", mask: "lines", autoSplit: true, aria: "none",
     onSplit: (s) => gsap.from(s.lines, { yPercent: 100, duration: DUR.base, stagger: STAGGER * 1.5, ease: EASE.out, scrollTrigger: once(el) }),
   }));
 
@@ -256,9 +263,9 @@ function reveals(free) {
   });
 
   gsap.utils.toArray('[data-scrub="words"]').forEach((el) => SplitText.create(el, {
-    type: "words", autoSplit: true,
-    onSplit: (s) => gsap.fromTo(s.words, { opacity: .3 }, {
-      opacity: 1, stagger: .1, ease: "none",
+    type: "words", autoSplit: true, aria: "none",
+    onSplit: (s) => gsap.fromTo(s.words.filter((w) => !w.closest(".muted")), { color: "#62667F" }, {
+      color: "#111749", stagger: .1, ease: "none",
       scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: true },
     }),
   }));
@@ -279,34 +286,6 @@ function reveals(free) {
 function undrawn(p) {
   const len = p.getTotalLength();
   return { strokeDasharray: `${len} ${len * 2}`, strokeDashoffset: len + 10 };
-}
-
-// Preloader: 1 → 9, coroa cai sobre o "I", cortina sobe. ~1,6s, uma vez por sessão.
-function preloader() {
-  const el = $("[data-preloader]");
-  if (!root.classList.contains("intro")) { el.remove(); return 0; }
-  try { sessionStorage.setItem("nine-intro", "1"); } catch (e) {}
-  const end = 1.15;
-  gsap.timeline({ onComplete: () => { root.classList.remove("intro"); el.remove(); ScrollTrigger.refresh(); } })
-    .to($(".preloader__digits", el), { yPercent: -100 * 8 / 9, duration: .7, ease: "power2.inOut" })
-    .to($(".preloader__count", el), { yPercent: -40, opacity: 0, duration: .15, ease: "power2.in" }, .62)
-    .fromTo(el.querySelectorAll(".ch"), { yPercent: 50, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: .05, duration: .25, ease: EASE.out }, .76)
-    .fromTo($(".crown", el), { y: -innerHeight / 2, opacity: 1 }, { y: 0, duration: .42, ease: "bounce.out" }, .8)
-    .to(el, { clipPath: "inset(0% 0% 100% 0%)", duration: .45, ease: "power3.inOut" }, end);
-  return end;
-}
-
-function heroIntro(delay) {
-  const chars = SplitText.create(".hero__wordmark > span", { type: "chars", mask: "chars" }).chars;
-  gsap.timeline({ delay })
-    .from(".hero__media", { scale: 1.15, duration: DUR.slow * 1.4, ease: EASE.expo })
-    .from(chars, { yPercent: 100, stagger: STAGGER, duration: DUR.slow, ease: EASE.expo }, .1)
-    .from(".hero__bar", { opacity: 0, y: 20, duration: DUR.base, ease: EASE.out }, .5)
-    .from(".hero__side", { opacity: 0, y: 40, duration: DUR.base, ease: EASE.out }, .6);
-  SplitText.create("#hero-title", {
-    type: "lines", mask: "lines", autoSplit: true,
-    onSplit: (s) => gsap.from(s.lines, { yPercent: 100, stagger: .1, duration: DUR.base, ease: EASE.out, delay: delay + .35 }),
-  });
 }
 
 function heroScroll() {

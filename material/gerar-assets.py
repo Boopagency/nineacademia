@@ -14,6 +14,7 @@ def webp(im, name):
     im = im.convert("RGB")
     im.thumbnail((1600, 1600)); im.save(f"{OUT_IMG}/{name}.webp", quality=80)
     t = im.copy(); t.thumbnail((600, 4000)); t.save(f"{OUT_IMG}/{name}-600.webp", quality=72)
+    s = im.copy(); s.thumbnail((320, 4000)); s.save(f"{OUT_IMG}/{name}-320.webp", quality=72)
     return im.size
 
 # Fotos do acervo
@@ -39,8 +40,9 @@ clips = [
 ] + [(f"reel-{n}", n, s, 15, True) for n, s in [("01", 9), ("02", 0), ("03", 0), ("04", 0), ("05", 30), ("06", 5), ("07", 0)]]
 for out, n, start, dur, audio in clips:
     a = ["-c:a", "aac", "-b:a", "64k", "-ac", "1"] if audio else ["-an"]
-    ff("-ss", str(start), "-t", str(dur), "-i", vid(n), "-vf", "scale=720:-2", "-c:v", "libx264", "-preset", "slow",
-       "-crf", "30", "-maxrate", "800k", "-bufsize", "1600k", "-pix_fmt", "yuv420p", *a, "-movflags", "+faststart", f"{OUT_VID}/{out}.mp4")
+    hero = out.startswith("hero")  # colunas estreitas no topo: 540px e bitrate menor bastam
+    ff("-ss", str(start), "-t", str(dur), "-i", vid(n), "-vf", f"scale={540 if hero else 720}:-2", "-c:v", "libx264", "-preset", "slow",
+       "-crf", "32" if hero else "30", "-maxrate", "450k" if hero else "800k", "-bufsize", "1600k", "-pix_fmt", "yuv420p", *a, "-movflags", "+faststart", f"{OUT_VID}/{out}.mp4")
     ff("-ss", "0.5", "-i", f"{OUT_VID}/{out}.mp4", "-frames:v", "1", "-q:v", "75", f"{OUT_VID}/{out}.webp")
 
 for k, v in sizes.items(): print(k, v)
