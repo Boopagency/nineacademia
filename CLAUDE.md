@@ -1,3 +1,17 @@
+# ATUALIZAÇÃO (nov/2026): o site agora é da FACULDADE NINE
+
+A Nine Academia de Influência está virando a **Faculdade Nine** (instituição de ensino superior). O site será usado na avaliação do MEC; onde este bloco conflitar com o resto do arquivo, **este bloco vale**.
+
+- **Dados institucionais:** Faculdade Nine, mantida pelo Conselho Educacional Nine (CNPJ 61.991.971/0001-35), Rua Engenheiro Niepce da Silva, 139, Portão, Curitiba/PR. Diretor-Geral: Raul Cesar Sindlinger. Órgãos: CONSUP e CPA. E-mail provisório: contato@nine.com.br.
+- **Fonte normativa:** Regulamento da Ouvidoria e da Comunicação Institucional (Caps. VII a X = área de Transparência, Ouvidoria, informações de curso). O anexo técnico do PDF **não** vai para o site.
+- **Curso:** matriz de 4 semestres e 30 disciplinas (planilha Disciplinas_Nine.xlsx). Nome, grau, modalidade, carga horária e ato autorizativo: **[A CONFIRMAR]**.
+- **Mapa do site (multipágina):** `index.html` (home com motion) · `a-faculdade.html` · `curso.html` (ficha + matriz) · `transparencia.html` (documentos com status e data de atualização) · `ouvidoria.html` (tipos, prazos 5/10/20 dias úteis, sigilo, formulário) · `privacidade.html`.
+- **Código:** `base.js` é comum a todas as páginas (nav, menu, ano, formulário da Ouvidoria); `main.js` é só da home. Páginas internas sem GSAP, sóbrias (≈90% Instituição).
+- **Formulários:** pré-inscrição e Ouvidoria vão para planilha via webhook (sem Supabase). A Ouvidoria precisa gerar protocolo e e-mail de confirmação.
+- **e-MEC:** após o credenciamento, publicar QR Code e banner do e-MEC na home/rodapé (Portaria MEC 879/2022, prazo de 20 dias úteis).
+
+---
+
 # Nine Academia de Influência: guia de construção do site
 
 > Coloque este arquivo na raiz do projeto com o nome `CLAUDE.md`. O Claude Code lê automaticamente e usa como briefing em toda sessão.
