@@ -43,6 +43,8 @@ for out, n, start, dur, audio in clips:
     hero = out.startswith("hero")  # colunas estreitas no topo: 540px e bitrate menor bastam
     ff("-ss", str(start), "-t", str(dur), "-i", vid(n), "-vf", f"scale={540 if hero else 720}:-2", "-c:v", "libx264", "-preset", "slow",
        "-crf", "32" if hero else "30", "-maxrate", "450k" if hero else "800k", "-bufsize", "1600k", "-pix_fmt", "yuv420p", *a, "-movflags", "+faststart", f"{OUT_VID}/{out}.mp4")
-    ff("-ss", "0.5", "-i", f"{OUT_VID}/{out}.mp4", "-frames:v", "1", "-q:v", "75", f"{OUT_VID}/{out}.webp")
+    # capa: as dos Reels/zoom aparecem pequenas (400px bastam); a do topo é a imagem principal da página
+    ff("-ss", "0.5", "-i", f"{OUT_VID}/{out}.mp4", "-frames:v", "1", *([] if hero else ["-vf", "scale=400:-2"]),
+       "-q:v", "70" if hero else "65", f"{OUT_VID}/{out}.webp")
 
 for k, v in sizes.items(): print(k, v)
