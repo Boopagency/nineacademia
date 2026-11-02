@@ -114,8 +114,24 @@ lb.addEventListener("click", (e) => { if (e.target === lb && !lbSwipe) lb.close(
 // Vídeos com data-autoplay tocam só quando visíveis (e nunca com reduced motion)
 const autoplayIO = new IntersectionObserver((es) => es.forEach((e) =>
   e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause()), { threshold: .25 });
-// Vídeos só começam depois da página pronta, para não disputar banda com o primeiro conteúdo
-if (!reduceMotion.matches) afterLoad(() => document.querySelectorAll("[data-autoplay]").forEach((v) => autoplayIO.observe(v)));
+// Capas dos vídeos fora do topo só baixam quando chegam perto da tela (não disputam banda com o primeiro conteúdo)
+const posterIO = new IntersectionObserver((es) => es.forEach((e) => {
+  if (!e.isIntersecting) return;
+  e.target.poster = e.target.dataset.poster;
+  posterIO.unobserve(e.target);
+}), { rootMargin: "600px" });
+document.querySelectorAll("video[data-poster]").forEach((v) => posterIO.observe(v));
+
+// Fotos das trilhas: no desktop os painéis abrem no hover, então já baixam depois do load para não aparecer em branco
+afterLoad(() => matchMedia("(min-width: 1024px)").matches && document.querySelectorAll(".path__img img").forEach((i) => (i.loading = "eager")));
+
+// Vídeos só começam depois da página pronta. No celular (rede mais lenta), o do topo espera o primeiro toque ou rolagem.
+const startVideos = () => document.querySelectorAll("[data-autoplay]").forEach((v) => autoplayIO.observe(v));
+if (!reduceMotion.matches) afterLoad(() => {
+  if (matchMedia("(min-width: 768px)").matches) return startVideos();
+  const go = () => { ["pointerdown", "scroll", "keydown"].forEach((t) => removeEventListener(t, go)); startVideos(); };
+  ["pointerdown", "scroll", "keydown"].forEach((t) => addEventListener(t, go, { once: true, passive: true }));
+});
 
 // Parede de Reels: só o ativo toca (mudo); som opcional; no mobile, ativo = o centralizado
 const reelsTrack = document.querySelector("[data-reels]");

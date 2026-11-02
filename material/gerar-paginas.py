@@ -132,6 +132,7 @@ def page(slug, title, desc, body):
   <link rel="icon" type="image/png" href="assets/logo/crown.png">
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-tight-latin.woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{{"@context": "https://schema.org", "@type": "CollegeOrUniversity", "name": "Faculdade Nine", "alternateName": "Nine Academia de Influência", "url": "https://nineacademia.vercel.app/", "logo": "https://nineacademia.vercel.app/assets/logo/crown.png", "email": "contato@nine.com.br", "address": {{"@type": "PostalAddress", "streetAddress": "Rua Engenheiro Niepce da Silva, 139", "addressLocality": "Curitiba", "addressRegion": "PR", "addressCountry": "BR"}}, "parentOrganization": {{"@type": "Organization", "name": "Conselho Educacional Nine", "taxID": "61.991.971/0001-35"}}, "sameAs": ["https://www.instagram.com/nine.academia/"]}}</script>
   <script src="base.js" defer></script>
 </head>
 <body class="page">

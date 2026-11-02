@@ -14,6 +14,7 @@
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-tight-latin.woff2" crossorigin>
   <link rel="preload" as="image" href="assets/video/hero-1.webp" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollegeOrUniversity", "name": "Faculdade Nine", "alternateName": "Nine Academia de Influência", "url": "https://nineacademia.vercel.app/", "logo": "https://nineacademia.vercel.app/assets/logo/crown.png", "email": "contato@nine.com.br", "address": {"@type": "PostalAddress", "streetAddress": "Rua Engenheiro Niepce da Silva, 139", "addressLocality": "Curitiba", "addressRegion": "PR", "addressCountry": "BR"}, "parentOrganization": {"@type": "Organization", "name": "Conselho Educacional Nine", "taxID": "61.991.971/0001-35"}, "sameAs": ["https://www.instagram.com/nine.academia/"]}</script>
   <script src="base.js" defer></script>
   <script src="main.js" defer></script>
 </head>
@@ -74,8 +75,8 @@
         <div class="hero__card">
           <div class="hero__media" role="img" aria-label="Vídeos da turma da Nine: oficina de pizza, aula de pintura e jantar da turma">
             <video src="assets/video/hero-1.mp4" poster="assets/video/hero-1.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
-            <video src="assets/video/hero-2.mp4" poster="assets/video/hero-2.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
-            <video src="assets/video/hero-3.mp4" poster="assets/video/hero-3.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
+            <video src="assets/video/hero-2.mp4" data-poster="assets/video/hero-2.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
+            <video src="assets/video/hero-3.mp4" data-poster="assets/video/hero-3.webp" muted playsinline loop preload="none" data-autoplay aria-hidden="true"></video>
           </div>
           <p class="hero__wordmark" aria-hidden="true"><span></span></p>
           <div class="hero__bar">
@@ -128,7 +129,7 @@
         <!-- 4a. Zoom 3×3 -->
         <div class="zoom" data-zoom-grid>
           <div class="zoom__center">
-            <video src="assets/video/zoom.mp4" poster="assets/video/zoom.webp" muted playsinline loop preload="none" data-autoplay aria-label="Alunos da Nine desfilando com roupa de gala, sorrindo para a câmera"></video>
+            <video src="assets/video/zoom.mp4" data-poster="assets/video/zoom.webp" muted playsinline loop preload="none" data-autoplay aria-label="Alunos da Nine desfilando com roupa de gala, sorrindo para a câmera"></video>
             <p class="zoom__phrase">Imagine você aqui.</p>
           </div>
           <div class="zoom__ring" tabindex="0" role="region" aria-label="Fotos da turma">
@@ -171,37 +172,37 @@
         <div class="reels">
           <ul class="reels__track" data-reels>
             <li data-reel>
-              <video class="reel" src="assets/video/reel-02.mp4" poster="assets/video/reel-02.webp" muted playsinline loop preload="none" aria-label="Reel: Oficina de pintura em tela e perfumaria"></video>
+              <video class="reel" src="assets/video/reel-02.mp4" data-poster="assets/video/reel-02.webp" muted playsinline loop preload="none" aria-label="Reel: Oficina de pintura em tela e perfumaria"></video>
               <button type="button" class="reel__pick" aria-label="Assistir: Oficina de pintura em tela e perfumaria"></button>
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
             <li data-reel>
-              <video class="reel" src="assets/video/reel-04.mp4" poster="assets/video/reel-04.webp" muted playsinline loop preload="none" aria-label="Reel: Aula, convivência e jantar da turma"></video>
+              <video class="reel" src="assets/video/reel-04.mp4" data-poster="assets/video/reel-04.webp" muted playsinline loop preload="none" aria-label="Reel: Aula, convivência e jantar da turma"></video>
               <button type="button" class="reel__pick" aria-label="Assistir: Aula, convivência e jantar da turma"></button>
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
             <li data-reel>
-              <video class="reel" src="assets/video/reel-05.mp4" poster="assets/video/reel-05.webp" muted playsinline loop preload="none" aria-label="Reel: Visita ao Pequeno Cotolengo"></video>
+              <video class="reel" src="assets/video/reel-05.mp4" data-poster="assets/video/reel-05.webp" muted playsinline loop preload="none" aria-label="Reel: Visita ao Pequeno Cotolengo"></video>
               <button type="button" class="reel__pick" aria-label="Assistir: Visita ao Pequeno Cotolengo"></button>
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
             <li class="is-active" data-reel>
-              <video class="reel" src="assets/video/reel-01.mp4" poster="assets/video/reel-01.webp" muted playsinline loop preload="none" aria-label="Reel: Oficina de pizza"></video>
+              <video class="reel" src="assets/video/reel-01.mp4" data-poster="assets/video/reel-01.webp" muted playsinline loop preload="none" aria-label="Reel: Oficina de pizza"></video>
               <button type="button" class="reel__pick" aria-label="Assistir: Oficina de pizza"></button>
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
             <li data-reel>
-              <video class="reel" src="assets/video/reel-03.mp4" poster="assets/video/reel-03.webp" muted playsinline loop preload="none" aria-label="Reel: Alunos desfilando com roupa de gala"></video>
+              <video class="reel" src="assets/video/reel-03.mp4" data-poster="assets/video/reel-03.webp" muted playsinline loop preload="none" aria-label="Reel: Alunos desfilando com roupa de gala"></video>
               <button type="button" class="reel__pick" aria-label="Assistir: Alunos desfilando com roupa de gala"></button>
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
             <li data-reel>
-              <video class="reel" src="assets/video/reel-06.mp4" poster="assets/video/reel-06.webp" muted playsinline loop preload="none" aria-label="Reel: Bastidores e palco do evento Game Over"></video>
+              <video class="reel" src="assets/video/reel-06.mp4" data-poster="assets/video/reel-06.webp" muted playsinline loop preload="none" aria-label="Reel: Bastidores e palco do evento Game Over"></video>
               <button type="button" class="reel__pick" aria-label="Assistir: Bastidores e palco do evento Game Over"></button>
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
             <li data-reel>
-              <video class="reel" src="assets/video/reel-07.mp4" poster="assets/video/reel-07.webp" muted playsinline loop preload="none" aria-label="Reel: Turma reformando a residência dos niners"></video>
+              <video class="reel" src="assets/video/reel-07.mp4" data-poster="assets/video/reel-07.webp" muted playsinline loop preload="none" aria-label="Reel: Turma reformando a residência dos niners"></video>
               <button type="button" class="reel__pick" aria-label="Assistir: Turma reformando a residência dos niners"></button>
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
@@ -213,7 +214,7 @@
 
     <!-- 4d. Faixa de CTA -->
     <section class="cta-band" aria-labelledby="cta-band-title">
-      <div class="cta-band__bg" aria-hidden="true"></div>
+      <img class="cta-band__bg" src="assets/img/galeria/21-600.webp" srcset="assets/img/galeria/21-320.webp 320w, assets/img/galeria/21-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="391" alt="Turma jantando sob um pergolado iluminado à noite" loading="lazy" decoding="async">
       <div class="container cta-band__inner">
         <h2 id="cta-band-title" data-reveal="lines">Na próxima turma, a foto pode ser sua.</h2>
         <a class="btn btn--light" href="#aplicar" data-magnetic>Quero aplicar <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 11L11 5M6 5h5v5"/></svg></span></a>
@@ -354,13 +355,13 @@
         </header>
 
         <ul class="paths" data-reveal="fade-up">
-          <li class="path is-open u-8ae841" tabindex="0"><span class="path__n">01</span><h3>Negócios</h3><p>Empreender e liderar com propósito e ética.</p><div class="photo path__img"><img src="assets/img/galeria/16-600.webp" srcset="assets/img/galeria/16-320.webp 320w, assets/img/galeria/16-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="409" alt="Instrutora apresentando para a turma" decoding="async"></div></li>
-          <li class="path u-66d4ec" tabindex="0"><span class="path__n">02</span><h3>Política</h3><p>Servir o bem comum com responsabilidade pública.</p><div class="photo path__img"><img src="assets/img/galeria/12-600.webp" srcset="assets/img/galeria/12-320.webp 320w, assets/img/galeria/12-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="397" alt="Turma reunida ouvindo e debatendo com o convidado" decoding="async"></div></li>
-          <li class="path u-37cd40" tabindex="0"><span class="path__n">03</span><h3>Educação</h3><p>Formar as próximas gerações.</p><div class="photo path__img"><img src="assets/img/galeria/24-600.webp" srcset="assets/img/galeria/24-320.webp 320w, assets/img/galeria/24-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="438" alt="Turma de jaleco reunida no laboratório" decoding="async"></div></li>
-          <li class="path u-562862" tabindex="0"><span class="path__n">04</span><h3>Arte e Cultura</h3><p>Criar beleza que aponta para algo maior.</p><div class="photo path__img"><img src="assets/img/galeria/v02-9-600.webp" srcset="assets/img/galeria/v02-9-320.webp 320w, assets/img/galeria/v02-9-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="1067" alt="Aluna pintando uma tela na oficina de arte" decoding="async" class="u-335304"></div></li>
-          <li class="path u-51b504" tabindex="0"><span class="path__n">05</span><h3>Ciência e Tecnologia</h3><p>Investigar, construir e inovar.</p><div class="photo path__img"><img src="assets/img/galeria/27-600.webp" srcset="assets/img/galeria/27-320.webp 320w, assets/img/galeria/27-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="417" alt="Turma usando óculos de realidade virtual" decoding="async"></div></li>
-          <li class="path u-82fe87" tabindex="0"><span class="path__n">06</span><h3>Serviço Social</h3><p>Estar onde a necessidade é maior.</p><div class="photo path__img"><img src="assets/img/galeria/v05-39-600.webp" srcset="assets/img/galeria/v05-39-320.webp 320w, assets/img/galeria/v05-39-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" decoding="async" class="u-4bd870"></div></li>
-          <li class="path u-06f667" tabindex="0"><span class="path__n">07</span><h3>Comunicação e Entretenimento</h3><p>Contar histórias que movem pessoas.</p><div class="photo path__img"><img src="assets/img/galeria/v06-17-600.webp" srcset="assets/img/galeria/v06-17-320.webp 320w, assets/img/galeria/v06-17-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="1067" alt="Aluno atuando no palco do evento Game Over" decoding="async" class="u-4bd870"></div></li>
+          <li class="path is-open u-8ae841" tabindex="0"><span class="path__n">01</span><h3>Negócios</h3><p>Empreender e liderar com propósito e ética.</p><div class="photo path__img"><img src="assets/img/galeria/16-600.webp" srcset="assets/img/galeria/16-320.webp 320w, assets/img/galeria/16-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="409" alt="Instrutora apresentando para a turma" loading="lazy" decoding="async"></div></li>
+          <li class="path u-66d4ec" tabindex="0"><span class="path__n">02</span><h3>Política</h3><p>Servir o bem comum com responsabilidade pública.</p><div class="photo path__img"><img src="assets/img/galeria/12-600.webp" srcset="assets/img/galeria/12-320.webp 320w, assets/img/galeria/12-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="397" alt="Turma reunida ouvindo e debatendo com o convidado" loading="lazy" decoding="async"></div></li>
+          <li class="path u-37cd40" tabindex="0"><span class="path__n">03</span><h3>Educação</h3><p>Formar as próximas gerações.</p><div class="photo path__img"><img src="assets/img/galeria/24-600.webp" srcset="assets/img/galeria/24-320.webp 320w, assets/img/galeria/24-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="438" alt="Turma de jaleco reunida no laboratório" loading="lazy" decoding="async"></div></li>
+          <li class="path u-562862" tabindex="0"><span class="path__n">04</span><h3>Arte e Cultura</h3><p>Criar beleza que aponta para algo maior.</p><div class="photo path__img"><img src="assets/img/galeria/v02-9-600.webp" srcset="assets/img/galeria/v02-9-320.webp 320w, assets/img/galeria/v02-9-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="1067" alt="Aluna pintando uma tela na oficina de arte" loading="lazy" decoding="async" class="u-335304"></div></li>
+          <li class="path u-51b504" tabindex="0"><span class="path__n">05</span><h3>Ciência e Tecnologia</h3><p>Investigar, construir e inovar.</p><div class="photo path__img"><img src="assets/img/galeria/27-600.webp" srcset="assets/img/galeria/27-320.webp 320w, assets/img/galeria/27-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="417" alt="Turma usando óculos de realidade virtual" loading="lazy" decoding="async"></div></li>
+          <li class="path u-82fe87" tabindex="0"><span class="path__n">06</span><h3>Serviço Social</h3><p>Estar onde a necessidade é maior.</p><div class="photo path__img"><img src="assets/img/galeria/v05-39-600.webp" srcset="assets/img/galeria/v05-39-320.webp 320w, assets/img/galeria/v05-39-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" loading="lazy" decoding="async" class="u-4bd870"></div></li>
+          <li class="path u-06f667" tabindex="0"><span class="path__n">07</span><h3>Comunicação e Entretenimento</h3><p>Contar histórias que movem pessoas.</p><div class="photo path__img"><img src="assets/img/galeria/v06-17-600.webp" srcset="assets/img/galeria/v06-17-320.webp 320w, assets/img/galeria/v06-17-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw" width="600" height="1067" alt="Aluno atuando no palco do evento Game Over" loading="lazy" decoding="async" class="u-4bd870"></div></li>
         </ul>
       </div>
     </section>
