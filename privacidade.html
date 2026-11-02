@@ -17,15 +17,22 @@
   <script src="base.js" defer></script>
 </head>
 <body class="page">
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <nav class="a11y-bar" aria-label="Atalhos de acessibilidade">
+    <ul>
+      <li><a href="#conteudo" accesskey="1">Ir para o conteúdo [1]</a></li>
+      <li><a href="#menu-principal" accesskey="2">Ir para o menu [2]</a></li>
+      <li><a href="#rodape" accesskey="3">Ir para o rodapé [3]</a></li>
+    </ul>
+  </nav>
+  <noscript><p class="noscript">Algumas animações dependem de JavaScript. Todo o conteúdo do site continua disponível sem ele.</p></noscript>
 
   <header class="nav" data-nav>
     <div class="container nav__inner">
       <a class="logo" href="./" aria-label="Faculdade Nine, página inicial">
-        <span class="wm" aria-hidden="true">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span>
+        <span class="wm" aria-hidden="true">N<span class="wm__i">I<i class="crown" aria-hidden="true"></i></span>NE</span>
       </a>
 
-      <nav class="nav__pill" aria-label="Principal">
+      <nav class="nav__pill" id="menu-principal" aria-label="Principal">
         <ul>
           <li><a href="./">Início</a></li>
           <li><a href="a-faculdade.html">A Faculdade</a></li>
@@ -87,7 +94,7 @@
 
   </main>
 
-  <footer class="footer">
+  <footer class="footer" id="rodape">
     <div class="container">
       <div class="footer__inst">
         <p class="footer__name">Faculdade Nine</p>
@@ -116,7 +123,7 @@
           <ul>
             <li><a href="mailto:contato@nine.com.br">contato@nine.com.br</a></li>
             <li>Telefone <span class="tbc tbc--dark">[A CONFIRMAR]</span></li>
-            <li><a href="https://www.instagram.com/nine.academia/" target="_blank" rel="noopener">@nine.academia</a></li>
+            <li><a href="https://www.instagram.com/nine.academia/">@nine.academia</a></li>
           </ul>
         </div>
         <div>
@@ -125,12 +132,12 @@
             <span class="emec__qr" aria-hidden="true">QR</span>
             <p>Selo e QR Code do e-MEC <span class="tbc tbc--dark">[após o credenciamento]</span></p>
           </div>
-          <p class="footer__small"><a href="https://emec.mec.gov.br/" target="_blank" rel="noopener">Consulte instituições no e-MEC</a></p>
+          <p class="footer__small"><a href="https://emec.mec.gov.br/">Consulte instituições no e-MEC</a></p>
         </div>
       </div>
       <p class="footer__copy">© <span data-year></span> Faculdade Nine · Conselho Educacional Nine</p>
     </div>
-    <p class="footer__wm" aria-hidden="true"><span class="wm">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span></p>
+    <p class="footer__wm" aria-hidden="true"><span class="wm">N<span class="wm__i">I<i class="crown" aria-hidden="true"></i></span>NE</span></p>
   </footer>
 </body>
 </html>

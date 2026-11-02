@@ -9,7 +9,7 @@ HOJE = "02/11/2026"
 EMAIL = "contato@nine.com.br"
 TBC = '<span class="tbc">[A CONFIRMAR]</span>'
 ARROW = '<span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 11L11 5M6 5h5v5"/></svg></span>'
-CROWN = '<img src="assets/logo/crown.png" alt="" width="214" height="101">'
+CROWN = '<i class="crown" aria-hidden="true"></i>'
 PAGES = [("./", "Início"), ("a-faculdade.html", "A Faculdade"), ("curso.html", "Curso"),
          ("transparencia.html", "Transparência"), ("ouvidoria.html", "Ouvidoria")]
 
@@ -28,7 +28,14 @@ def header(current):
         return f'<li><a href="{href}"{cur}>{label}</a></li>'
     links = "\n          ".join(li(h, l) for h, l in PAGES)
     mlinks = "\n        ".join(li(h, l) for h, l in PAGES)
-    return f'''  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    return f'''  <nav class="a11y-bar" aria-label="Atalhos de acessibilidade">
+    <ul>
+      <li><a href="#conteudo" accesskey="1">Ir para o conteúdo [1]</a></li>
+      <li><a href="#menu-principal" accesskey="2">Ir para o menu [2]</a></li>
+      <li><a href="#rodape" accesskey="3">Ir para o rodapé [3]</a></li>
+    </ul>
+  </nav>
+  <noscript><p class="noscript">Algumas animações dependem de JavaScript. Todo o conteúdo do site continua disponível sem ele.</p></noscript>
 
   <header class="nav" data-nav>
     <div class="container nav__inner">
@@ -36,7 +43,7 @@ def header(current):
         <span class="wm" aria-hidden="true">N<span class="wm__i">I{CROWN}</span>NE</span>
       </a>
 
-      <nav class="nav__pill" aria-label="Principal">
+      <nav class="nav__pill" id="menu-principal" aria-label="Principal">
         <ul>
           {links}
         </ul>
@@ -62,7 +69,7 @@ def header(current):
 '''
 
 
-FOOTER = f'''  <footer class="footer">
+FOOTER = f'''  <footer class="footer" id="rodape">
     <div class="container">
       <div class="footer__inst">
         <p class="footer__name">Faculdade Nine</p>
@@ -91,7 +98,7 @@ FOOTER = f'''  <footer class="footer">
           <ul>
             <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
             <li>Telefone <span class="tbc tbc--dark">[A CONFIRMAR]</span></li>
-            <li><a href="https://www.instagram.com/nine.academia/" target="_blank" rel="noopener">@nine.academia</a></li>
+            <li><a href="https://www.instagram.com/nine.academia/">@nine.academia</a></li>
           </ul>
         </div>
         <div>
@@ -100,7 +107,7 @@ FOOTER = f'''  <footer class="footer">
             <span class="emec__qr" aria-hidden="true">QR</span>
             <p>Selo e QR Code do e-MEC <span class="tbc tbc--dark">[após o credenciamento]</span></p>
           </div>
-          <p class="footer__small"><a href="https://emec.mec.gov.br/" target="_blank" rel="noopener">Consulte instituições no e-MEC</a></p>
+          <p class="footer__small"><a href="https://emec.mec.gov.br/">Consulte instituições no e-MEC</a></p>
         </div>
       </div>
       <p class="footer__copy">© <span data-year></span> Faculdade Nine · Conselho Educacional Nine</p>
@@ -144,7 +151,7 @@ def page(slug, title, desc, body):
 def hero(id_, crumb, label, title, lead, photo=None, crown=True):
     ph = f'''
         <div class="photo page-hero__img" style="--ar: 21/8">{photo}</div>''' if photo else ""
-    wm = '\n      <img class="wm-mark wm-mark--crown" src="assets/logo/crown.png" alt="" aria-hidden="true" width="214" height="101" style="top:8%;right:3%;width:180px;rotate:-10deg">' if crown else ""
+    wm = '\n      <span class="wm-mark wm-mark--crown crown" aria-hidden="true" style="top:8%;right:3%;width:180px;rotate:-10deg"></span>' if crown else ""
     return f'''    <section class="page-hero" aria-labelledby="{id_}">{wm}
       <div class="container">
         <nav class="crumbs" aria-label="Você está em"><a href="./">Início</a> <span aria-hidden="true">/</span> <span aria-current="page">{crumb}</span></nav>
@@ -252,9 +259,9 @@ def tabela(sem, ds):
     linhas = "\n".join(
         f'              <tr><td class="mono">{d["cod"]}</td><th scope="row">{d["nome"]}</th><td>{d["eixo"]}</td><td>{d["area"]}</td><td>{TBC}</td></tr>'
         for d in ds)
-    return f'''        <section class="sem" aria-labelledby="sem-{sem[0]}">
+    return f'''        <div class="sem">
           <h3 id="sem-{sem[0]}">{sem} semestre <span class="sem__count">{len(ds)} disciplinas</span></h3>
-          <div class="table-wrap" tabindex="0" role="region" aria-labelledby="sem-{sem[0]}">
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Disciplinas do {sem} semestre (role para os lados)">
             <table class="table">
               <thead><tr><th scope="col">Código</th><th scope="col">Disciplina</th><th scope="col">Eixo formativo</th><th scope="col">Área</th><th scope="col">Carga horária</th></tr></thead>
               <tbody>
@@ -262,7 +269,7 @@ def tabela(sem, ds):
               </tbody>
             </table>
           </div>
-        </section>'''
+        </div>'''
 
 eixos_html = "\n".join(f'          <li><span class="eixo__n">{n}</span> {e}</li>' for e, n in EIXOS.most_common())
 comps_html = "\n".join(f"            <li>{c}.</li>" for c in COMPS)
@@ -375,7 +382,7 @@ page("transparencia.html", "Transparência Institucional",
         <div class="prose">
           <p class="prose__big">Situação regulatória da Faculdade e de seus cursos no Ministério da Educação.</p>
           <p>Selo, QR Code e link para o cadastro da Instituição no e-MEC: {TBC} Serão publicados aqui e no rodapé assim que disponibilizados pelo sistema.</p>
-          <p><a href="https://emec.mec.gov.br/" target="_blank" rel="noopener">Consultar instituições no e-MEC</a></p>
+          <p><a href="https://emec.mec.gov.br/">Consultar instituições no e-MEC</a></p>
         </div>
       </div>
     </section>
@@ -436,13 +443,15 @@ page("ouvidoria.html", "Ouvidoria",
     <section class="aplicar" id="manifestacao" aria-labelledby="t-form">
       <div class="container grid-12">
         <header class="aplicar__head">
-          <img class="aplicar__crown" src="assets/logo/crown.png" alt="" width="214" height="101">
+          <span class="aplicar__crown crown" aria-hidden="true"></span>
           <h2 id="t-form">Registre sua manifestação</h2>
           <p class="lead">Acesso livre, sem cadastro. Os campos marcados como opcionais podem ficar em branco.</p>
           <p class="lead">Se preferir, escreva para <a class="link-gold" href="mailto:{EMAIL}">{EMAIL}</a>.</p>
         </header>
 
         <form class="form" data-ouvidoria novalidate>
+          <fieldset>
+            <legend>Identificação</legend>
           <div class="field">
             <label for="o-nome">Nome</label>
             <input id="o-nome" name="nome" type="text" autocomplete="name" required>
@@ -459,6 +468,9 @@ page("ouvidoria.html", "Ouvidoria",
               <option>Candidato</option><option>Pai, mãe ou responsável</option><option>Comunidade externa</option>
             </select>
           </div>
+          </fieldset>
+          <fieldset>
+            <legend>Manifestação</legend>
           <div class="field">
             <label for="o-tipo">Tipo de manifestação</label>
             <select id="o-tipo" name="tipo" required>
@@ -474,9 +486,10 @@ page("ouvidoria.html", "Ouvidoria",
             <label for="o-anexos">Anexos <span class="opt">(opcional)</span></label>
             <input id="o-anexos" name="anexos" type="file" multiple>
           </div>
+          </fieldset>
           <div class="field field--hp" aria-hidden="true">
             <label for="o-website">Website</label>
-            <input id="o-website" name="website" type="text" tabindex="-1" autocomplete="off">
+            <input id="o-website" name="website" type="text" autocomplete="off">
           </div>
           <div class="field field--full field--check">
             <input id="o-sigilo" name="sigilo_total" type="checkbox">
@@ -519,9 +532,10 @@ page("privacidade.html", "Política de privacidade",
 
 # ---------------------------------------------------------------- Home: cabeçalho e rodapé comuns
 h = open("index.html").read()
-s = h.index('  <a class="skip" href="#conteudo">'); e = h.index('  <main id="conteudo">')
+s = h.index('  <nav class="a11y-bar"') if '<nav class="a11y-bar"' in h else h.index('  <a class="skip" href="#conteudo">')
+e = h.index('  <main id="conteudo">')
 h = h[:s] + header("./") + "\n" + h[e:]
-s = h.index('  <!-- 13. Rodapé -->'); e = h.index('</body>')
+s = h.index('  <footer class="footer"'); e = h.index('  </footer>\n') + len('  </footer>\n')
 h = h[:s] + FOOTER + h[e:]
 open("index.html", "w").write(h)
 
@@ -533,3 +547,33 @@ h = open("index.html").read()
 h = re.sub(r'(<ol class="jornada__track container">\n)(?:.*\n)*?(\s*</ol>)', lambda m: m.group(1) + st + "\n" + m.group(2).lstrip("\n"), h, count=1)
 open("index.html", "w").write(h)
 print("ok", len(DISC), "disciplinas;", {k: len(v) for k, v in SEMS.items()}, dict(EIXOS))
+
+
+# ---------------------------------------------------------------- style="" -> classes utilitárias
+import glob, hashlib
+regras = {}
+def _tag(m):
+    tag = m.group(0)
+    st = re.search(r'\s+style="([^"]*)"', tag)
+    if not st:
+        return tag
+    nome = "u-" + hashlib.md5(st.group(1).strip().rstrip(";").encode()).hexdigest()[:6]
+    regras[nome] = st.group(1).strip().rstrip(";")
+    tag = tag.replace(st.group(0), "")
+    if re.search(r'\sclass="', tag):
+        return re.sub(r'\sclass="([^"]*)"', lambda c: f' class="{c.group(1)} {nome}"', tag, count=1)
+    return tag[:-1].rstrip("/").rstrip() + f' class="{nome}">'
+for arq in glob.glob("*.html"):
+    t = re.sub(r"<[a-zA-Z][^<>]*>", _tag, open(arq).read())
+    assert ' style="' not in t, arq
+    open(arq, "w").write(t)
+css = open("style.css").read()
+INI, FIM = "/* utilitários gerados (gerar-paginas.py) */", "/* fim dos utilitários gerados */"
+if INI in css:  # mantém as regras de execuções anteriores (o HTML já convertido não as traz de volta)
+    for k, v in re.findall(r"^\.(u-[0-9a-f]{6}) \{ (.*); \}$", css[css.index(INI):css.index(FIM)], re.M):
+        regras.setdefault(k, v)
+    css = css[:css.index(INI)] + css[css.index(FIM) + len(FIM):]
+    css = css.rstrip() + "\n"
+css += "\n" + INI + "\n" + "\n".join(f".{k} {{ {re.sub(r'rotate:\s*(-?[0-9.]+deg)', r'transform: rotate(\1)', v)}; }}" for k, v in sorted(regras.items())) + "\n" + FIM + "\n"
+open("style.css", "w").write(css)
+print(len(regras), "estilos inline viraram classes")

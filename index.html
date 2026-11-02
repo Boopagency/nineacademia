@@ -26,20 +26,22 @@
   <script src="main.js" defer></script>
 </head>
 <body>
-  <div class="preloader" aria-hidden="true" data-preloader>
-    <div class="preloader__count"><div class="preloader__digits"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div></div>
-    <p class="preloader__wm wm"><span class="ch">N</span><span class="ch wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span><span class="ch">N</span><span class="ch">E</span></p>
-  </div>
-
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <nav class="a11y-bar" aria-label="Atalhos de acessibilidade">
+    <ul>
+      <li><a href="#conteudo" accesskey="1">Ir para o conteúdo [1]</a></li>
+      <li><a href="#menu-principal" accesskey="2">Ir para o menu [2]</a></li>
+      <li><a href="#rodape" accesskey="3">Ir para o rodapé [3]</a></li>
+    </ul>
+  </nav>
+  <noscript><p class="noscript">Algumas animações dependem de JavaScript. Todo o conteúdo do site continua disponível sem ele.</p></noscript>
 
   <header class="nav" data-nav>
     <div class="container nav__inner">
       <a class="logo" href="./" aria-label="Faculdade Nine, página inicial">
-        <span class="wm" aria-hidden="true">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span>
+        <span class="wm" aria-hidden="true">N<span class="wm__i">I<i class="crown" aria-hidden="true"></i></span>NE</span>
       </a>
 
-      <nav class="nav__pill" aria-label="Principal">
+      <nav class="nav__pill" id="menu-principal" aria-label="Principal">
         <ul>
           <li><a href="./" aria-current="page">Início</a></li>
           <li><a href="a-faculdade.html">A Faculdade</a></li>
@@ -75,7 +77,7 @@
 
     <!-- 2. Hero -->
     <section class="hero" id="topo" aria-labelledby="hero-title">
-      <img class="wm-mark wm-mark--crown" src="assets/logo/crown.png" alt="" aria-hidden="true" width="214" height="101" style="bottom:-40px;right:2%;width:200px;rotate:-12deg">
+      <span class="wm-mark wm-mark--crown crown u-62605d" aria-hidden="true"></span>
       <div class="container">
         <div class="hero__card">
           <div class="hero__media" role="img" aria-label="Vídeos da turma da Nine: oficina de pizza, aula de pintura e jantar da turma">
@@ -108,11 +110,11 @@
 
     <!-- 3. Sobre / Manifesto -->
     <section class="section manifesto" id="sobre" aria-labelledby="sobre-title">
-      <img class="wm-mark wm-mark--crown" src="assets/logo/crown.png" alt="" aria-hidden="true" width="214" height="101" style="bottom:4%;left:6%;width:150px;rotate:10deg">
+      <span class="wm-mark wm-mark--crown crown u-c48100" aria-hidden="true"></span>
       <div class="container grid-12">
         <div class="manifesto__aside">
           <h2 class="label" id="sobre-title">Sobre a Nine</h2>
-          <div class="photo manifesto__face" data-reveal="image" style="--ar: 4/5">
+          <div class="photo manifesto__face u-0db893" data-reveal="image">
             <img src="assets/img/galeria/v01-21-600.webp" width="600" height="1067" alt="Aluna sorrindo enquanto abre a massa na oficina de pizza" loading="lazy" decoding="async">
           </div>
         </div>
@@ -125,7 +127,7 @@
 
     <!-- 4. Vida na Nine -->
     <section class="section vida" id="vida" aria-labelledby="vida-title">
-      <span class="wm-mark wm-mark--nine" aria-hidden="true" style="top:0;right:-6vw;rotate:3deg">NINE</span>
+      <span class="wm-mark wm-mark--nine u-c589f7" aria-hidden="true">NINE</span>
       <div class="container">
         <header class="section-head">
           <h2 class="label" id="vida-title">Vida na Nine</h2>
@@ -165,7 +167,7 @@
 
         <dialog class="lightbox" aria-label="Foto ampliada" data-lightbox data-lenis-prevent>
           <figure class="lightbox__fig">
-            <img alt="" data-lb-img>
+            <img src="assets/img/galeria/06.webp" alt="Turma em volta da mesa na oficina de joalheria" loading="lazy" data-lb-img>
             <figcaption data-lb-cap></figcaption>
           </figure>
           <button type="button" class="lightbox__btn lightbox__close" data-lb-close aria-label="Fechar">×</button>
@@ -212,14 +214,14 @@
               <button type="button" class="reel__sound" aria-pressed="false" aria-label="Ativar som"><span aria-hidden="true">🔇</span></button>
             </li>
           </ul>
-          <p class="reels__more">Tem muito mais no <a href="https://www.instagram.com/nine.academia/" target="_blank" rel="noopener">@nine.academia</a></p>
+          <p class="reels__more">Tem muito mais no <a href="https://www.instagram.com/nine.academia/">@nine.academia</a></p>
         </div>
       </div>
     </section>
 
     <!-- 4d. Faixa de CTA -->
     <section class="cta-band" aria-labelledby="cta-band-title">
-      <img class="cta-band__bg" src="assets/img/galeria/21.webp" width="862" height="562" alt="" loading="lazy" decoding="async">
+      <div class="cta-band__bg" aria-hidden="true"></div>
       <div class="container cta-band__inner">
         <h2 id="cta-band-title" data-reveal="lines">Na próxima turma, a foto pode ser sua.</h2>
         <a class="btn btn--light" href="#aplicar" data-magnetic>Quero aplicar <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 11L11 5M6 5h5v5"/></svg></span></a>
@@ -228,11 +230,11 @@
 
     <!-- 5. Números -->
     <section class="section numeros" aria-labelledby="numeros-title">
-      <img class="wm-mark wm-mark--crown" src="assets/logo/crown.png" alt="" aria-hidden="true" width="214" height="101" style="top:40%;left:34%;width:170px;rotate:-8deg">
+      <span class="wm-mark wm-mark--crown crown u-7aa610" aria-hidden="true"></span>
       <div class="container grid-12">
         <div class="numeros__aside">
           <p class="label">A Nine em números</p>
-          <div class="photo numeros__face" data-reveal="image" style="--ar: 4/3">
+          <div class="photo numeros__face u-dd4285" data-reveal="image">
             <img src="assets/img/galeria/24-600.webp" width="600" height="438" alt="Turma da Nine de jaleco reunida no laboratório de ciências" loading="lazy" decoding="async">
           </div>
           <div class="numeros__foot">
@@ -251,7 +253,7 @@
 
     <!-- 6. Pilares -->
     <section class="section pilares" id="programa" aria-labelledby="pilares-title">
-      <span class="wm-mark wm-mark--nine" aria-hidden="true" style="top:2%;right:-8vw;rotate:-3deg">NINE</span>
+      <span class="wm-mark wm-mark--nine u-fd461b" aria-hidden="true">NINE</span>
       <div class="container">
         <header class="section-head">
           <p class="label">Nossa formação</p>
@@ -259,7 +261,7 @@
         </header>
 
         <div class="pilares__stage" data-pin>
-        <article class="pilar" style="--accent: var(--green)" aria-labelledby="pilar-1">
+        <article class="pilar u-37cd40" aria-labelledby="pilar-1">
           <div class="pilar__text" data-reveal="fade-up">
             <p class="pilar__num">01</p>
             <h3 id="pilar-1">Conhecer sua identidade</h3>
@@ -280,7 +282,7 @@
           </div>
         </article>
 
-        <article class="pilar" style="--accent: var(--coral)" aria-labelledby="pilar-2">
+        <article class="pilar u-66d4ec" aria-labelledby="pilar-2">
           <div class="pilar__text" data-reveal="fade-up">
             <p class="pilar__num">02</p>
             <h3 id="pilar-2">Treinar suas habilidades</h3>
@@ -301,7 +303,7 @@
           </div>
         </article>
 
-        <article class="pilar" style="--accent: var(--violet)" aria-labelledby="pilar-3">
+        <article class="pilar u-562862" aria-labelledby="pilar-3">
           <div class="pilar__text" data-reveal="fade-up">
             <p class="pilar__num">03</p>
             <h3 id="pilar-3">Inspirar o seu mundo</h3>
@@ -349,7 +351,7 @@
 
     <!-- 8. Trilhas -->
     <section class="section trilhas" id="trilhas" aria-labelledby="trilhas-title">
-      <img class="wm-mark wm-mark--crown" src="assets/logo/crown.png" alt="" aria-hidden="true" width="214" height="101" style="top:6%;left:44%;width:160px;rotate:12deg">
+      <span class="wm-mark wm-mark--crown crown u-5ef307" aria-hidden="true"></span>
       <div class="container">
         <header class="section-head grid-12">
           <div class="trilhas__head">
@@ -360,13 +362,13 @@
         </header>
 
         <ul class="paths" data-reveal="fade-up">
-          <li class="path is-open" tabindex="0" style="--accent: var(--blue)"><span class="path__n">01</span><h3>Negócios</h3><p>Empreender e liderar com propósito e ética.</p><div class="photo path__img"><img src="assets/img/galeria/16-600.webp" width="600" height="409" alt="Instrutora apresentando para a turma" decoding="async"></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--coral)"><span class="path__n">02</span><h3>Política</h3><p>Servir o bem comum com responsabilidade pública.</p><div class="photo path__img"><img src="assets/img/galeria/12-600.webp" width="600" height="397" alt="Turma reunida ouvindo e debatendo com o convidado" decoding="async"></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--green)"><span class="path__n">03</span><h3>Educação</h3><p>Formar as próximas gerações.</p><div class="photo path__img"><img src="assets/img/galeria/24-600.webp" width="600" height="438" alt="Turma de jaleco reunida no laboratório" decoding="async"></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--violet)"><span class="path__n">04</span><h3>Arte e Cultura</h3><p>Criar beleza que aponta para algo maior.</p><div class="photo path__img"><img src="assets/img/galeria/v02-9-600.webp" width="600" height="1067" alt="Aluna pintando uma tela na oficina de arte" decoding="async" style="object-position:50% 45%"></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--lime)"><span class="path__n">05</span><h3>Ciência e Tecnologia</h3><p>Investigar, construir e inovar.</p><div class="photo path__img"><img src="assets/img/galeria/27-600.webp" width="600" height="417" alt="Turma usando óculos de realidade virtual" decoding="async"></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--orange)"><span class="path__n">06</span><h3>Serviço Social</h3><p>Estar onde a necessidade é maior.</p><div class="photo path__img"><img src="assets/img/galeria/v05-39-600.webp" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" decoding="async" style="object-position:50% 55%"></div></li>
-          <li class="path" tabindex="0" style="--accent: var(--gold)"><span class="path__n">07</span><h3>Comunicação e Entretenimento</h3><p>Contar histórias que movem pessoas.</p><div class="photo path__img"><img src="assets/img/galeria/v06-17-600.webp" width="600" height="1067" alt="Aluno atuando no palco do evento Game Over" decoding="async" style="object-position:50% 55%"></div></li>
+          <li class="path is-open u-8ae841" tabindex="0"><span class="path__n">01</span><h3>Negócios</h3><p>Empreender e liderar com propósito e ética.</p><div class="photo path__img"><img src="assets/img/galeria/16-600.webp" width="600" height="409" alt="Instrutora apresentando para a turma" decoding="async"></div></li>
+          <li class="path u-66d4ec" tabindex="0"><span class="path__n">02</span><h3>Política</h3><p>Servir o bem comum com responsabilidade pública.</p><div class="photo path__img"><img src="assets/img/galeria/12-600.webp" width="600" height="397" alt="Turma reunida ouvindo e debatendo com o convidado" decoding="async"></div></li>
+          <li class="path u-37cd40" tabindex="0"><span class="path__n">03</span><h3>Educação</h3><p>Formar as próximas gerações.</p><div class="photo path__img"><img src="assets/img/galeria/24-600.webp" width="600" height="438" alt="Turma de jaleco reunida no laboratório" decoding="async"></div></li>
+          <li class="path u-562862" tabindex="0"><span class="path__n">04</span><h3>Arte e Cultura</h3><p>Criar beleza que aponta para algo maior.</p><div class="photo path__img"><img src="assets/img/galeria/v02-9-600.webp" width="600" height="1067" alt="Aluna pintando uma tela na oficina de arte" decoding="async" class="u-335304"></div></li>
+          <li class="path u-51b504" tabindex="0"><span class="path__n">05</span><h3>Ciência e Tecnologia</h3><p>Investigar, construir e inovar.</p><div class="photo path__img"><img src="assets/img/galeria/27-600.webp" width="600" height="417" alt="Turma usando óculos de realidade virtual" decoding="async"></div></li>
+          <li class="path u-82fe87" tabindex="0"><span class="path__n">06</span><h3>Serviço Social</h3><p>Estar onde a necessidade é maior.</p><div class="photo path__img"><img src="assets/img/galeria/v05-39-600.webp" width="600" height="1067" alt="Turma reunida na visita ao Pequeno Cotolengo" decoding="async" class="u-4bd870"></div></li>
+          <li class="path u-06f667" tabindex="0"><span class="path__n">07</span><h3>Comunicação e Entretenimento</h3><p>Contar histórias que movem pessoas.</p><div class="photo path__img"><img src="assets/img/galeria/v06-17-600.webp" width="600" height="1067" alt="Aluno atuando no palco do evento Game Over" decoding="async" class="u-4bd870"></div></li>
         </ul>
       </div>
     </section>
@@ -379,10 +381,10 @@
           <h2 id="mentores-title" data-reveal="lines">Gente que já vive o que ensina.</h2>
         </header>
         <ul class="mentores__grid">
-          <li class="mentor"><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
-          <li class="mentor"><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
-          <li class="mentor"><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
-          <li class="mentor"><div class="ph" style="--ar: 4/5"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
+          <li class="mentor"><div class="ph u-0db893"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
+          <li class="mentor"><div class="ph u-0db893"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
+          <li class="mentor"><div class="ph u-0db893"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
+          <li class="mentor"><div class="ph u-0db893"><span>[A CONFIRMAR] Foto</span></div><h3>Nome [A CONFIRMAR]</h3><p>Área [A CONFIRMAR]</p></li>
         </ul>
         <p class="parceria"><span class="label">Parceria acadêmica</span> Fatemi · Teologia Livre <span class="tbc">[A CONFIRMAR] autorização de logo</span></p>
       </div>
@@ -405,12 +407,12 @@
 
     <!-- 11. FAQ -->
     <section class="section faq" id="faq" aria-labelledby="faq-title">
-      <span class="wm-mark wm-mark--nine" aria-hidden="true" style="bottom:-2%;left:-5vw;rotate:-4deg">NINE</span>
+      <span class="wm-mark wm-mark--nine u-821029" aria-hidden="true">NINE</span>
       <div class="container grid-12">
         <header class="faq__head">
           <p class="label">Dúvidas</p>
           <h2 id="faq-title" data-reveal="lines">Perguntas frequentes</h2>
-          <div class="photo faq__face" data-reveal="image" style="--ar: 1/1">
+          <div class="photo faq__face u-318b33" data-reveal="image">
             <img src="assets/img/galeria/22-600.webp" width="600" height="398" alt="Dois alunos rindo juntos no jantar da turma" loading="lazy" decoding="async">
           </div>
         </header>
@@ -430,7 +432,7 @@
     <section class="aplicar" id="aplicar" aria-labelledby="aplicar-title">
       <div class="container grid-12">
         <header class="aplicar__head">
-          <img class="aplicar__crown" src="assets/logo/crown.png" alt="" width="214" height="101">
+          <span class="aplicar__crown crown" aria-hidden="true"></span>
           <p class="label label--gold">Processo seletivo · Pré-inscrição</p>
           <h2 id="aplicar-title" data-reveal="lines">Sua turma começa aqui.</h2>
           <p class="lead">As vagas são limitadas e cada aplicação é lida pela nossa equipe.</p>
@@ -438,6 +440,8 @@
         </header>
 
         <form class="form" data-form novalidate data-reveal="fade-up">
+          <fieldset>
+            <legend>Seus dados</legend>
           <div class="field">
             <label for="f-nome">Nome completo</label>
             <input id="f-nome" name="nome" type="text" autocomplete="name" required>
@@ -448,7 +452,7 @@
           </div>
           <div class="field">
             <label for="f-whats">WhatsApp</label>
-            <input id="f-whats" name="whatsapp" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="(00) 00000-0000" required>
+            <input id="f-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" required>
           </div>
           <div class="field">
             <label for="f-idade">Idade</label>
@@ -462,6 +466,9 @@
             <label for="f-igreja">Igreja que frequenta <span class="opt">(opcional)</span></label>
             <input id="f-igreja" name="igreja" type="text">
           </div>
+          </fieldset>
+          <fieldset>
+            <legend>Sobre a inscrição</legend>
           <div class="field">
             <label for="f-medio">Ensino médio</label>
             <select id="f-medio" name="ensino_medio" required>
@@ -486,9 +493,10 @@
             <label for="f-motivacao">Por que você quer fazer parte da Nine?</label>
             <textarea id="f-motivacao" name="motivacao" rows="5" maxlength="800" required></textarea>
           </div>
+          </fieldset>
           <div class="field field--hp" aria-hidden="true">
             <label for="f-website">Website</label>
-            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+            <input id="f-website" name="website" type="text" autocomplete="off">
           </div>
           <div class="field field--full field--check">
             <input id="f-lgpd" name="consentimento" type="checkbox" required>
@@ -504,7 +512,7 @@
 
   <a class="cta-float" href="#aplicar" data-cta-float>Inscrições abertas · <strong>Pré-inscrição →</strong></a>
 
-  <footer class="footer">
+  <footer class="footer" id="rodape">
     <div class="container">
       <div class="footer__inst">
         <p class="footer__name">Faculdade Nine</p>
@@ -533,7 +541,7 @@
           <ul>
             <li><a href="mailto:contato@nine.com.br">contato@nine.com.br</a></li>
             <li>Telefone <span class="tbc tbc--dark">[A CONFIRMAR]</span></li>
-            <li><a href="https://www.instagram.com/nine.academia/" target="_blank" rel="noopener">@nine.academia</a></li>
+            <li><a href="https://www.instagram.com/nine.academia/">@nine.academia</a></li>
           </ul>
         </div>
         <div>
@@ -542,12 +550,16 @@
             <span class="emec__qr" aria-hidden="true">QR</span>
             <p>Selo e QR Code do e-MEC <span class="tbc tbc--dark">[após o credenciamento]</span></p>
           </div>
-          <p class="footer__small"><a href="https://emec.mec.gov.br/" target="_blank" rel="noopener">Consulte instituições no e-MEC</a></p>
+          <p class="footer__small"><a href="https://emec.mec.gov.br/">Consulte instituições no e-MEC</a></p>
         </div>
       </div>
       <p class="footer__copy">© <span data-year></span> Faculdade Nine · Conselho Educacional Nine</p>
     </div>
-    <p class="footer__wm" aria-hidden="true"><span class="wm">N<span class="wm__i">I<img src="assets/logo/crown.png" alt="" width="214" height="101"></span>NE</span></p>
+    <p class="footer__wm" aria-hidden="true"><span class="wm">N<span class="wm__i">I<i class="crown" aria-hidden="true"></i></span>NE</span></p>
   </footer>
+  <div class="preloader" aria-hidden="true" data-preloader>
+    <div class="preloader__count"><div class="preloader__digits"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div></div>
+    <p class="preloader__wm wm"><span class="ch">N</span><span class="ch wm__i">I<i class="crown" aria-hidden="true"></i></span><span class="ch">N</span><span class="ch">E</span></p>
+  </div>
 </body>
 </html>
