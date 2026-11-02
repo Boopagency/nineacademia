@@ -8,6 +8,8 @@ A Nine Academia de Influência está virando a **Faculdade Nine** (instituição
 - **Mapa do site (multipágina):** `index.html` (home com motion) · `a-faculdade.html` · `curso.html` (ficha + matriz) · `transparencia.html` (documentos com status e data de atualização) · `ouvidoria.html` (tipos, prazos 5/10/20 dias úteis, sigilo, formulário) · `privacidade.html`.
 - **Código:** `base.js` é comum a todas as páginas (nav, menu, ano, formulário da Ouvidoria); `main.js` é só da home. Páginas internas sem GSAP, sóbrias (≈90% Instituição).
 - **Formulários:** pré-inscrição e Ouvidoria vão para planilha via webhook (sem Supabase). A Ouvidoria precisa gerar protocolo e e-mail de confirmação.
+- **Desempenho (meta: 100 no PageSpeed):** sem preloader e sem animação de entrada no topo. Fonte Inter Tight hospedada em `assets/fonts/` com preload; GSAP/ScrollTrigger/SplitText/Flip/Lenis em `assets/vendor/` (versões fixas), carregados por `main.js` só depois do `load`. Vídeos só começam após o `load`. SplitText sempre com `aria: "none"`; nada de texto com opacidade baixa (falha contraste).
+- **Acessibilidade (e-MAG/ASES):** barra de atalhos com accesskey, `<noscript>`, decoração via CSS (nunca `<img alt="">`), `:focus` visível, sem `style=""` inline (o gerador converte em classes), sem `target="_blank"`, formulários com `fieldset`. Validar com W3C vnu e axe-core com animação ligada.
 - **e-MEC:** após o credenciamento, publicar QR Code e banner do e-MEC na home/rodapé (Portaria MEC 879/2022, prazo de 20 dias úteis).
 
 ---

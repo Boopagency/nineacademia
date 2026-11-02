@@ -130,9 +130,7 @@ def page(slug, title, desc, body):
   <meta property="og:title" content="{title} | Faculdade Nine">
   <meta property="og:description" content="{desc}">
   <link rel="icon" type="image/png" href="assets/logo/crown.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-tight-latin.woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
   <script src="base.js" defer></script>
 </head>
@@ -550,7 +548,7 @@ print("ok", len(DISC), "disciplinas;", {k: len(v) for k, v in SEMS.items()}, dic
 
 
 # ---------------------------------------------------------------- style="" -> classes utilitárias
-import glob, hashlib
+import glob, hashlib, os
 regras = {}
 def _tag(m):
     tag = m.group(0)
@@ -563,8 +561,15 @@ def _tag(m):
     if re.search(r'\sclass="', tag):
         return re.sub(r'\sclass="([^"]*)"', lambda c: f' class="{c.group(1)} {nome}"', tag, count=1)
     return tag[:-1].rstrip("/").rstrip() + f' class="{nome}">'
+def _srcset(m):
+    tag, base = m.group(0), m.group(1)
+    if "srcset=" in tag or not os.path.exists(f"assets/img/galeria/{base}-320.webp"):
+        return tag
+    return tag.replace(f'src="assets/img/galeria/{base}-600.webp"',
+        f'src="assets/img/galeria/{base}-600.webp" srcset="assets/img/galeria/{base}-320.webp 320w, assets/img/galeria/{base}-600.webp 600w" sizes="(min-width: 1024px) 30vw, 60vw"')
 for arq in glob.glob("*.html"):
     t = re.sub(r"<[a-zA-Z][^<>]*>", _tag, open(arq).read())
+    t = re.sub(r'<img [^>]*src="assets/img/galeria/([\w-]+)-600\.webp"[^>]*>', _srcset, t)
     assert ' style="' not in t, arq
     open(arq, "w").write(t)
 css = open("style.css").read()
