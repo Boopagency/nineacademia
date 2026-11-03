@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/curso.html", "destination": "/cursos/processos-gerenciais/", "permanent": true },
+    { "source": "/areas-de-atuacao.html", "destination": "/cursos/processos-gerenciais/areas-de-atuacao/", "permanent": true }
+  ]
+}

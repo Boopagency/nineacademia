@@ -2,11 +2,14 @@
 
 Este bloco vale sobre o resto do arquivo. O guia original abaixo continua valendo **só para a Academia de Influência** (`/academia/`).
 
-## Faculdade Nine (raiz do site) — institucional, foco em vender UM curso
+## Faculdade Nine (raiz do site) — institucional, pensado para vários cursos (como a PUCPR)
+- **Cursos:** lista `CURSOS` no gerador alimenta menu "Cursos", rodapé, home e `/cursos/`. Curso novo = item em `CURSOS` + página em `/cursos/<slug>/`. Hoje há um só:
 - **Curso:** Tecnólogo em Processos Gerenciais · presencial em Curitiba · 4 semestres · 30 disciplinas (planilha Disciplinas_Nine.xlsx; cada disciplina mostra "o que você fará a partir daqui"). **Sem vestibular/processo seletivo.** Preço e inscrição: **"Em breve"**.
 - **Identidade:** referência estrutural PUCPR (pucpr.br e ead.pucpr.br/cursos/...) sem copiar: barra superior escura, cabeçalho branco com submenu "A Faculdade", banner, blocos divididos foto + cor com **selo circular** e pílulas, pontos dourados, rodapé escuro multicoluna, faixa e-MEC. Cores Nine (navy + dourado + coroa). Imagens: corporativas (gestão), **geradas pelo cliente**; até lá, fotos reais em `FOTOS` no gerador.
-- **Páginas:** `index` · `curso` (caixa lateral, matriz retrátil por semestre, jornada, FAQ) · `areas-de-atuacao` (perfil do CNCST 2016 p. 48, CBO 1421-20 e 2521-05, registro no CRA, 8 áreas ligadas às disciplinas) · `a-faculdade` (dados, estrutura, CPA, onde estamos com mapa OSM) · `transparencia` (documentos do art. 26, sem painel de upload) · `ouvidoria` · `privacidade`.
+- **Páginas:** `index` (carrossel de destaques acessível: pausa, setas, pontos, swipe; cursos; Faculdade; mapa; e-MEC) · `cursos/` (lista) · `cursos/processos-gerenciais/` (caixa lateral, matriz em abas por semestre, jornada, mercado em abas, por que fazer, tecnólogo × bacharelado, FAQ) · `cursos/processos-gerenciais/areas-de-atuacao/` (perfil do CNCST 2016 p. 48, CBO 1421-20 e 2521-05, registro no CRA, 8 áreas ligadas às disciplinas) · `a-faculdade` (dados, estrutura, CPA, onde estamos com mapa OSM) · `transparencia` (documentos do art. 26, sem painel de upload) · `ouvidoria` · `privacidade`.
 - **Dados:** Faculdade Nine, mantida pelo Conselho Educacional Nine (CNPJ 61.991.971/0001-35), Rua Engenheiro Niepce da Silva, 139, Portão, Curitiba/PR, CEP 80610-240. Diretor-Geral: Raul Cesar Sindlinger. CONSUP e CPA. E-mail provisório: contato@nine.com.br.
+- **URLs antigas** (`/curso.html`, `/areas-de-atuacao.html`) redirecionam em `vercel.json`.
+- **Motion (sem biblioteca):** `data-reveal` posto pelo gerador + IntersectionObserver em `base.js`; topo com zoom/subida só em transform; botões, cartões e abas com transição; tudo desligado com `prefers-reduced-motion`.
 - **Código:** gerado por `material/gerar-site.py <planilha.xlsx>` (sobrescreve as páginas da raiz; CSS-fonte `faculdade.css`, embutido minificado em cada página). Sem GSAP na Faculdade. `base.js` é comum aos dois sites.
 
 ## Academia de Influência (`/academia/index.html`) — mantida à mão
