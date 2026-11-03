@@ -26,6 +26,7 @@ FOTOS = {
     "home-curso": ("v04-12", "Professora explicando um tema em sala de aula"),
     "home-areas": ("16", "Instrutora apresentando um projeto para a turma"),
     "home-faculdade": ("24", "Turma da Faculdade Nine reunida"),
+    "home-bloco-fac": ("08", "Turma assistindo a uma apresentação em sala"),
     "curso": ("25", "Alunos trabalhando juntos em uma atividade prática"),
     "areas": ("16", "Profissional apresentando resultados para a equipe"),
     "faculdade": ("24", "Turma da Faculdade Nine reunida"),
@@ -699,6 +700,8 @@ ATUAL = ' aria-current="true"'
 pontos = "".join(f'<button type="button" class="carousel__dot" data-goto="{i}"{ATUAL if i == 0 else ""}><span class="sr-only">Destaque {i + 1}: {re.sub("<[^>]+>", "", t)}</span></button>'
                  for i, (t, *_) in enumerate(SLIDES))
 
+why_home = "\n".join(f'          <li class="card">{icon(ic)}<h3>{t}</h3><p>{d}</p></li>' for ic, t, d in POR_QUE)
+
 page("index.html", "Faculdade Nine | Ensino superior presencial em Curitiba",
      f"Faculdade Nine, em Curitiba: curso superior de {CURSO}, presencial, em 4 semestres. Cursos, institucional, transparência e ouvidoria.",
      f'''    <section class="hero carousel" aria-roledescription="carrossel" aria-labelledby="t-hero" data-carousel>
@@ -717,6 +720,16 @@ page("index.html", "Faculdade Nine | Ensino superior presencial em Curitiba",
         </div>
       </div>
     </section>
+    <div class="facts-bar">
+      <div class="container">
+        <ul>
+          <li><b>Presencial</b><span>Portão, Curitiba/PR</span></li>
+          <li><b>Graduação</b><span>cursos superiores de tecnologia</span></li>
+          <li><b>Sem vestibular</b><span>basta ter concluído o ensino médio</span></li>
+          <li><b>Inscrições</b><span>em breve</span></li>
+        </ul>
+      </div>
+    </div>
 
     <section class="section" aria-labelledby="t-cursos">
       {wm("crown p-bl", "nine p-tr")}
@@ -731,9 +744,23 @@ page("index.html", "Faculdade Nine | Ensino superior presencial em Curitiba",
       </div>
     </section>
 
-{split("t-split-fac", "navy", "home-areas", "A Faculdade", "Faculdade Nine",
+    <section class="section section--tint" aria-labelledby="t-porque">
+      {wm("nine p-tr", "dots p-bl")}
+      <div class="container why">
+{head("t-porque", "Por que estudar na Faculdade Nine", "Formação prática, perto do mercado e com propósito.")}
+        <ul class="why__grid">
+{why_home}
+        </ul>
+      </div>
+    </section>
+
+{split("t-split-areas", "gold", "home-areas", "Carreira", "Áreas de atuação",
+       "Onde trabalha e o que faz o tecnólogo em Processos Gerenciais.",
+       [(f"{C}areas-de-atuacao/#area-{i+1}", a[0]) for i, a in enumerate(AREAS[:6])], rev=True)}
+{split("t-split-fac", "navy", "home-bloco-fac", "A Faculdade", "Faculdade Nine",
        "Mantida pelo Conselho Educacional Nine, em Curitiba.",
        [("/a-faculdade.html", "Sobre"), ("/a-faculdade.html#estrutura", "Estrutura"), ("/a-faculdade.html#cpa", "CPA"), ("/transparencia.html", "Transparência"), ("/ouvidoria.html", "Ouvidoria")])}
+{investimento()}
 {ONDE_ESTAMOS}
 {EMEC}''', "/")
 

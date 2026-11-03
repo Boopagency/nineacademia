@@ -177,6 +177,19 @@ p { text-wrap: pretty; }
   .hero__img { border-radius: 120px 0 0 0; }
 }
 
+/* Faixa dourada de dados rápidos (home) */
+.facts-bar { background: var(--gold); color: var(--navy); }
+.facts-bar ul { display: grid; grid-template-columns: repeat(4, 1fr); }
+.facts-bar li { padding: 18px 16px; display: grid; gap: 2px; border-left: 1px solid rgba(17, 23, 73, .18); }
+.facts-bar li:first-child { border-left: 0; padding-left: 0; }
+.facts-bar b { font-size: clamp(1.25rem, 2vw, 1.625rem); letter-spacing: -0.02em; line-height: 1.1; }
+.facts-bar span { font-size: .875rem; font-weight: 600; }
+@media (max-width: 900px) {
+  .facts-bar ul { grid-template-columns: 1fr 1fr; }
+  .facts-bar li:nth-child(3) { border-left: 0; padding-left: 0; }
+  .facts-bar li:nth-child(n+3) { border-top: 1px solid rgba(17, 23, 73, .18); }
+}
+
 /* Carrossel de destaques (home): troca com fade; barra dourada mostra o tempo do destaque */
 .carousel__track { display: grid; }
 .slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s .8s; }
