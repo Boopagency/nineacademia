@@ -181,7 +181,7 @@ p { text-wrap: pretty; }
 .carousel__track { display: grid; }
 .slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s .8s; }
 .slide.is-active { opacity: 1; visibility: visible; transition: opacity .8s ease; }
-.carousel:not(.is-ready) .slide:not(.is-active) { display: none; }
+.carousel:not(.is-ready) .slide:not(.is-active) .hero__img { display: none; }
 .slide:not(.is-active) .hero__img img, .slide:not(.is-active) .hero__text > * { animation: none; }
 .carousel__ctrl { position: absolute; z-index: 3; left: 0; right: 0; bottom: clamp(16px, 3vw, 32px); max-width: var(--max); margin-inline: auto; padding-inline: var(--margin); pointer-events: none; }
 .carousel__ctrl > div { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: var(--r-pill); background: rgba(11, 15, 51, .78); pointer-events: auto; }

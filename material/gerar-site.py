@@ -679,10 +679,10 @@ def curso_card(c):
 cards = "\n".join(curso_card(c) for c in CURSOS)
 
 # ---------------------------------------------------------------- Início (carrossel de destaques + cursos + Faculdade)
-SLIDES = [("Processos <span>Gerenciais</span>", "Graduação tecnológica presencial em Curitiba. Aprenda a organizar processos, liderar equipes e decidir com base em dados.",
-           [(C, "Conheça o curso", "btn--gold"), (C + "areas-de-atuacao/", "Áreas de atuação", "btn--outline")], "home-hero"),
-          ("Faculdade <span>Nine</span>", "Ensino superior em Curitiba, mantido pelo Conselho Educacional Nine.",
+SLIDES = [("Faculdade <span>Nine</span>", "Ensino superior em Curitiba, mantido pelo Conselho Educacional Nine.",
            [("/a-faculdade.html", "Conheça a Faculdade", "btn--gold"), ("/a-faculdade.html#onde-estamos", "Onde estamos", "btn--outline")], "home-faculdade"),
+          ("Processos <span>Gerenciais</span>", "Graduação tecnológica presencial em Curitiba. Aprenda a organizar processos, liderar equipes e decidir com base em dados.",
+           [(C, "Conheça o curso", "btn--gold"), (C + "areas-de-atuacao/", "Áreas de atuação", "btn--outline")], "home-hero"),
           ("Inscrições <span>em breve</span>", "Sem vestibular: basta ter concluído o ensino médio. Avisamos você quando as inscrições abrirem.",
            [(AVISE, "Quero ser avisado", "btn--gold"), (C + "#investimento", "Investimento", "btn--outline")], "home-curso")]
 slides = "\n".join(f'''        <div class="slide{' is-active' if i == 0 else ''}" role="group" aria-roledescription="destaque" aria-label="{i + 1} de {len(SLIDES)}">
@@ -731,7 +731,7 @@ page("index.html", "Faculdade Nine | Ensino superior presencial em Curitiba",
       </div>
     </section>
 
-{split("t-split-fac", "navy", "home-faculdade", "A Faculdade", "Faculdade Nine",
+{split("t-split-fac", "navy", "home-areas", "A Faculdade", "Faculdade Nine",
        "Mantida pelo Conselho Educacional Nine, em Curitiba.",
        [("/a-faculdade.html", "Sobre"), ("/a-faculdade.html#estrutura", "Estrutura"), ("/a-faculdade.html#cpa", "CPA"), ("/transparencia.html", "Transparência"), ("/ouvidoria.html", "Ouvidoria")])}
 {ONDE_ESTAMOS}
