@@ -470,6 +470,7 @@ html:not(.js) .carousel__ctrl { display: none; }
 .soon__box dt { color: var(--ink-muted); }
 .soon__box dd { margin: 0; font-weight: 700; text-align: right; }
 .soon__box .tbc { color: var(--ink-muted); }
+.section--tint .soon__box { border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(17, 23, 73, .08); }
 
 /* Foco: sempre visível ao navegar pelo teclado; sem caixa ao clicar com o mouse */
 :focus:not(:focus-visible) { outline-color: transparent; }

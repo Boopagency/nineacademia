@@ -316,8 +316,9 @@ def facts(rows, cls="facts"):
 AVISE = f"mailto:{EMAIL}?subject=Quero%20ser%20avisado%20das%20inscri%C3%A7%C3%B5es"
 
 
-def investimento():
-    return f'''    <section class="section is-dark" id="investimento" aria-labelledby="t-investimento">
+def investimento(claro=False):
+    """Faixa de investimento: navy por padrão; clara quando vem logo depois de um bloco navy."""
+    return f'''    <section class="section {'section--tint' if claro else 'is-dark'}" id="investimento" aria-labelledby="t-investimento">
       {wm("crown p-tr", "dots p-bl")}
       <div class="container soon">
 {head("t-investimento", "Investimento e inscrições", "Valores e período de inscrição da primeira turma serão divulgados nesta página.")}
@@ -592,7 +593,7 @@ page("cursos/processos-gerenciais/index.html", f"{CURSO} | Faculdade Nine",
       </div>
     </section>
 
-{investimento()}''', "/cursos/processos-gerenciais/", CURSO_LD)
+{investimento(claro=True)}''', "/cursos/processos-gerenciais/", CURSO_LD)
 
 # ---------------------------------------------------------------- Áreas de atuação
 areas_html = "\n".join(f'''          <li class="card card--area" id="area-{i+1}">
@@ -760,7 +761,7 @@ page("index.html", "Faculdade Nine | Ensino superior presencial em Curitiba",
 {split("t-split-fac", "navy", "home-bloco-fac", "A Faculdade", "Faculdade Nine",
        "Mantida pelo Conselho Educacional Nine, em Curitiba.",
        [("/a-faculdade.html", "Sobre"), ("/a-faculdade.html#estrutura", "Estrutura"), ("/a-faculdade.html#cpa", "CPA"), ("/transparencia.html", "Transparência"), ("/ouvidoria.html", "Ouvidoria")])}
-{investimento()}
+{investimento(claro=True)}
 {ONDE_ESTAMOS}
 {EMEC}''', "/")
 
