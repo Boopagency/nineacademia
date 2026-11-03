@@ -14,6 +14,11 @@ SITE = "https://nineacademia.vercel.app"
 ENDERECO = "Rua Engenheiro Niepce da Silva, 139 · Portão · Curitiba/PR · CEP 80610-240"
 TBC = '<span class="tbc">[A CONFIRMAR]</span>'
 CURSO = "Tecnólogo em Processos Gerenciais"
+C = "/cursos/processos-gerenciais/"
+
+# Cursos da Faculdade. Curso novo: acrescente aqui (entra no menu, no rodapé, na home e em /cursos/) e crie a página dele.
+CURSOS = [dict(url=C, nome="Processos Gerenciais", grau="Graduação tecnológica", lugar="Presencial · Curitiba", duracao="4 semestres",
+               foto="curso", resumo="Organize processos, lidere equipes e decida com base em dados.")]
 
 # Fotos de cada lugar do site (provisórias: fotos reais da Nine até chegarem as imagens corporativas)
 FOTOS = {
@@ -59,11 +64,13 @@ def img(key_or_id, alt=None, eager=False, sizes="(min-width: 900px) 50vw, 100vw"
 
 DOTS = '<span class="dots" aria-hidden="true">' + "<i></i>" * 21 + "</span>"
 
-NAV = [("/curso.html", "O Curso"), ("/areas-de-atuacao.html", "Áreas de atuação"), ("/transparencia.html", "Transparência"),
-       ("/a-faculdade.html#onde-estamos", "Contato")]
+NAV = [("/transparencia.html", "Transparência"), ("/a-faculdade.html#onde-estamos", "Contato")]
 SUB = [("/a-faculdade.html", "Sobre a Faculdade"), ("/a-faculdade.html#estrutura", "Estrutura organizacional"),
        ("/a-faculdade.html#cpa", "CPA · Comissão Própria de Avaliação"), ("/a-faculdade.html#onde-estamos", "Onde estamos"),
        ("/transparencia.html", "Transparência institucional"), ("/ouvidoria.html", "Ouvidoria"), ("/privacidade.html", "Privacidade e proteção de dados")]
+
+DROPS = [("A Faculdade", "/a-faculdade.html", SUB),
+         ("Cursos", "/cursos/", [("/cursos/", "Todos os cursos")] + [(c["url"], c["nome"]) for c in CURSOS])]
 
 BRAND = '''<span class="crown" aria-hidden="true"></span><span class="brand__name"><b>NINE</b><small>Faculdade</small></span>'''
 
@@ -72,10 +79,19 @@ def header(atual):
     def a(href, txt):
         cur = ' aria-current="page"' if href == atual else ""
         return f'<a href="{href}"{cur}>{txt}</a>'
-    sub = "\n".join(f"              <li>{a(h, t)}</li>" for h, t in SUB)
     nav = "\n".join(f"          <li>{a(h, t)}</li>" for h, t in NAV)
-    msub = "\n".join(f'          <li><a href="{h}">{t}</a></li>' for h, t in SUB)
     mnav = "\n".join(f'        <li><a href="{h}">{t}</a></li>' for h, t in NAV)
+    dd = "\n".join(f'''          <li>
+            <details class="dd">
+              <summary>{t}</summary>
+              <ul class="dd__panel">
+{"".join(f"                <li>{a(h, x)}</li>" + chr(10) for h, x in itens)}              </ul>
+            </details>
+          </li>''' for t, _, itens in DROPS)
+    mdd = "\n".join(f'''        <li><a href="{u}">{t}</a>
+          <ul class="menu__sub">
+{"".join(f'            <li><a href="{h}">{x}</a></li>' + chr(10) for h, x in itens)}          </ul>
+        </li>''' for t, u, itens in DROPS)
     return f'''  <nav class="a11y-bar" aria-label="Atalhos de acessibilidade">
     <ul>
       <li><a href="#conteudo" accesskey="1">Ir para o conteúdo [1]</a></li>
@@ -104,18 +120,11 @@ def header(atual):
       <a class="brand" href="/" aria-label="Faculdade Nine, página inicial">{BRAND}</a>
       <nav class="mainnav" id="menu-principal" aria-label="Principal">
         <ul>
-          <li>
-            <details class="dd">
-              <summary>A Faculdade</summary>
-              <ul class="dd__panel">
-{sub}
-              </ul>
-            </details>
-          </li>
+{dd}
 {nav}
         </ul>
       </nav>
-      <a class="btn btn--gold header__cta" href="/curso.html#investimento">Inscrições em breve</a>
+      <a class="btn btn--gold header__cta" href="/cursos/processos-gerenciais/#investimento">Inscrições em breve</a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="menu-mobile" data-menu-toggle>
         <span class="sr-only">Abrir menu</span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
@@ -127,14 +136,10 @@ def header(atual):
     <nav aria-label="Menu mobile">
       <ul>
         <li><a href="/">Início</a></li>
-        <li><a href="/a-faculdade.html">A Faculdade</a>
-          <ul class="menu__sub">
-{msub}
-          </ul>
-        </li>
+{mdd}
 {mnav}
       </ul>
-      <a class="btn btn--gold" href="/curso.html#investimento">Inscrições em breve</a>
+      <a class="btn btn--gold" href="/cursos/processos-gerenciais/#investimento">Inscrições em breve</a>
     </nav>
   </div>
 '''
@@ -143,12 +148,12 @@ def header(atual):
 FOOTER = f'''  <footer class="footer" id="rodape">
     <div class="container footer__cols">
       <div>
-        <h2>O Curso</h2>
+        <h2>Cursos</h2>
         <ul>
-          <li><a href="/curso.html">{CURSO}</a></li>
-          <li><a href="/curso.html#matriz">Matriz curricular</a></li>
-          <li><a href="/areas-de-atuacao.html">Áreas de atuação</a></li>
-          <li><a href="/curso.html#investimento">Investimento e inscrição</a></li>
+          <li><a href="/cursos/">Todos os cursos</a></li>
+          <li><a href="/cursos/processos-gerenciais/">{CURSO}</a></li>
+          <li><a href="/cursos/processos-gerenciais/#matriz">Matriz curricular</a></li>
+          <li><a href="/cursos/processos-gerenciais/areas-de-atuacao/">Áreas de atuação</a></li>
         </ul>
       </div>
       <div>
@@ -215,6 +220,7 @@ def page(arq, titulo, desc, corpo, atual, extra_ld=None, robots=None):
   <meta property="og:description" content="{desc}">
   <link rel="icon" type="image/png" href="/assets/logo/crown.png">
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-tight-latin.woff2" crossorigin>
+  <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="/faculdade.css">
 {lds}
   <script src="/base.js" defer></script>
@@ -266,12 +272,18 @@ ONDE = [("Empresas em geral", "Indústria, comércio e serviços, de pequenas em
         ("Negócio próprio", "Abrir e gerir o próprio empreendimento com método e indicadores."),
         ("Pesquisa e ensino", "Institutos e centros de pesquisa; instituições de ensino, conforme a formação exigida pela legislação.")]
 
+def crumbs(*trilha):
+    """Migalhas: pares (link, texto) e, por último, o texto da página atual."""
+    links = "".join(f'<a href="{h}">{x}</a> / ' for h, x in [("/", "Início"), *trilha[:-1]])
+    return f'<nav class="crumbs" aria-label="Você está em">{links}<span aria-current="page">{trilha[-1]}</span></nav>'
+
+
 def page_hero(titulo_id, crumb, titulo, lead, foto):
     return f'''    <section class="page-hero" aria-labelledby="{titulo_id}">
       <div class="page-hero__bg">{img(foto, eager=True, sizes="100vw")}</div>
       {wm("nine p-br", "dots p-tr")}
       <div class="container">
-        <nav class="crumbs" aria-label="Você está em"><a href="/">Início</a> / <span aria-current="page">{crumb}</span></nav>
+        {crumbs(*crumb) if isinstance(crumb, tuple) else crumbs(crumb)}
         <h1 id="{titulo_id}">{titulo}</h1>
         <p class="lead">{lead}</p>
       </div>
@@ -377,66 +389,86 @@ PARA_QUEM = [("Acabou o ensino médio", "e quer uma graduação curta que já le
              ("Quer empreender", "e precisa organizar as finanças, as vendas e a equipe do próprio negócio."),
              ("Atua em igrejas, ONGs ou projetos sociais", "e quer gerir com método o que já faz.")]
 
-# ---------------------------------------------------------------- Início
-page("index.html", f"Faculdade Nine | {CURSO} presencial em Curitiba",
-     f"Faculdade Nine: curso superior de {CURSO}, presencial em Curitiba, em 4 semestres. Matriz curricular, áreas de atuação e inscrições.",
-     f'''    <section class="hero" aria-labelledby="t-hero">
-      <span class="hero__ring" aria-hidden="true"></span>
-      {wm("dots p-bl", "crown p-tl")}
-      <div class="container">
-        <div class="hero__text">
-          <h1 id="t-hero">Processos <span>Gerenciais</span></h1>
-          <p class="lead">Curso superior de tecnologia da Faculdade Nine, presencial em Curitiba.</p>
-          <div class="btn-row">
-            <a class="btn btn--gold" href="/curso.html">Conheça o curso</a>
-            <a class="btn btn--outline" href="/areas-de-atuacao.html">Áreas de atuação</a>
-          </div>
-        </div>
-        <div class="hero__media"><div class="hero__img">{img("home-hero", eager=True)}</div></div>
-      </div>
-    </section>
-    <div class="facts-bar">
-      <div class="container">
-        <ul>
-          <li><b>4 semestres</b><span>cerca de 2 anos</span></li>
-          <li><b>{len(DISC)} disciplinas</b><span>e {N_PI} projetos integradores</span></li>
-          <li><b>Presencial</b><span>Portão, Curitiba/PR</span></li>
-          <li><b>Inscrições</b><span>em breve</span></li>
-        </ul>
-      </div>
-    </div>
+# ---------------------------------------------------------------- Ícones (traço simples, sem biblioteca)
+ICON_PATHS = {
+    "processos": "M4 5h6v6H4zM14 13h6v6h-6zM7 11v5h7M17 13V8h-7",
+    "pessoas": "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5.2a3 3 0 0 1 0 5.6M21 20c0-2.6-1.5-4.8-3.8-5.6",
+    "financas": "M3 20h18M6 20v-6M11 20V9M16 20v-9M20 6l-5 4-4-3-6 5",
+    "marketing": "M3 10v4l12 5V5L3 10zM15 9h2.5a3 3 0 0 1 0 6H15M7 15.5 8 20h3l-1-3.5",
+    "logistica": "M2 6h11v10H2zM13 9h4.5l3.5 3.5V16h-8M6 19.5a1.5 1.5 0 1 0 0-.01M17 19.5a1.5 1.5 0 1 0 0-.01",
+    "projetos": "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zM12 11.2a.8.8 0 1 0 0 1.6.8.8 0 0 0 0-1.6z",
+    "dados": "M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3",
+    "empreender": "M3 9 5 4h14l2 5M3 9h18v11H3zM9 20v-6h6v6M3 9c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3",
+    "pratica": "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z",
+    "ia": "M7 7h10v10H7zM10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4",
+    "local": "M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+    "proposito": "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z",
+    "tempo": "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2",
+    "diploma": "M3 8l9-4 9 4-9 4-9-4zM7 10v5c0 1.1 2.2 3 5 3s5-1.9 5-3v-5",
+    "empresa": "M4 21V5l8-2v18M12 21h8V9l-8-2M3 21h18M8 8v.01M8 12v.01M8 16v.01M16 12v.01M16 16v.01",
+    "consultoria": "M3 8h18v12H3zM8 8V5h8v3M3 13h18",
+    "publica": "M3 21h18M4 10h16L12 4 4 10zM6 10v8M10 10v8M14 10v8M18 10v8",
+    "ensino": "M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7",
+}
 
-    <section class="section" aria-labelledby="t-statement">
-      {wm("crown p-bl", "nine p-tr")}
-      <div class="container statement">
-        <h2 id="t-statement">Por que Processos Gerenciais</h2>
-        <div class="prose">
-          <p class="lead">Toda empresa depende de processos: atender, vender, comprar, contratar, entregar.</p>
-          <p>No curso de <strong>{CURSO}</strong> você aprende a organizar esse trabalho, liderar a equipe e decidir com base em dados.</p>
-        </div>
-      </div>
-    </section>
 
-{split("t-split-curso", "navy", "home-curso", "O curso", CURSO,
-       "Graduação tecnológica presencial, em 4 semestres.",
-       [("/curso.html", "Sobre o curso"), ("/curso.html#matriz", "Matriz curricular"), ("/curso.html#para-quem", "Para quem é"), ("/curso.html#investimento", "Investimento")])}
-{split("t-split-areas", "gold", "home-areas", "Carreira", "Áreas de atuação",
-       "Onde trabalha e o que faz o tecnólogo em Processos Gerenciais.",
-       [(f"/areas-de-atuacao.html#area-{i+1}", a[0]) for i, a in enumerate(AREAS[:6])], rev=True)}
-{split("t-split-fac", "navy", "home-faculdade", "A Faculdade", "Faculdade Nine",
-       "Mantida pelo Conselho Educacional Nine, em Curitiba.",
-       [("/a-faculdade.html", "Sobre"), ("/a-faculdade.html#estrutura", "Estrutura"), ("/a-faculdade.html#cpa", "CPA"), ("/transparencia.html", "Transparência"), ("/ouvidoria.html", "Ouvidoria")])}
-{investimento()}
-{ONDE_ESTAMOS}
-{EMEC}''', "/")
+def icon(nome):
+    return (f'<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            f'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{ICON_PATHS[nome]}"/></svg></span>')
+
+
+AREA_ICON = ["processos", "pessoas", "financas", "marketing", "logistica", "projetos", "dados", "empreender"]
+ONDE_ICON = ["empresa", "consultoria", "publica", "empreender", "ensino"]
+
+
+def tabs(nome, rotulo, itens, vertical=False):
+    """Abas acessíveis. Sem JavaScript, todos os painéis aparecem um embaixo do outro."""
+    botoes = "\n".join(
+        f'          <button type="button" role="tab" id="tab-{nome}-{i}" aria-controls="painel-{nome}-{i}" aria-selected="{str(i == 0).lower()}">{t}</button>'
+        for i, (t, _) in enumerate(itens))
+    paineis = "\n".join(
+        f'        <div class="tabs__panel" role="tabpanel" id="painel-{nome}-{i}" aria-labelledby="tab-{nome}-{i}" tabindex="0">\n{c}\n        </div>'
+        for i, (_, c) in enumerate(itens))
+    orient = ' aria-orientation="vertical"' if vertical else ""
+    return f'''      <div class="tabs{' tabs--v' if vertical else ''}" data-tabs>
+        <div class="tabs__list" role="tablist" aria-label="{rotulo}"{orient}>
+{botoes}
+        </div>
+{paineis}
+      </div>'''
+
 
 # ---------------------------------------------------------------- Curso
-disc_html = "\n".join(f'''        <details class="sem"{" open" if s == "1º" else ""}>
-          <summary><span>{s} semestre<small>{len(ds)} disciplinas</small></span></summary>
-          <ul class="disc">
-''' + "\n".join(f'''            <li><h3>{d["nome"]}</h3><p class="disc__meta"><span>{d["cod"]}</span><span>{d["eixo"]}</span></p><p class="disc__do"><b>O que você fará a partir daqui</b>{d["faz"]}</p></li>''' for d in ds) + '''
-          </ul>
-        </details>''' for s, ds in SEMS.items())
+semestres = []
+for s, ds in SEMS.items():
+    itens = "\n".join(f'''            <li><h3>{d["nome"]}</h3><p class="disc__meta"><span>{d["cod"]}</span><span>{d["eixo"]}</span></p><p class="disc__do"><b>O que você fará a partir daqui</b>{d["faz"]}</p></li>''' for d in ds)
+    semestres.append((f"{s} semestre", f'          <p class="tabs__count">{len(ds)} disciplinas</p>\n          <ul class="disc">\n{itens}\n          </ul>'))
+
+mercado = []
+for (t, d, f, cods), ic in zip(AREAS, AREA_ICON):
+    funcoes = "".join(f"<li>{x}</li>" for x in f)
+    discs = " · ".join(POR_COD[c]["nome"] for c in cods[:3])
+    mercado.append((t, f'''          {icon(ic)}
+          <h3>{t}</h3>
+          <p>{d}</p>
+          <h4>Funções</h4>
+          <ul class="tags">{funcoes}</ul>
+          <p class="note">No curso: {discs}.</p>'''))
+
+JORNADA = [("diploma", "1º semestre", "Base de gestão, ferramentas e pessoas."),
+           ("processos", "2º semestre", "Marketing, finanças, direito e processos."),
+           ("projetos", "3º semestre", "Projeto Integrador I, projetos e inovação."),
+           ("ia", "4º semestre", "Projeto Integrador II, dados, IA e liderança.")]
+POR_QUE = [("pratica", "Prática desde o início", f"{N_PI} projetos integradores com problemas reais de empresas."),
+           ("ia", "Dados e IA", "Analytics, sistemas de informação e inteligência artificial aplicada aos negócios."),
+           ("local", "Presencial em Curitiba", "Turma, professores e convivência no Portão."),
+           ("proposito", "Gestão com propósito", "Teologia com ênfase social e ética na liderança.")]
+COMPARA = [("Duração", "4 semestres (cerca de 2 anos)", "8 semestres (cerca de 4 anos)"),
+           ("Foco", "Processos e rotinas de gestão, com aplicação prática", "Formação ampla em administração"),
+           ("Tipo de curso", "Graduação", "Graduação"),
+           ("Pós-graduação", "Pode cursar", "Pode cursar"),
+           ("Registro profissional", "Conselho Regional de Administração", "Conselho Regional de Administração")]
+
 CURSO_LD = {"@context": "https://schema.org", "@type": "Course", "name": f"Curso Superior de {CURSO}",
             "description": "Graduação tecnológica presencial em 4 semestres, eixo Gestão e Negócios.", "inLanguage": "pt-BR",
             "provider": {"@type": "CollegeOrUniversity", "name": "Faculdade Nine", "url": SITE + "/"},
@@ -444,22 +476,35 @@ CURSO_LD = {"@context": "https://schema.org", "@type": "Course", "name": f"Curso
             "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "Onsite",
                                   "location": {"@type": "Place", "name": "Faculdade Nine", "address": ORG["address"]}}}
 para_quem = "\n".join(f"            <li><b>{t}</b> {d}</li>" for t, d in PARA_QUEM)
-page("curso.html", f"{CURSO} | Faculdade Nine",
+page("cursos/processos-gerenciais/index.html", f"{CURSO} | Faculdade Nine",
      f"Curso superior de {CURSO}, presencial em Curitiba: 4 semestres, {len(DISC)} disciplinas e o que você fará em cada uma.",
-     page_hero("t-curso", "O Curso", CURSO, "Graduação tecnológica presencial em Curitiba, em 4 semestres.", "curso") + f'''
-    <section class="section" aria-labelledby="t-sobre">
-      {wm("crown p-br")}
+     f'''    <section class="page-hero page-hero--course" aria-labelledby="t-curso">
+      <div class="page-hero__bg">{img("curso", eager=True, sizes="100vw")}</div>
+      {wm("nine p-br", "dots p-tr")}
+      <div class="container">
+        {crumbs(("/cursos/", "Cursos"), "Processos Gerenciais")}
+        <h1 id="t-curso">{CURSO}</h1>
+        <ul class="meta">
+          <li>{icon("local")}Presencial · Curitiba</li>
+          <li>{icon("tempo")}4 semestres</li>
+          <li>{icon("diploma")}Graduação tecnológica</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--first" aria-labelledby="t-sobre">
+      {wm("crown p-bl")}
       <div class="container course-layout">
         <div class="prose">
 {head("t-sobre", "Sobre o curso")}
+          <p class="lead">Aprenda a organizar o trabalho de uma empresa, liderar a equipe e decidir com base em dados.</p>
           <p>O tecnólogo em Processos Gerenciais cuida de como uma organização funciona: atendimento, compras, produção, pessoas, finanças e vendas. Ele encontra o que trava o trabalho e propõe melhorias acompanhando os resultados.</p>
-          <p>Em cada semestre há disciplinas de gestão, análise, liderança e tecnologia. No 3º e no 4º, os projetos integradores levam o que você aprendeu para problemas reais de empresas. Como é um curso de graduação, depois dele você pode fazer pós-graduação.</p>
           <h3 id="para-quem">Para quem é</h3>
           <ul class="plain">
 {para_quem}
           </ul>
         </div>
-        <div class="aside-box" role="region" aria-labelledby="t-box">
+        <div class="aside-box aside-box--float" role="region" aria-labelledby="t-box">
           <h2 id="t-box">Informações do curso</h2>
           <dl>
             <div><dt>Modalidade</dt><dd>Presencial</dd></div>
@@ -478,45 +523,87 @@ page("curso.html", f"{CURSO} | Faculdade Nine",
     <section class="section section--tint" id="matriz" aria-labelledby="t-matriz">
       {wm("nine p-tr", "dots p-bl")}
       <div class="container">
-{head("t-matriz", "Matriz curricular", f"Abra cada semestre para ver as disciplinas e o que você passa a fazer com cada uma.")}
-{disc_html}
+{head("t-matriz", "Conheça a matriz curricular", "Escolha o semestre e veja o que você passa a fazer em cada disciplina.")}
+{tabs("sem", "Semestres", semestres)}
         <p class="note">Atualizada em {HOJE}. A carga horária de cada disciplina será publicada com o Projeto Pedagógico do Curso.</p>
       </div>
     </section>
 
-{split("t-split-areas", "gold", "areas", "Carreira", "Onde você pode trabalhar",
-       "Processos, pessoas, finanças, marketing, logística, projetos, dados ou o próprio negócio.",
-       [("/areas-de-atuacao.html", "Ver as áreas de atuação")])}
-    <section class="section" id="ingresso" aria-labelledby="t-ingresso">
-      {wm("crown p-tr")}
-      <div class="container course-layout">
-        <div class="prose">
-{head("t-ingresso", "Como ingressar")}
-          <p>O curso não tem vestibular. Basta ter concluído o ensino médio e fazer a inscrição quando o período for aberto.</p>
-          <p>Documentos e datas: {TBC}</p>
+    <section class="section is-dark" aria-labelledby="t-jornada">
+      {wm("crown p-tr", "dots p-bl")}
+      <div class="container">
+{head("t-jornada", "Como é a sua jornada")}
+        <ol class="journey">
+''' + "\n".join(f'          <li>{icon(ic)}<h3>{t}</h3><p>{d}</p></li>' for ic, t, d in JORNADA) + f'''
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-mercado">
+      {wm("nine p-br")}
+      <div class="container">
+        <div class="head-row">
+{head("t-mercado", "Processos Gerenciais e o mercado de trabalho")}
+          <a class="btn btn--outline" href="/cursos/processos-gerenciais/areas-de-atuacao/">Ver todas as áreas</a>
         </div>
-        <div>
-          <h2 class="h-small" id="t-faq">Perguntas frequentes</h2>
-          {faq([("O tecnólogo é um curso superior?", "Sim. É um curso de graduação e permite seguir para pós-graduação."),
-                ("Onde são as aulas?", "Na Faculdade Nine, Rua Engenheiro Niepce da Silva, 139, Portão, Curitiba/PR."),
-                ("Quais são os dias e horários?", "[A CONFIRMAR]"),
-                ("Quando abrem as inscrições?", "As datas e os valores serão divulgados em breve nesta página.")])}
+{tabs("area", "Áreas de atuação", mercado, vertical=True)}
+      </div>
+    </section>
+
+    <section class="section band-gold" aria-labelledby="t-porque">
+      {wm("crown p-br", "nine p-tr")}
+      <div class="container why">
+{head("t-porque", "Por que fazer este curso?")}
+        <ul class="why__grid">
+''' + "\n".join(f'          <li class="card">{icon(ic)}<h3>{t}</h3><p>{d}</p></li>' for ic, t, d in POR_QUE) + f'''
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-compara">
+      {wm("dots p-tr")}
+      <div class="container">
+{head("t-compara", "Tecnólogo ou bacharelado?", "Os dois são cursos de graduação. A diferença está na duração e no foco.")}
+        <div class="table-wrap" role="region" aria-label="Tabela comparativa: tecnólogo e bacharelado" tabindex="0">
+          <table class="compare">
+            <thead><tr><th scope="col"><span class="sr-only">Critério</span></th><th scope="col">Tecnólogo em Processos Gerenciais</th><th scope="col">Bacharelado em Administração</th></tr></thead>
+            <tbody>
+''' + "\n".join(f'              <tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>' for a, b, c in COMPARA) + f'''
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-{investimento()}''', "/curso.html", CURSO_LD)
+    <section class="section is-dark" id="ingresso" aria-labelledby="t-faq">
+      {wm("nine p-bl", "crown p-tr")}
+      <div class="container faq-band">
+        <div class="prose">
+{head("t-faq", "Você pergunta, a gente responde")}
+          <p>O curso não tem vestibular: basta ter concluído o ensino médio e se inscrever quando o período abrir.</p>
+          <a class="btn btn--gold" href="{AVISE}">Quero ser avisado</a>
+        </div>
+        {faq([("O tecnólogo é um curso superior?", "Sim. É um curso de graduação e permite seguir para pós-graduação."),
+              ("Precisa fazer vestibular?", "Não. Basta ter concluído o ensino médio. Documentos e datas: [A CONFIRMAR]"),
+              ("Onde são as aulas?", "Na Faculdade Nine, Rua Engenheiro Niepce da Silva, 139, Portão, Curitiba/PR."),
+              ("Quais são os dias e horários?", "[A CONFIRMAR]"),
+              ("Quando abrem as inscrições?", "As datas e os valores serão divulgados em breve nesta página.")])}
+      </div>
+    </section>
+
+{investimento()}''', "/cursos/processos-gerenciais/", CURSO_LD)
 
 # ---------------------------------------------------------------- Áreas de atuação
-areas_html = "\n".join(f'''          <li class="card" id="area-{i+1}">
+areas_html = "\n".join(f'''          <li class="card card--area" id="area-{i+1}">
+            {icon(ic)}
             <h3>{t}</h3>
             <p>{d}</p>
             <ul class="tags" aria-label="Funções">{"".join(f"<li>{x}</li>" for x in f)}</ul>
-          </li>''' for i, (t, d, f, _) in enumerate(AREAS))
-onde_html = "\n".join(f"          <li><b>{t}</b> {d}</li>" for t, d in ONDE)
-page("areas-de-atuacao.html", "Áreas de atuação do tecnólogo em Processos Gerenciais | Faculdade Nine",
+          </li>''' for i, ((t, d, f, _), ic) in enumerate(zip(AREAS, AREA_ICON)))
+onde_html = "\n".join(f'          <li>{icon(ic)}<h3>{t}</h3><p>{d}</p></li>' for (t, d), ic in zip(ONDE, ONDE_ICON))
+page("cursos/processos-gerenciais/areas-de-atuacao/index.html", "Áreas de atuação do tecnólogo em Processos Gerenciais | Faculdade Nine",
      "Onde trabalha e o que faz o tecnólogo em Processos Gerenciais: áreas, funções, ocupações na CBO e registro profissional.",
-     page_hero("t-areas", "Áreas de atuação", "Áreas de atuação do tecnólogo em Processos Gerenciais",
+     page_hero("t-areas", (("/cursos/", "Cursos"), (C, "Processos Gerenciais"), "Áreas de atuação"), "Áreas de atuação do tecnólogo em Processos Gerenciais",
                "Onde este profissional trabalha e o que ele faz.", "areas") + f'''
     <section class="section" aria-labelledby="t-faz">
       {wm("crown p-bl")}
@@ -536,11 +623,24 @@ page("areas-de-atuacao.html", "Áreas de atuação do tecnólogo em Processos Ge
       </div>
     </section>
 
+    <section class="stats band-gold" aria-labelledby="t-numeros">
+      <h2 class="sr-only" id="t-numeros">Em números</h2>
+      {wm("dots p-tr")}
+      <div class="container">
+        <ul class="stats__list">
+          <li><b data-count="{len(AREAS)}">{len(AREAS)}</b><span>áreas de atuação</span></li>
+          <li><b data-count="2">2</b><span>ocupações na CBO</span></li>
+          <li><b>CRA</b><span>registro profissional</span></li>
+          <li><b data-count="4">4</b><span>semestres de curso</span></li>
+        </ul>
+      </div>
+    </section>
+
     <section class="section section--tint" aria-labelledby="t-lista">
       {wm("nine p-tr", "dots p-bl")}
       <div class="container">
 {head("t-lista", "Áreas e funções")}
-        <ul class="grid grid--2">
+        <ul class="grid grid--4">
 {areas_html}
         </ul>
       </div>
@@ -550,7 +650,7 @@ page("areas-de-atuacao.html", "Áreas de atuação do tecnólogo em Processos Ge
       {wm("crown p-tr", "dots p-br")}
       <div class="container">
 {head("t-onde-trab", "Onde trabalha")}
-        <ul class="plain plain--cols">
+        <ul class="places">
 {onde_html}
         </ul>
         <p class="note">Fonte: {FONTE}.</p>
@@ -559,7 +659,99 @@ page("areas-de-atuacao.html", "Áreas de atuação do tecnólogo em Processos Ge
 
 {split("t-split-curso", "navy", "home-curso", "O curso", CURSO,
        "Graduação tecnológica presencial em Curitiba, em 4 semestres.",
-       [("/curso.html", "Sobre o curso"), ("/curso.html#matriz", "Matriz curricular")])}''', "/areas-de-atuacao.html")
+       [("/cursos/processos-gerenciais/", "Sobre o curso"), ("/cursos/processos-gerenciais/#matriz", "Matriz curricular")])}''', "/cursos/processos-gerenciais/areas-de-atuacao/")
+
+
+# ---------------------------------------------------------------- Cursos (cartões usados na home e em /cursos/)
+def curso_card(c):
+    return f'''          <li class="course-card">
+            <div class="course-card__photo">{img(c["foto"], sizes="(min-width: 900px) 400px, 100vw")}</div>
+            <div class="course-card__body">
+              <p class="course-card__grau">{c["grau"]}</p>
+              <h3><a href="{c["url"]}">{c["nome"]}</a></h3>
+              <p>{c["resumo"]}</p>
+              <ul class="course-card__meta"><li>{icon("local")}{c["lugar"]}</li><li>{icon("tempo")}{c["duracao"]}</li></ul>
+              <span class="course-card__go" aria-hidden="true">Ver curso</span>
+            </div>
+          </li>'''
+
+
+cards = "\n".join(curso_card(c) for c in CURSOS)
+
+# ---------------------------------------------------------------- Início (carrossel de destaques + cursos + Faculdade)
+SLIDES = [("Processos <span>Gerenciais</span>", "Graduação tecnológica presencial em Curitiba. Aprenda a organizar processos, liderar equipes e decidir com base em dados.",
+           [(C, "Conheça o curso", "btn--gold"), (C + "areas-de-atuacao/", "Áreas de atuação", "btn--outline")], "home-hero"),
+          ("Faculdade <span>Nine</span>", "Ensino superior em Curitiba, mantido pelo Conselho Educacional Nine.",
+           [("/a-faculdade.html", "Conheça a Faculdade", "btn--gold"), ("/a-faculdade.html#onde-estamos", "Onde estamos", "btn--outline")], "home-faculdade"),
+          ("Inscrições <span>em breve</span>", "Sem vestibular: basta ter concluído o ensino médio. Avisamos você quando as inscrições abrirem.",
+           [(AVISE, "Quero ser avisado", "btn--gold"), (C + "#investimento", "Investimento", "btn--outline")], "home-curso")]
+slides = "\n".join(f'''        <div class="slide{' is-active' if i == 0 else ''}" role="group" aria-roledescription="destaque" aria-label="{i + 1} de {len(SLIDES)}">
+          <div class="container">
+            <div class="hero__text">
+              <h2 class="hero__title">{t}</h2>
+              <p class="lead">{d}</p>
+              <div class="btn-row">{"".join(f'<a class="btn {cl}" href="{h}">{x}</a>' for h, x, cl in bs)}</div>
+            </div>
+            <div class="hero__media"><div class="hero__img">{img(f, eager=i == 0)}</div></div>
+          </div>
+        </div>''' for i, (t, d, bs, f) in enumerate(SLIDES))
+ATUAL = ' aria-current="true"'
+pontos = "".join(f'<button type="button" class="carousel__dot" data-goto="{i}"{ATUAL if i == 0 else ""}><span class="sr-only">Destaque {i + 1}: {re.sub("<[^>]+>", "", t)}</span></button>'
+                 for i, (t, *_) in enumerate(SLIDES))
+
+page("index.html", "Faculdade Nine | Ensino superior presencial em Curitiba",
+     f"Faculdade Nine, em Curitiba: curso superior de {CURSO}, presencial, em 4 semestres. Cursos, institucional, transparência e ouvidoria.",
+     f'''    <section class="hero carousel" aria-roledescription="carrossel" aria-labelledby="t-hero" data-carousel>
+      <h1 class="sr-only" id="t-hero">Faculdade Nine: ensino superior em Curitiba</h1>
+      <span class="hero__ring" aria-hidden="true"></span>
+      {wm("crown p-tl")}
+      <div class="carousel__track" aria-live="off">
+{slides}
+      </div>
+      <div class="carousel__ctrl">
+        <div>
+          <button type="button" class="carousel__btn carousel__play" data-play aria-label="Pausar destaques"></button>
+          <button type="button" class="carousel__btn" data-step="-1" aria-label="Destaque anterior">‹</button>
+          {pontos}
+          <button type="button" class="carousel__btn" data-step="1" aria-label="Próximo destaque">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="t-cursos">
+      {wm("crown p-bl", "nine p-tr")}
+      <div class="container courses">
+        <div class="courses__intro">
+{head("t-cursos", "Nossos cursos", "Graduação presencial em Curitiba, com prática desde o primeiro semestre.")}
+          <a class="btn btn--outline" href="/cursos/">Todos os cursos</a>
+        </div>
+        <ul class="courses__list">
+{cards}
+        </ul>
+      </div>
+    </section>
+
+{split("t-split-fac", "navy", "home-faculdade", "A Faculdade", "Faculdade Nine",
+       "Mantida pelo Conselho Educacional Nine, em Curitiba.",
+       [("/a-faculdade.html", "Sobre"), ("/a-faculdade.html#estrutura", "Estrutura"), ("/a-faculdade.html#cpa", "CPA"), ("/transparencia.html", "Transparência"), ("/ouvidoria.html", "Ouvidoria")])}
+{ONDE_ESTAMOS}
+{EMEC}''', "/")
+
+# ---------------------------------------------------------------- Cursos (lista)
+page("cursos/index.html", "Cursos | Faculdade Nine",
+     "Cursos de graduação da Faculdade Nine, presenciais em Curitiba.",
+     page_hero("t-lista-cursos", "Cursos", "Cursos", "Graduação presencial em Curitiba.", "faculdade") + f'''
+    <section class="section" aria-labelledby="t-grad">
+      {wm("crown p-br", "dots p-tl")}
+      <div class="container">
+{head("t-grad", "Graduação tecnológica", "Cursos superiores de curta duração, com foco no mercado de trabalho.")}
+        <ul class="courses__list courses__list--page">
+{cards}
+        </ul>
+      </div>
+    </section>
+
+{investimento()}''', "/cursos/")
 
 # ---------------------------------------------------------------- A Faculdade
 page("a-faculdade.html", "A Faculdade | Faculdade Nine",
@@ -609,7 +801,7 @@ DOCS = [
     ("Regimento Interno", "a-publicar", None, None),
     ("Regulamento da Ouvidoria e da Comunicação Institucional", "em-aprovacao", None, "/ouvidoria.html"),
     ("PPC · Projeto Pedagógico do Curso", "a-publicar", None, None),
-    ("Matriz curricular", "publicado", HOJE, "/curso.html#matriz"),
+    ("Matriz curricular", "publicado", HOJE, "/cursos/processos-gerenciais/#matriz"),
     ("Calendário acadêmico", "a-publicar", None, None),
     ("Atos regulatórios (credenciamento e autorização do curso)", "a-publicar", None, None),
     ("Composição do CONSUP e da CPA", "a-publicar", None, None),
@@ -727,16 +919,23 @@ def minifica(css):
     return css.replace(";}", "}").strip()
 
 CSS = {"faculdade": minifica(open("faculdade.css").read()), "academia": minifica(open("style.css").read())}
-for arq in glob.glob("*.html") + glob.glob("academia/*.html"):
+REVEAL = r'class="(?:[^"]*\s)?(head|card|split__body|split__photo|aside-box|soon__box|statement|place__info|map|disc|journey|why__grid|stats__list|places|emec-card|docs|timeline|facts|form|tabs|quote|compare|faq|plain)(?:\s[^"]*)?"'
+def _rev(t):
+    return re.sub(r"<(div|ul|ol|blockquote|dl|form|table|li)(\s[^>]*?)(" + REVEAL + r")([^>]*)>",
+                  lambda m: m.group(0) if "data-reveal" in m.group(0) else f"<{m.group(1)}{m.group(2)}{m.group(3)}{m.group(5)} data-reveal>", t)
+for arq in glob.glob("*.html") + glob.glob("academia/*.html") + glob.glob("cursos/**/*.html", recursive=True):
     t = open(arq).read()
     css = CSS["academia" if arq.startswith("academia/") else "faculdade"]
+    if not arq.startswith("academia/") and "<main" in t:
+        ini, fim = t.index("<main"), t.index("</main>")
+        t = t[:ini] + _rev(t[ini:fim]) + t[fim:]
     t = re.sub(r'<link rel="stylesheet" href="/?(?:faculdade|style)\.css">|<style id="css">.*?</style>',
                lambda m: f'<style id="css">{css}</style>', t, count=1, flags=re.S)
     assert ' style="' not in t, arq
     open(arq, "w").write(t)
 
 # sitemap e robots
-urls = ["/", "/curso.html", "/areas-de-atuacao.html", "/a-faculdade.html", "/transparencia.html", "/ouvidoria.html", "/privacidade.html", "/academia/"]
+urls = ["/", "/cursos/", "/cursos/processos-gerenciais/", "/cursos/processos-gerenciais/areas-de-atuacao/", "/a-faculdade.html", "/transparencia.html", "/ouvidoria.html", "/privacidade.html", "/academia/"]
 open("sitemap.xml", "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                                + "".join(f"  <url><loc>{SITE}{u}</loc></url>\n" for u in urls) + "</urlset>\n")
 open("robots.txt", "w").write(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
